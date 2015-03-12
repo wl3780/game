@@ -1,5 +1,6 @@
 package
 {
+	import com.adobe.crypto.MD5;
 	import com.coder.engine.Engine;
 	
 	import flash.display.Sprite;
@@ -19,6 +20,7 @@ package
 	{
 		public function game()
 		{
+			trace(MD5.hash("1"));
 			if (this.stage) {
 				this.init(null);
 			} else {
@@ -44,8 +46,8 @@ package
 			// 屏蔽右键方法，需要设置编译器版本
 			var verArr:Array = Capabilities.version.slice(3).split(",");
 			if (int(verArr[0]) > 11 || (int(verArr[0]) == 11 && int(verArr[1]) >= 2)) {
-//				this.stage.addEventListener("rightMouseDown", onRightDown);
-//				this.stage.addEventListener("rightMouseUp", onRightUp);
+				this.stage.addEventListener("rightMouseDown", onRightDown);
+				this.stage.addEventListener("rightMouseUp", onRightUp);
 				this.stage.addEventListener(MouseEvent.RIGHT_CLICK, function(evt:MouseEvent):void {});
 			}
 			
