@@ -17,8 +17,12 @@ package
 			this.stage.align = StageAlign.TOP_LEFT;
 			this.stage.scaleMode = StageScaleMode.NO_SCALE;
 			
+			// 插值
 			//this.bitmapBasic();
+			// 矩阵
 			this.matrixBasic();
+			// 齐次向量（第四位0）、齐次坐标（第四位w）概念
+			//　视口变换（正交视口，投影视口） --> 变换矩阵
 		}
 		
 		// 位图插值原理
