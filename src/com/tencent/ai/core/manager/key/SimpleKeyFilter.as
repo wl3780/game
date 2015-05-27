@@ -24,30 +24,29 @@
 
         protected function checkKey(checkKeys:Vector.<int>):Boolean
         {
-            var _local_4:int;
-            var _local_2:int = (this.m_matchLen - 1);
-            var _local_3:int = (checkKeys.length - 1);
-            if (this.m_isOrder){
-                while (_local_2 >= 0) {
-                    if (this.m_keys[_local_2].keyCode != checkKeys[_local_3]){
-                        return (false);
-                    };
-                    _local_2--;
-                    _local_3--;
-                };
+            var matchLen:int = this.m_matchLen - 1;
+            var checkLen:int = checkKeys.length - 1;
+            if (this.m_isOrder) {
+                while (matchLen >= 0) {
+                    if (this.m_keys[matchLen].keyCode != checkKeys[checkLen]) {
+                        return false;
+                    }
+                    matchLen--;
+                    checkLen--;
+                }
             } else {
-                while (_local_2 >= 0) {
-                    _local_4 = this.m_keys[_local_2].keyCode;
-                    if (checkKeys.indexOf(_local_4) == -1){
-                        return (false);
-                    };
-                    _local_2--;
-                };
-            };
-            if (this.m_handler != null){
+                while (matchLen >= 0) {
+		            var subCode:int = this.m_keys[matchLen].keyCode;
+                    if (checkKeys.indexOf(subCode) == -1) {
+                        return false;
+                    }
+                    matchLen--;
+                }
+            }
+            if (this.m_handler != null) {
                 this.m_handler.invoke();
-            };
-            return (true);
+            }
+            return true;
         }
 
         public function onKeyDown(keyArr:IKeyArray, keyBoard:IKeyboard):Boolean

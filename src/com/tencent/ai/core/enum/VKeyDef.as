@@ -12,8 +12,8 @@
         public static const C_right:String = "r";
         public static const C_space:String = "k";
 		
-        public static const C_a:String = "a";
         public static const C_c:String = "c";
+        public static const C_a:String = "a";
         public static const C_s:String = "s";
         public static const C_d:String = "d";
         public static const C_f:String = "f";
@@ -97,7 +97,6 @@
         public static const STOP_DOWN:int = 8;
         public static const STOP_LEFT:int = 9;
         public static const STOP_RIGHT:int = 10;
-		
         public static const FIGHT:int = 11;
         public static const SHAKE:int = 12;
         public static const Z_DOWN:int = 13;

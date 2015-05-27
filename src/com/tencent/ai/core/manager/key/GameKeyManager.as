@@ -32,11 +32,21 @@
             _keyboardType = 0;
         }
 
+		/** Manager初始化 */
+        public static function initialize(stage:Stage=null):void
+        {
+            var keyConfig:GameKeyConfig = GetDefaultKeyConfig();
+            KeyManager.initialize(stage, keyConfig.keyCodes);
+            GameKeyManager.Current.initKeys(keyConfig);
+            VKeyDef.INIT_HOT_KYES();
+        }
+
         private static function GetDefaultKeyConfig():GameKeyConfig
         {
             if (_keyConfigs == null) {
                 _keyConfigs = new Vector.<GameKeyConfig>();
-            	var keyCodes:Vector.<GameKeyCode> = new Vector.<GameKeyCode>();
+            	
+				var keyCodes:Vector.<GameKeyCode> = new Vector.<GameKeyCode>();
             	var keyConfig:GameKeyConfig = new GameKeyConfig();
                 keyConfig.keyCodes = keyCodes;
                 keyCodes.push(new GameKeyCode(Keyboard.UP, VKeyDef.C_up, "↑ ", "", false));
@@ -119,14 +129,6 @@
                 _keyConfigs.push(keyConfig);
             }
             return _keyConfigs[0];
-        }
-
-        public static function initialize(stage:Stage=null):void
-        {
-            var keyConfig:GameKeyConfig = GetDefaultKeyConfig();
-            KeyManager.initialize(stage, keyConfig.keyCodes);
-            GameKeyManager.Current.initKeys(keyConfig);
-            VKeyDef.INIT_HOT_KYES();
         }
 
         public static function get Current():GameKeyManager

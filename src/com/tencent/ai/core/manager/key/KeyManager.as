@@ -137,11 +137,10 @@
             this.m_keyCTimeCache = new Dictionary();
             this.m_funckeys = new Vector.<FunctionKey>();
             
-			var keyCode:GameKeyCode;
             var len:uint = keyCodes.length;
             var index:int;
             while (index < len) {
-                keyCode = keyCodes[index];
+				var keyCode:GameKeyCode = keyCodes[index];
                 if (!keyCode.isFuncKey) {
                     StrKF.addChar(keyCode.char, keyCode.code);
                     if (keyCode.isRepeat) {
