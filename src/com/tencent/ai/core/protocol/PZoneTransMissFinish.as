@@ -1,0 +1,53 @@
+﻿// Decompiled by AS3 Sorcerer 3.16
+// http://www.as3sorcerer.com/
+
+//com.tencent.ai.core.protocol.PZoneTransMissFinish
+
+package com.tencent.ai.core.protocol
+{
+    import com.tencent.ai.core.utils.ISerialize;
+    import com.tencent.ai.core.net.ProtocolHelper;
+    import flash.utils.IDataInput;
+    import flash.utils.IDataOutput;
+    import  ©init._SafeStr_1095;
+
+    public class PZoneTransMissFinish implements ISerialize 
+    {
+
+        public static const IN_CMD:int = 524398;
+        public static const OUT_CMD:int = 524397;
+
+        public var oMissID:uint;
+        public var oPhaseID:uint;
+        public var oNPCID:uint;
+        public var oAwardChoose:uint;
+        public var iRet:int;
+
+
+        public function read(_arg_1:IDataInput):void
+        {
+            this.iRet = _arg_1.readInt();
+            if (this.iRet != 0){
+                ProtocolHelper.handlerError2(this.iRet, IN_CMD);
+            };
+        }
+
+        public function write(_arg_1:IDataOutput):void
+        {
+            _arg_1.writeUnsignedInt(this.oMissID);
+            _arg_1.writeUnsignedInt(this.oPhaseID);
+            _arg_1.writeUnsignedInt(this.oNPCID);
+            _arg_1.writeUnsignedInt(this.oAwardChoose);
+        }
+
+        public /*  ©init. */ function _SafeStr_1095()
+        {
+        }
+
+
+    }
+}//package com.tencent.ai.core.protocol
+
+// _SafeStr_1095 = " PZoneTransMissFinish" (String#15734)
+
+
