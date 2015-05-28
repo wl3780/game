@@ -7,6 +7,7 @@
 
         protected var m_matchLen:int = 0;
         protected var m_handler:CFunction;
+		/** KeyDef列表 */
         protected var m_keys:Array;
         protected var m_group:int;
         protected var m_checkType:int = 3;
@@ -14,8 +15,8 @@
 
         public function SimpleKeyFilter(keys:Array, handler:CFunction, group:int=0, checkType:int=3, isOrder:Boolean=true)
         {
-            this.m_handler = handler;
             this.m_keys = keys;
+            this.m_handler = handler;
             this.m_group = group;
             this.m_checkType = checkType;
             this.m_isOrder = isOrder;

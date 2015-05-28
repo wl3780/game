@@ -10,8 +10,8 @@
 
         public function CFunction(handler:Function, target:Object=null, params:Array=null)
         {
-            this.target = target;
             this.handler = handler;
+            this.target = target;
             this.params = params;
         }
 

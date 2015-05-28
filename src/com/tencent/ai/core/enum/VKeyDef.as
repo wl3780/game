@@ -143,6 +143,7 @@
 				new StrKF(C_t, new CFunction(null, null, [ITEM_T]), 0, 1),
 				new StrKF(C_y, new CFunction(null, null, [ITEM_Y]), 0, 1),
 				new StrKF(C_b, new CFunction(null, null, [ITEM_V]), 0, 1),
+				
 				new StrKF(C_A, new CFunction(null, null, [ITEM_A_UP]), 0, 2),
 				new StrKF(C_S, new CFunction(null, null, [ITEM_S_UP]), 0, 2),
 				new StrKF(C_D, new CFunction(null, null, [ITEM_D_UP]), 0, 2),

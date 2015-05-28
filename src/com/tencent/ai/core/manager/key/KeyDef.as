@@ -7,6 +7,7 @@
         public static const WHATEVER:int = 0;
         public static const K_DOWN:int = 1;
         public static const K_UP:int = 2;
+		
         public static const KEY_UP_CODE_OFFSET:int = 10000;
 
         public var keyType:int = 1;

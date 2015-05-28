@@ -3,9 +3,11 @@
 
     public class GameKeyCode 
     {
-
+		/** 真实键值 */
         public var code:int;
+		/** 虚拟映射值 */
         public var char:String;
+		
         public var des:String;
         public var eventType:String;
         public var isFuncKey:Boolean;

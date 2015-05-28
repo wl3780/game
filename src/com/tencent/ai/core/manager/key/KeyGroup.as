@@ -30,21 +30,22 @@
             if (this.filters.indexOf(filter) != -1) {
                 return;
             }
-            var checkType:int = filter.getCheckType();
             var matchLen:int = filter.getMatchLen();
-            var isFind:Boolean;
-            var index:int = this.filters.length - 1;
-            while (index >= 0) {
-                if (this.filters[index].getMatchLen() <= matchLen) {
-                    this.filters.splice(index+1, 0, filter);
+            var isFind:Boolean = false;
+            var idx:int = this.filters.length - 1;
+            while (idx >= 0) {
+                if (this.filters[idx].getMatchLen() <= matchLen) {
+                    this.filters.splice(idx+1, 0, filter);
                     isFind = true;
                     break;
                 }
-                index--;
+                idx--;
             }
             if (!isFind) {
                 this.filters.push(filter);
             }
+			
+            var checkType:int = filter.getCheckType();
             if (checkType == KeyDef.K_DOWN) {
                 if (this.downKeys.maxLen < matchLen) {
                     this.downKeys.maxLen = matchLen;
@@ -73,12 +74,12 @@
             this.downKeys.put(keyCode, time);
             this.allKeys.put(keyCode, time);
             this.currentKey = keyCode;
-            var index:int = this.filters.length - 1;
-            while (index >= 0) {
-                if (this.filters[index].onKeyDown(this, keyBoard)) {
+            var idx:int = this.filters.length - 1;
+            while (idx >= 0) {
+                if (this.filters[idx].onKeyDown(this, keyBoard)) {
 					break;
 				}
-                index--;
+                idx--;
             }
         }
 
@@ -88,12 +89,12 @@
             this.upKeys.put(keyCode, time);
             this.allKeys.put(keyCode, time);
             this.currentKey = keyCode;
-            var index:int = this.filters.length - 1;
-            while (index >= 0) {
-                if (this.filters[index].onKeyUp(this, keyBoard)) {
+            var idx:int = this.filters.length - 1;
+            while (idx >= 0) {
+                if (this.filters[idx].onKeyUp(this, keyBoard)) {
 					break;
 				}
-                index--;
+                idx--;
             }
         }
 
@@ -122,13 +123,13 @@
             return this.allKeys.keys;
         }
 
-        public function reset(isClear:Boolean=false):void
+        public function reset(doClear:Boolean=false):void
         {
-            this.upKeys.reset(isClear);
-            this.downKeys.reset(isClear);
-            this.allKeys.reset(isClear);
+            this.upKeys.reset(doClear);
+            this.downKeys.reset(doClear);
+            this.allKeys.reset(doClear);
             this.currentKey = 0;
-            if (isClear) {
+            if (doClear) {
                 this.filters.length = 0;
             }
         }

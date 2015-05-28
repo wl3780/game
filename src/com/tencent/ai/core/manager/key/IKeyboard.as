@@ -3,7 +3,7 @@
     public interface IKeyboard 
     {
 
-        function isKeyDown(_arg_1:int):Boolean;
+        function isKeyDown(keyCode:int):Boolean;
 
     }
 }
