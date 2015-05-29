@@ -9,38 +9,37 @@
         private var _type:Class;
         private var _dicResource:DictionaryEx;
 
-        public function Pool(_arg_1:Class, _arg_2:int, _arg_3:Boolean=false)
+        public function Pool(type:Class, maxNum:int, weakKeys:Boolean=false)
         {
-            _type = _arg_1;
-            _maxNumber = _arg_2;
-            _dicResource = new DictionaryEx(_arg_3);
+            _type = type;
+            _maxNumber = maxNum;
+            _dicResource = new DictionaryEx(weakKeys);
         }
 
         public function getResource():Object
         {
-            var _local_1:Object;
-            var _local_2:Object;
-            for (_local_2 in _dicResource) {
-                if (((_local_2) && ((_dicResource[_local_2] == true)))){
-                    _dicResource[_local_2] = false;
-                    _local_1 = _local_2;
+            var ret:Object;
+            for (var res:Object in _dicResource) {
+                if (res && _dicResource[res] == true) {
+                    _dicResource[res] = false;
+                    ret = res;
                     break;
-                };
-            };
-            if (!_local_1){
-                if (_dicResource.length < _maxNumber){
-                    _local_1 = new _type();
-                    _dicResource[_local_1] = false;
-                };
-            };
-            return (_local_1);
+                }
+            }
+            if (!ret) {
+                if (_dicResource.length < _maxNumber) {
+                    ret = new _type();
+                    _dicResource[ret] = false;
+                }
+            }
+            return ret;
         }
 
-        public function returnResource(_arg_1:Object):void
+        public function returnResource(res:Object):void
         {
-            if (_arg_1){
-                _dicResource[_arg_1] = true;
-            };
+            if (res) {
+                _dicResource[res] = true;
+            }
         }
 
     }

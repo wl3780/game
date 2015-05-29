@@ -18,63 +18,60 @@
         protected var _taskFlow:TaskFlow;
         protected var _taskType:Class;
 
-        public function Manager(taskType:Class, taskNum:int=1, loader:Class=null)
+        public function Manager(taskType:Class, taskNum:int=1, resType:Class=null)
         {
-            _taskFlow = new TaskFlow(taskNum, loader);
+            _taskFlow = new TaskFlow(taskNum, resType);
             _taskFlow.start();
             _cacheManager = new CacheManager();
             _taskType = taskType;
         }
 
-        public function request(_arg_1:ILoader):Object
+        public function request(loader:ILoader):Object
         {
-            var _local_2:ITask;
-            var _local_3:ICache;
-            if (((_arg_1) && (_arg_1.key))){
-                _local_3 = _cacheManager.getCache(_arg_1.key);
-                _local_2 = _taskFlow.getTask(_arg_1.key);
-                if (!_local_2){
-                    if (_local_3){
-                        _local_2 = (_local_3 as ITask);
-                        if (_local_3.isLoaded()){
-                            _local_2.start(null);
+            if (loader && loader.key) {
+	            var cache:ICache = _cacheManager.getCache(loader.key);
+	            var task:ITask = _taskFlow.getTask(loader.key);
+                if (!task) {
+                    if (cache) {
+                        task = cache as ITask;
+                        if (cache.isLoaded()) {
+                            task.start(null);
                         } else {
-                            _taskFlow.addTask(_local_2);
+                            _taskFlow.addTask(task);
                         }
                     } else {
-                        _local_2 = new _taskType(_arg_1.key);
-                        _taskFlow.addTask(_local_2);
-                        _cacheManager.addCache(_arg_1.key, (_local_2 as ICache));
+                        task = new _taskType(loader.key);
+                        _taskFlow.addTask(task);
+                        _cacheManager.addCache(loader.key, task as ICache);
                     }
                 }
-                _cacheManager.addCacheReference(_arg_1.key, _arg_1);
-                _local_2.addLoader(_arg_1);
+                _cacheManager.addCacheReference(loader.key, loader);
+                task.addLoader(loader);
             }
-            return (_local_2);
+            return task;
         }
 
-        public function getContent(_arg_1:ILoader):IContent
+        public function getContent(loader:ILoader):IContent
         {
-            var _local_2:Task = (_cacheManager.getCache(_arg_1.key) as Task);
-            if (!_local_2){
-                _local_2 = new _taskType(_arg_1.key);
-                _cacheManager.addCache(_arg_1.key, _local_2);
+            var task:Task = _cacheManager.getCache(loader.key) as Task;
+            if (!task) {
+                task = new _taskType(loader.key);
+                _cacheManager.addCache(loader.key, task);
             }
-            _local_2.addLoader(_arg_1);
-            _cacheManager.addCacheReference(_arg_1.key, _arg_1);
-            return (_local_2);
+            task.addLoader(loader);
+            _cacheManager.addCacheReference(loader.key, loader);
+            return task;
         }
 
-        public function release(_arg_1:ILoader):void
+        public function release(loader:ILoader):void
         {
-            var _local_2:ITask;
-            if (((_arg_1) && (_arg_1.key))){
-                _cacheManager.removeCacheReference(_arg_1.key, _arg_1);
-                _local_2 = _taskFlow.getTask(_arg_1.key);
-                if (_local_2){
-                    _local_2.removeLoader(_arg_1);
-                    if (_local_2.referenceLength() == 0){
-                        _taskFlow.removeTask(_local_2.key);
+            if (loader && loader.key) {
+                _cacheManager.removeCacheReference(loader.key, loader);
+	            var task:ITask = _taskFlow.getTask(loader.key);
+                if (task) {
+                    task.removeLoader(loader);
+                    if (task.referenceLength() == 0) {
+                        _taskFlow.removeTask(task.key);
                     }
                 }
             }

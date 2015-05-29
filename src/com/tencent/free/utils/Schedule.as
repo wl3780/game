@@ -1,16 +1,8 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.utils.Schedule
-
-package com.tencent.free.utils
+﻿package com.tencent.free.utils
 {
-    import flash.utils.Timer;
-    import __AS3__.vec.Vector;
     import flash.events.TimerEvent;
+    import flash.utils.Timer;
     import flash.utils.getTimer;
-    import  ©init._SafeStr_77;
-    import __AS3__.vec.*;
 
     public class Schedule 
     {
@@ -25,103 +17,94 @@ package com.tencent.free.utils
 
         public function Schedule()
         {
-            this._timer = new Timer(this.DEFAULT_DELAY);
-            this._timer.addEventListener(TimerEvent.TIMER, this.onTimer);
-            this._currentInvokes = new Vector.<InvokeItem>();
-            this._buffInvokes = new Vector.<InvokeItem>();
+            _timer = new Timer(this.DEFAULT_DELAY);
+            _timer.addEventListener(TimerEvent.TIMER, this.onTimer);
+            
+			_currentInvokes = new Vector.<InvokeItem>();
+            _buffInvokes = new Vector.<InvokeItem>();
         }
 
         public static function get Default():Schedule
         {
-            if (__instance == null){
-                __instance = new (Schedule)();
-            };
-            return (__instance);
+            if (__instance == null) {
+                __instance = new Schedule();
+            }
+            return __instance;
         }
 
-        public static function addInvoke(_arg_1:CFunction, _arg_2:int=0):void
+        public static function addInvoke(func:CFunction, delay:int=0):void
         {
-            Default.addInvoke(_arg_1, _arg_2);
+            Default.addInvoke(func, delay);
         }
 
-        public static function removeInvoke(_arg_1:CFunction):void
+        public static function removeInvoke(func:CFunction):void
         {
-            Default.removeInvoke(_arg_1);
+            Default.removeInvoke(func);
         }
 
 
-        protected function onTimer(_arg_1:TimerEvent):void
+        protected function onTimer(evt:TimerEvent):void
         {
-            var _local_4:InvokeItem;
-            var _local_2:int = getTimer();
-            var _local_3:int = (this._currentInvokes.length - 1);
-            while (_local_3 >= 0) {
-                _local_4 = this._currentInvokes[_local_3];
-                _local_4.func.invoke();
-                _local_3--;
-            };
-            this._currentInvokes.length = 0;
+            var item:InvokeItem;
+            var idx:int = _currentInvokes.length - 1;
+            while (idx >= 0) {
+                item = _currentInvokes[idx];
+                item.func.invoke();
+                idx--;
+            }
+            _currentInvokes.length = 0;
             this.checkRuning();
         }
 
         protected function checkRuning():void
         {
-            var _local_1:Vector.<InvokeItem>;
-            if (this._buffInvokes.length == 0){
-                this._timer.stop();
+            if (_buffInvokes.length == 0) {
+                _timer.stop();
             } else {
-                _local_1 = this._currentInvokes;
-                this._currentInvokes = this._buffInvokes;
-                this._buffInvokes = _local_1;
-            };
+	            var tmp:Vector.<InvokeItem> = _currentInvokes;
+                _currentInvokes = _buffInvokes;
+                _buffInvokes = tmp;
+            }
         }
 
-        public function setDelay(_arg_1:int):void
+        public function setDelay(value:int):void
         {
-            this._timer.delay = _arg_1;
+            _timer.delay = value;
         }
 
-        public function addInvoke(_arg_1:CFunction, _arg_2:int=0):void
+        public function addInvoke(func:CFunction, delay:int=0):void
         {
-            var _local_3:Vector.<InvokeItem>;
-            if (_arg_1 != null){
-                _local_3 = this._buffInvokes;
-                _local_3.splice(0, 0, new InvokeItem(_arg_1, _arg_2, getTimer()));
-                if (!this._timer.running){
-                    this._timer.start();
-                };
-            };
+            if (func != null) {
+	            var list:Vector.<InvokeItem> = _buffInvokes;
+                list.splice(0, 0, new InvokeItem(func, delay, getTimer()));
+                if (!_timer.running) {
+                    _timer.start();
+                }
+            }
         }
 
-        public function removeInvoke(_arg_1:CFunction):void
+        public function removeInvoke(func:CFunction):void
         {
-            var _local_5:InvokeItem;
-            if (_arg_1 == null){
+            if (func == null) {
                 return;
-            };
-            var _local_2:Vector.<InvokeItem> = this._buffInvokes;
-            var _local_3:int = _local_2.length;
-            var _local_4:int;
-            while (_local_4 < _local_3) {
-                _local_5 = _local_2[_local_4];
-                if (_local_5.func == _arg_1){
-                    _local_2.splice(_local_4, 1);
+            }
+            var list:Vector.<InvokeItem> = _buffInvokes;
+            var len:int = list.length;
+            var idx:int;
+            while (idx < len) {
+	            var item:InvokeItem = list[idx];
+                if (item.func == func) {
+                    list.splice(idx, 1);
                     return;
-                };
-                _local_4++;
-            };
+                }
+                idx++;
+            }
         }
-
-        public /*  ©init. */ function _SafeStr_77()
-        {
-        }
-
 
     }
-}//package com.tencent.free.utils
+}
 
 import com.tencent.free.utils.CFunction;
-import  ©init._SafeStr_78;
 
 class InvokeItem 
 {
@@ -131,22 +114,12 @@ class InvokeItem
     public var begin:int;
     public var once:Boolean;
 
-    public function InvokeItem(_arg_1:CFunction, _arg_2:int, _arg_3:int, _arg_4:Boolean=true)
+    public function InvokeItem(func:CFunction, delay:int, begin:int, once:Boolean=true)
     {
-        this.func = _arg_1;
-        this.delay = _arg_2;
-        this.begin = _arg_3;
-        this.once = _arg_4;
+        this.func = func;
+        this.delay = delay;
+        this.begin = begin;
+        this.once = once;
     }
-
-    public /*  ©init. */ function _SafeStr_78()
-    {
-    }
-
 
 }
-
-// _SafeStr_77 = " Schedule" (String#1469)
-// _SafeStr_78 = " InvokeItem" (String#1472)
-
-

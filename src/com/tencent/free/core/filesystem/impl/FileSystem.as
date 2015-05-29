@@ -12,9 +12,9 @@
 
         private var _totalBytes:int;
 
-        public function FileSystem(taskType:Class, taskNum:int=1, loader:Class=null)
+        public function FileSystem(taskType:Class, taskNum:int=1, resType:Class=null)
         {
-            super(taskType, taskNum, loader);
+            super(taskType, taskNum, resType);
         }
 
         public static function getInstance():FileSystem

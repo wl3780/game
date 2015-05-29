@@ -8,9 +8,9 @@
         public static var g_Max_Simultaneous_Task_Number:int = 4;
         private static var g_Instance:SwfManager;
 
-        public function SwfManager(taskType:Class, taskNum:int=1, loader:Class=null)
+        public function SwfManager(taskType:Class, taskNum:int=1, resType:Class=null)
         {
-            super(taskType, taskNum, loader);
+            super(taskType, taskNum, resType);
         }
 
         public static function getInstance():SwfManager
