@@ -1,25 +1,18 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.AIAssetsLoader
-
-package com.tencent.ai
+﻿package com.tencent.ai
 {
-    import flash.events.EventDispatcher;
-    import com.tencent.ai.core.manager.data.IDataManager;
-    import com.tencent.ai.core.effect.IEffectManager;
-    import com.tencent.ai.core.interact.IInteractItemAssetManager;
-    import com.tencent.ai.core.sound.ISoundAssetManager;
-    import com.tencent.ai.core.asset.prepare.AssetPrepare;
-    import com.tencent.ai.ui.view.AssetLoadingView;
     import com.tencent.ai.core.AICore;
+    import com.tencent.ai.core.asset.IAsset;
+    import com.tencent.ai.core.asset.prepare.AssetPrepare;
+    import com.tencent.ai.core.effect.IEffectManager;
     import com.tencent.ai.core.enum.AssetLoadType;
     import com.tencent.ai.core.events.AssetLoadEvent;
-    import com.tencent.ai.core.asset.IAsset;
-    import com.tencent.free.logging.error;
+    import com.tencent.ai.core.interact.IInteractItemAssetManager;
+    import com.tencent.ai.core.manager.data.IDataManager;
+    import com.tencent.ai.core.sound.ISoundAssetManager;
     import com.tencent.free.logging.debug;
-    import com.tencent.ai.ui.UIManager;
-    import  ©init._SafeStr_3;
+    import com.tencent.free.logging.error;
+    
+    import flash.events.EventDispatcher;
 
     public class AIAssetsLoader extends EventDispatcher 
     {
@@ -29,7 +22,8 @@ package com.tencent.ai
         protected var m_interactItemAssetManager:IInteractItemAssetManager;
         protected var m_soundAssetManager:ISoundAssetManager;
         protected var m_assetsPrepare:AssetPrepare;
-        private var _bar:AssetLoadingView;
+        
+		private var _bar:AssetLoadingView;
         private var _showBar:Boolean;
 
 

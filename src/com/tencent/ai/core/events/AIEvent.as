@@ -1,12 +1,6 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.events.AIEvent
-
-package com.tencent.ai.core.events
+﻿package com.tencent.ai.core.events
 {
     import flash.events.Event;
-    import  ©init._SafeStr_523;
 
     public class AIEvent extends BaseEvent 
     {
@@ -77,28 +71,19 @@ package com.tencent.ai.core.events
 
         public var arg:Object;
 
-        public function AIEvent(_arg_1:String, _arg_2:Boolean=false, _arg_3:Boolean=false)
+        public function AIEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
         {
-            super(_arg_1, _arg_2, _arg_3);
+            super(type, bubbles, cancelable);
         }
 
         override public function clone():Event
         {
-            var _local_1:AIEvent = new AIEvent(type);
-            _local_1.arg = this.arg;
-            _local_1.data = data;
-            _local_1.setTarget(m_target);
-            return (_local_1);
+            var event:AIEvent = new AIEvent(type);
+            event.arg = this.arg;
+            event.data = data;
+            event.setTarget(m_target);
+            return event;
         }
-
-        public /*  ©init. */ function _SafeStr_523()
-        {
-        }
-
 
     }
-}//package com.tencent.ai.core.events
-
-// _SafeStr_523 = " AIEvent" (String#17426)
-
-
+}
