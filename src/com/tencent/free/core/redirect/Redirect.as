@@ -1,12 +1,6 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.core.redirect.Redirect
-
-package com.tencent.free.core.redirect
+﻿package com.tencent.free.core.redirect
 {
     import flash.utils.Dictionary;
-    import  ©init._SafeStr_38;
 
     public class Redirect 
     {
@@ -14,72 +8,63 @@ package com.tencent.free.core.redirect
         public static var MD5:String = "";
         public static var redirectMap:Dictionary;
         public static var preUrl:String = "";
-        private static var _hasData:Boolean = false;
+        
+		private static var _hasData:Boolean = false;
 
 
-        public static function setData(_arg_1:XML):void
+        public static function setData(xml:XML):void
         {
-            var _local_2:RedirectConfig = new RedirectConfig();
-            _local_2.parse(_arg_1);
-            redirectMap = _local_2.redirectMap;
+            var config:RedirectConfig = new RedirectConfig();
+            config.parse(xml);
+            this.redirectMap = config.redirectMap;
             _hasData = true;
         }
 
         public static function clearData():void
         {
+            this.redirectMap = new Dictionary();
             _hasData = false;
-            redirectMap = new Dictionary();
         }
 
         public static function hasData():Boolean
         {
-            return (_hasData);
+            return _hasData;
         }
 
-        public static function redirect(_arg_1:String):String
+        public static function redirect(url:String):String
         {
-            var _local_2:String = _arg_1.replace(/\\/g, "/");
-            var _local_3:RedirectFile = getRedirectFile(_local_2);
-            if (_local_3){
-                if ((((_local_3.redirctPath.indexOf("://") == -1)) && (!((preUrl == ""))))){
-                    return (((preUrl + "/") + _local_3.redirctPath));
-                };
-                return (_local_3.redirctPath);
-            };
-            return (_arg_1);
+            var newURL:String = url.replace(/\\/g, "/");
+            var dirFile:RedirectFile = this.getRedirectFile(newURL);
+            if (dirFile) {
+                if (dirFile.redirctPath.indexOf("://") == -1 && this.preUrl != "") {
+                    return this.preUrl + "/" + dirFile.redirctPath;
+                }
+                return dirFile.redirctPath;
+            }
+            return url;
         }
 
-        public static function getRedirectFile(_arg_1:String):RedirectFile
+        public static function getRedirectFile(url:String):RedirectFile
         {
-            var _local_2:String = _arg_1.substr(0, (((_arg_1.lastIndexOf("?") == -1)) ? _arg_1.length : _arg_1.lastIndexOf("?")));
-            var _local_3:RedirectFile;
-            if (redirectMap){
-                _local_3 = redirectMap[_local_2];
-                if (!_local_3){
-                    _local_3 = redirectMap[relativePath(_arg_1)];
-                };
-            };
-            return (_local_3);
+            var aURL:String = url.substr(0, url.lastIndexOf("?") == -1 ? url.length : url.lastIndexOf("?"));
+            var dirFile:RedirectFile;
+            if (this.redirectMap) {
+                dirFile = this.redirectMap[aURL];
+                if (!dirFile) {
+                    dirFile = this.redirectMap[this.relativePath(url)];
+                }
+            }
+            return dirFile;
         }
 
-        public static function relativePath(_arg_1:String):String
+        public static function relativePath(url:String):String
         {
-            var _local_2:String = _arg_1.substr(0, (((_arg_1.lastIndexOf("?") == -1)) ? _arg_1.length : _arg_1.lastIndexOf("?")));
-            if (((!((preUrl == ""))) && ((_local_2.indexOf(preUrl) == 0)))){
-                _local_2 = _local_2.substring((preUrl.length + 1));
-            };
-            return (_local_2.replace(/\\/g, "/"));
+            var aURL:String = url.substr(0, url.lastIndexOf("?") == -1 ? url.length : url.lastIndexOf("?"));
+            if (this.preUrl != "" && aURL.indexOf(preUrl) == 0) {
+                aURL = aURL.substring(preUrl.length + 1);
+            }
+            return aURL.replace(/\\/g, "/");
         }
-
-
-        public /*  ©init. */ function _SafeStr_38()
-        {
-        }
-
 
     }
-}//package com.tencent.free.core.redirect
-
-// _SafeStr_38 = " Redirect" (String#1508)
-
-
+}

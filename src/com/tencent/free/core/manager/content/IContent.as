@@ -1,9 +1,4 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.core.manager.content.IContent
-
-package com.tencent.free.core.manager.content
+﻿package com.tencent.free.core.manager.content
 {
     import flash.events.IEventDispatcher;
 
@@ -16,5 +11,4 @@ package com.tencent.free.core.manager.content
         function isLoaded():Boolean;
 
     }
-}//package com.tencent.free.core.manager.content
-
+}

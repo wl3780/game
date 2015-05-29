@@ -1,382 +1,378 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.utils.XString
-
-package com.tencent.free.utils
+﻿package com.tencent.free.utils
 {
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import flash.utils.IDataInput;
     import flash.utils.IDataOutput;
-    import  ©init._SafeStr_80;
 
     public class XString 
     {
 
+        public static var CHARSET:String = "utf-8";
+		
         private static var __Vars:Object;
         private static var __Exp:RegExp = /\{([Z-z$_][^\}\{]+)\}/g;
-        public static var CHARSET:String = "utf-8";
-        private static var byteBuff:ByteBuffer = new ByteBuffer();
+        
+		private static var byteBuff:ByteBuffer = new ByteBuffer();
 
-
-        public static function Trim(_arg_1:String):String
+        public static function Trim(str:String):String
         {
-            return (_arg_1.replace(/(^\s*)|(\s*$)/g, ""));
+            return str.replace(/(^\s*)|(\s*$)/g, "");
         }
 
-        public static function LTrim(_arg_1:String):String
+        public static function LTrim(str:String):String
         {
-            return (_arg_1.replace(/(^\s*)/g, ""));
+            return str.replace(/(^\s*)/g, "");
         }
 
-        public static function RTrim(_arg_1:String):String
+        public static function RTrim(str:String):String
         {
-            return (_arg_1.replace(/(\s*$)/g, ""));
+            return str.replace(/(\s*$)/g, "");
         }
 
-        public static function getFileName(_arg_1:String):String
+        public static function getFileName(path:String):String
         {
-            var _local_2:int = _arg_1.lastIndexOf("/");
-            if (_local_2 == -1){
-                _local_2 = _arg_1.lastIndexOf("\\");
-            };
-            return (_arg_1.substring((_local_2 + 1), _arg_1.length));
+            var idx:int = path.lastIndexOf("/");
+            if (idx == -1) {
+                idx = path.lastIndexOf("\\");
+            }
+            return path.substring(idx + 1, path.length);
         }
 
-        public static function getURLExtension(_arg_1:String):String
+        public static function getURLExtension(url:String):String
         {
-            var _local_2:String = _arg_1.substr(0, (((_arg_1.lastIndexOf("?") == -1)) ? _arg_1.length : (_arg_1.lastIndexOf("?"))));
-            return (_local_2.substring((_local_2.lastIndexOf(".") + 1)));
+            var aURL:String = url.substr(0, url.lastIndexOf("?") == -1 ? url.length : url.lastIndexOf("?"));
+            return aURL.substring(aURL.lastIndexOf(".") + 1);
         }
 
-        public static function equalsIgnoreCase(_arg_1:String, _arg_2:String):Boolean
+        public static function equalsIgnoreCase(strA:String, strB:String):Boolean
         {
-            return ((_arg_1.toLowerCase() == _arg_2.toLowerCase()));
+            return strA.toLowerCase() == strB.toLowerCase();
         }
 
-        public static function equals(_arg_1:String, _arg_2:String):Boolean
+        public static function equals(strA:String, strB:String):Boolean
         {
-            return ((_arg_1 == _arg_2));
+            return strA == strB;
         }
 
-        public static function isEmail(_arg_1:String):Boolean
+        public static function isEmail(str:String):Boolean
         {
-            if (_arg_1 == null){
-                return (false);
-            };
-            _arg_1 = XString.Trim(_arg_1);
-            var _local_2:RegExp = /(\w|[_.\-])+@((\w|-)+\.)+\w{2,4}+/;
-            var _local_3:Object = _local_2.exec(_arg_1);
-            if (_local_3 == null){
-                return (false);
-            };
-            return (true);
+            if (str == null) {
+                return false;
+            }
+            str = XString.Trim(str);
+            var mailExp:RegExp = /(\w|[_.\-])+@((\w|-)+\.)+\w{2,4}+/;
+            var matchs:Object = mailExp.exec(str);
+            if (matchs == null) {
+                return false;
+            }
+            return true;
         }
 
-        public static function isNumber(_arg_1:String):Boolean
+        public static function isNumber(str:String):Boolean
         {
-            if (_arg_1 == null){
-                return (false);
-            };
-            return (!(isNaN(Number(_arg_1))));
+            if (str == null) {
+                return false;
+            }
+            return !isNaN(Number(str));
         }
 
-        public static function isDouble(_arg_1:String):Boolean
+        public static function isDouble(str:String):Boolean
         {
-            _arg_1 = XString.Trim(_arg_1);
-            var _local_2:RegExp = /^[-\+]?\d+(\.\d+)?$/;
-            var _local_3:Object = _local_2.exec(_arg_1);
-            if (_local_3 == null){
-                return (false);
-            };
-            return (true);
+            str = XString.Trim(str);
+            var numExp:RegExp = /^[-\+]?\d+(\.\d+)?$/;
+            var matchs:Object = numExp.exec(str);
+            if (matchs == null) {
+                return false;
+            }
+            return true;
         }
 
-        public static function isInteger(_arg_1:String):Boolean
+        public static function isInteger(str:String):Boolean
         {
-            if (_arg_1 == null){
-                return (false);
-            };
-            _arg_1 = XString.Trim(_arg_1);
-            var _local_2:RegExp = /^[-\+]?\d+$/;
-            var _local_3:Object = _local_2.exec(_arg_1);
-            if (_local_3 == null){
-                return (false);
-            };
-            return (true);
+            if (str == null) {
+                return false;
+            }
+            str = XString.Trim(str);
+            var intExp:RegExp = /^[-\+]?\d+$/;
+            var matchs:Object = intExp.exec(str);
+            if (matchs == null) {
+                return false;
+            }
+            return true;
         }
 
-        public static function isEnglish(_arg_1:String):Boolean
+        public static function isEnglish(str:String):Boolean
         {
-            if (_arg_1 == null){
-                return (false);
-            };
-            _arg_1 = XString.Trim(_arg_1);
-            var _local_2:RegExp = /^[A-Za-z]+$/;
-            var _local_3:Object = _local_2.exec(_arg_1);
-            if (_local_3 == null){
-                return (false);
-            };
-            return (true);
+            if (str == null) {
+                return false;
+            }
+            str = XString.Trim(str);
+            var engExp:RegExp = /^[A-Za-z]+$/;
+            var matchs:Object = engExp.exec(str);
+            if (matchs == null) {
+                return false;
+            }
+            return true;
         }
 
-        public static function isChinese(_arg_1:String):Boolean
+        public static function isChinese(str:String):Boolean
         {
-            if (_arg_1 == null){
-                return (false);
-            };
-            _arg_1 = XString.Trim(_arg_1);
-            var _local_2:RegExp = /^[Α-￥]+$/;
-            var _local_3:Object = _local_2.exec(_arg_1);
-            if (_local_3 == null){
-                return (false);
-            };
-            return (true);
+            if (str == null) {
+                return false;
+            }
+            str = XString.Trim(str);
+            var chExp:RegExp = /^[Α-￥]+$/;
+            var matchs:Object = chExp.exec(str);
+            if (matchs == null) {
+                return false;
+            }
+            return true;
         }
 
-        public static function isDoubleChar(_arg_1:String):Boolean
+        public static function isDoubleChar(str:String):Boolean
         {
-            if (_arg_1 == null){
-                return (false);
-            };
-            _arg_1 = XString.Trim(_arg_1);
-            var _local_2:RegExp = /^[^\x00-\xff]+$/;
-            var _local_3:Object = _local_2.exec(_arg_1);
-            if (_local_3 == null){
-                return (false);
-            };
-            return (true);
+            if (str == null) {
+                return false;
+            }
+            str = XString.Trim(str);
+            var exp:RegExp = /^[^\x00-\xff]+$/;
+            var matchs:Object = exp.exec(str);
+            if (matchs == null) {
+                return false;
+            }
+            return true;
         }
 
         public static function hasChineseChar(_arg_1:String):Boolean
         {
-            if (_arg_1 == null){
-                return (false);
-            };
+            if (_arg_1 == null) {
+                return false;
+            }
             _arg_1 = XString.Trim(_arg_1);
             var _local_2:RegExp = /[^\x00-\xff]/;
             var _local_3:Object = _local_2.exec(_arg_1);
-            if (_local_3 == null){
-                return (false);
-            };
-            return (true);
+            if (_local_3 == null) {
+                return false;
+            }
+            return true;
         }
 
-        public static function hasAccountChar(_arg_1:String, _arg_2:uint=15):Boolean
+        public static function hasAccountChar(str:String, size:uint=15):Boolean
         {
-            if (_arg_1 == null){
-                return (false);
-            };
-            if (_arg_2 < 10){
-                _arg_2 = 15;
-            };
-            _arg_1 = XString.Trim(_arg_1);
-            var _local_3:RegExp = new RegExp((("^[a-zA-Z0-9][a-zA-Z0-9_-]{0," + _arg_2) + "}$"), "");
-            var _local_4:Object = _local_3.exec(_arg_1);
-            if (_local_4 == null){
-                return (false);
-            };
-            return (true);
+            if (str == null) {
+                return false;
+            }
+            if (size < 10) {
+                size = 15;
+            }
+            str = XString.Trim(str);
+            var exp:RegExp = new RegExp("^[a-zA-Z0-9][a-zA-Z0-9_-]{0," + size + "}$", "");
+            var matchs:Object = exp.exec(str);
+            if (matchs == null) {
+                return false;
+            }
+            return true;
         }
 
-        public static function isURL(_arg_1:String):Boolean
+        public static function isURL(str:String):Boolean
         {
-            if (_arg_1 == null){
-                return (false);
-            };
-            _arg_1 = XString.Trim(_arg_1).toLowerCase();
-            var _local_2:RegExp = /^http:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\’:+!]*([^<>\"\"])*$/;
-            var _local_3:Object = _local_2.exec(_arg_1);
-            if (_local_3 == null){
-                return (false);
-            };
-            return (true);
+            if (str == null) {
+                return false;
+            }
+            str = XString.Trim(str).toLowerCase();
+            var exp:RegExp = /^http:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\’:+!]*([^<>\"\"])*$/;
+            var matchs:Object = exp.exec(str);
+            if (matchs == null) {
+                return false;
+            }
+            return true;
         }
 
-        public static function isWhitespace(_arg_1:String):Boolean
+        public static function isWhitespace(str:String):Boolean
         {
-            switch (_arg_1){
+            switch (str) {
                 case " ":
                 case "\t":
                 case "\r":
                 case "\n":
                 case "\f":
-                    return (true);
+                    return true;
                 default:
-                    return (false);
-            };
+                    return false;
+            }
         }
 
-        public static function beginsWith(_arg_1:String, _arg_2:String):Boolean
+        public static function beginsWith(str:String, subStr:String):Boolean
         {
-            return ((_arg_2 == _arg_1.substring(0, _arg_2.length)));
+            return subStr == str.substring(0, subStr.length);
         }
 
-        public static function endsWith(_arg_1:String, _arg_2:String):Boolean
+        public static function endsWith(str:String, subStr:String):Boolean
         {
-            return ((_arg_2 == _arg_1.substring((_arg_1.length - 1), _arg_2.length)));
+            return subStr == str.substring(str.length - 1, subStr.length);
         }
 
-        public static function remove(_arg_1:String, _arg_2:String):String
+        public static function remove(str:String, subStr:String):String
         {
-            return (replace(_arg_1, _arg_2, '"'));
+            return replace(str, subStr, '"');
         }
 
-        public static function replace(_arg_1:String, _arg_2:String, _arg_3:String):String
+        public static function replace(str:String, repStr:String, toStr:String):String
         {
-            return (_arg_1.split(_arg_2).join(_arg_3));
+            return str.split(repStr).join(toStr);
         }
 
-        public static function replaceAt(_arg_1:String, _arg_2:String, _arg_3:int, _arg_4:int):String
+        public static function replaceAt(str:String, subStr:String, from:int, to:int):String
         {
-            _arg_3 = Math.max(_arg_3, 0);
-            _arg_4 = Math.min(_arg_4, _arg_1.length);
-            var _local_5:String = _arg_1.substr(0, _arg_3);
-            var _local_6:String = _arg_1.substr(_arg_4, _arg_1.length);
-            return (((_local_5 + _arg_2) + _local_6));
+            from = Math.max(from, 0);
+            to = Math.min(to, str.length);
+            var head:String = str.substr(0, from);
+            var end:String = str.substr(to, str.length);
+            return head + subStr + end;
         }
 
-        public static function removeAt(_arg_1:String, _arg_2:int, _arg_3:int):String
+        public static function removeAt(str:String, from:int, to:int):String
         {
-            return (replaceAt(_arg_1, "", _arg_2, _arg_3));
+            return replaceAt(str, "", from, to);
         }
 
-        public static function fixNewlines(_arg_1:String):String
+        public static function fixNewlines(str:String):String
         {
-            return (_arg_1.replace(/\r\n/gm, "\n"));
+            return str.replace(/\r\n/gm, "\n");
         }
 
-        public static function TranArgs(_arg_1:String, _arg_2:Object):String
+        public static function TranArgs(str:String, arg:Object):String
         {
-            if ((((((_arg_2 == null)) || ((_arg_1.indexOf("{") == -1)))) || ((_arg_1.indexOf("}") == -1)))){
-                return (_arg_1);
-            };
-            __Vars = _arg_2;
-            _arg_1 = _arg_1.replace(__Exp, __Method);
+            if (arg == null || str.indexOf("{") == -1 || str.indexOf("}") == -1) {
+                return str;
+            }
+            __Vars = arg;
+            str = str.replace(__Exp, __Method);
             __Vars = null;
-            return (_arg_1);
+            return str;
+        }
+        private static function __Method(... args):String
+        {
+            return __Vars[args[1]];
         }
 
-        private static function __Method(... _args):String
+        public static function DecodePoint(str:String, delimiter:String=","):Point
         {
-            return (__Vars[_args[1]]);
+            var idx:int = str.indexOf(delimiter);
+            if (idx != -1) {
+            	var x:int = int(str.substring(0, idx));
+            	var y:int = int(str.substring(idx + 1, str.length));
+                return new Point(x, y);
+            }
+            return null;
         }
 
-        public static function DecodePoint(_arg_1:String, _arg_2:String=","):Point
+        public static function DecodeRect(str:String, delimiter:String=","):Rectangle
         {
-            var _local_4:int;
-            var _local_5:int;
-            var _local_3:int = _arg_1.indexOf(_arg_2);
-            if (_local_3 != -1){
-                _local_4 = int(_arg_1.substring(0, _local_3));
-                _local_5 = int(_arg_1.substring((_local_3 + 1), _arg_1.length));
-                return (new Point(_local_4, _local_5));
-            };
-            return (null);
+            var idxX:int = str.indexOf(delimiter);
+            var idxY:int = str.indexOf(delimiter, idxX + 1);
+            var idxW:int = str.indexOf(delimiter, idxY + 1);
+            var x:int = int(str.substring(0, idxX));
+            var y:int = int(str.substring(idxX + 1, idxY));
+            var width:int = int(str.substring(idxY + 1, idxW));
+            var height:int = int(str.substring(idxW + 1, str.length));
+            return new Rectangle(x, y, width, height);
         }
 
-        public static function DecodeRect(_arg_1:String, _arg_2:String=","):Rectangle
+        public static function ReadIP(data:IDataInput):String
         {
-            var _local_3:int = _arg_1.indexOf(_arg_2);
-            var _local_4:int = _arg_1.indexOf(_arg_2, (_local_3 + 1));
-            var _local_5:int = _arg_1.indexOf(_arg_2, (_local_4 + 1));
-            var _local_6:int = int(_arg_1.substring(0, _local_3));
-            var _local_7:int = int(_arg_1.substring((_local_3 + 1), _local_4));
-            var _local_8:int = int(_arg_1.substring((_local_4 + 1), _local_5));
-            var _local_9:int = int(_arg_1.substring((_local_5 + 1), _arg_1.length));
-            return (new Rectangle(_local_6, _local_7, _local_8, _local_9));
+            var num:uint = data.readUnsignedInt();
+            return (num & 0xFF) + "." + (uint(num >> 8) & 0xFF) + "." + (uint(num >> 16) & 0xFF) + "." + (uint(num >> 24) & 0xFF);
         }
 
-        public static function ReadIP(_arg_1:IDataInput):String
+        public static function WriteIP(data:IDataOutput, str:String):void
         {
-            var _local_2:uint = _arg_1.readUnsignedInt();
-            return ((((((((_local_2 & 0xFF) + ".") + (uint((_local_2 >> 8)) & 0xFF)) + ".") + (uint((_local_2 >> 16)) & 0xFF)) + ".") + (uint((_local_2 >> 24)) & 0xFF)));
+            var arr:Array = str.split(".");
+            var num:uint = (uint(arr[0]) & 0xFF) | (uint(arr[1]) & (0xFF << 8)) | (uint(arr[2]) & (0xFF << 16)) | (uint(arr[3]) & (0xFF << 24));
+            data.writeUnsignedInt(num);
         }
 
-        public static function WriteIP(_arg_1:IDataOutput, _arg_2:String):void
+        public static function ReadChars(data:IDataInput, len:int, charset:String=""):String
         {
-            var _local_3:Array = _arg_2.split(".");
-            var _local_4:uint = ((((uint(_local_3[0]) & 0xFF) | (uint(_local_3[1]) & (0xFF << 8))) | (uint(_local_3[2]) & (0xFF << 16))) | (uint(_local_3[3]) & (0xFF << 24)));
-            _arg_1.writeUnsignedInt(_local_4);
+            if (charset == "") {
+                charset = CHARSET;
+            }
+            return data.readMultiByte(len, charset);
         }
 
-        public static function ReadChars(_arg_1:IDataInput, _arg_2:int, _arg_3:String=""):String
+        public static function WriteChars(data:IDataOutput, str:String, len:int):void
         {
-            var _local_5:int;
-            if (_arg_3 == ""){
-                _arg_3 = CHARSET;
-            };
-            return (_arg_1.readMultiByte(_arg_2, _arg_3));
+            byteBuff.allocate(len);
+            byteBuff.writeMultiByte(str, CHARSET);
+            if (len == 0) {
+                data.writeShort(byteBuff.position);
+            }
+            if (byteBuff.position > 0) {
+                data.writeBytes(byteBuff, 0, byteBuff.position);
+            }
+            if (len > 0) {
+	            var idx:int = len - byteBuff.position;
+                while (idx > 0) {
+                    data.writeByte(0);
+                    idx--;
+                }
+            }
         }
 
-        public static function WriteChars(_arg_1:IDataOutput, _arg_2:String, _arg_3:int):void
+        public static function WriteString(data:IDataOutput, str:String):void
         {
-            var _local_4:int;
-            byteBuff.allocate(_arg_3);
-            byteBuff.writeMultiByte(_arg_2, CHARSET);
-            if (_arg_3 == 0){
-                _arg_1.writeShort(byteBuff.position);
-            };
-            if (byteBuff.position > 0){
-                _arg_1.writeBytes(byteBuff, 0, byteBuff.position);
-            };
-            if (_arg_3 > 0){
-                _local_4 = (_arg_3 - byteBuff.position);
-                while (_local_4 > 0) {
-                    _arg_1.writeByte(0);
-                    _local_4--;
-                };
-            };
+            if (str == null) {
+                str = "";
+            }
+            WriteChars(data, str, 0);
         }
 
-        public static function WriteString(_arg_1:IDataOutput, _arg_2:String):void
+        public static function ReadString(data:IDataInput):String
         {
-            if (_arg_2 == null){
-                _arg_2 = "";
-            };
-            WriteChars(_arg_1, _arg_2, 0);
+            var str:int = data.readUnsignedShort();
+            return data.readMultiByte(str, CHARSET);
         }
 
-        public static function ReadString(_arg_1:IDataInput):String
+		/**
+		 * 模式匹配{0}{1}...
+		 * @param str
+		 * @param args
+		 * @return 
+		 */		
+        public static function substitute(str:String, ... args):String
         {
-            var _local_2:int = _arg_1.readUnsignedShort();
-            return (_arg_1.readMultiByte(_local_2, CHARSET));
-        }
-
-        public static function substitute(_arg_1:String, ... _args):String
-        {
-            var _local_4:Array;
-            var _local_3:uint = _args.length;
-            if ((((_local_3 == 1)) && ((_args[0] is Array)))){
-                _local_4 = (_args[0] as Array);
-                _local_3 = _local_4.length;
+            var arr:Array;
+            var len:uint = args.length;
+            if (len == 1 && args[0] is Array) {
+                arr = args[0] as Array;
+                len = arr.length;
             } else {
-                _local_4 = _args;
-            };
-            var _local_5:int;
-            while (_local_5 < _local_3) {
-                _arg_1 = _arg_1.replace(new RegExp((("\\{" + _local_5) + "\\}"), "g"), _local_4[_local_5]);
-                _local_5++;
-            };
-            return (_arg_1);
+                arr = args;
+            }
+            var idx:int;
+            while (idx < len) {
+                str = str.replace(new RegExp("\\{" + idx + "\\}", "g"), arr[idx]);
+                idx++;
+            }
+            return str;
         }
 
-        public static function getFilterString(_arg_1:String):String
+        public static function getFilterString(str:String):String
         {
-            _arg_1 = _arg_1.replace(/</g, "&lt;");
-            return (_arg_1.replace(/>/g, "&gt;"));
+            str = str.replace(/</g, "&lt;");
+            return str.replace(/>/g, "&gt;");
         }
 
 
-        public /*  ©init. */ function _SafeStr_80()
+        public static function matchsRegExp(str:String, exp:RegExp):Boolean
         {
+			var matchs:Object = exp.exec(str);
+			if (matchs == null) {
+				return false;
+			}
+			return true;
         }
-
 
     }
-}//package com.tencent.free.utils
-
-// _SafeStr_80 = " XString" (String#1415)
-
-
+}

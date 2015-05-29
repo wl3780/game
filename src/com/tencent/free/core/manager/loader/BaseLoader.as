@@ -1,22 +1,15 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.core.manager.loader.BaseLoader
-
-package com.tencent.free.core.manager.loader
+﻿package com.tencent.free.core.manager.loader
 {
-    import com.tencent.free.core.manager.content.IContent;
     import com.tencent.free.core.manager.IManager;
+    import com.tencent.free.core.manager.content.IContent;
     import com.tencent.free.core.manager.task.Priority;
     import com.tencent.free.utils.FileLenUtil;
-    import  ©init._SafeStr_22;
 
     public class BaseLoader implements ILoader 
     {
 
         public static var defaultExpireTime:int = (1000 * 3);//3000
 
-        private var _logHeader:String;
         protected var _key:Object;
         protected var _content:IContent;
         protected var _manager:IManager;
@@ -29,140 +22,125 @@ package com.tencent.free.core.manager.loader
         protected var _retryTimes:int;
         protected var _loadInfo:Object;
 
-        public function BaseLoader(_arg_1:String, _arg_2:IManager)
+        private var _logHeader:String;
+		
+        public function BaseLoader(loadKey:String, manager:IManager)
         {
-            this._manager = _arg_2;
-            this._key = _arg_1;
-            if (((!(this._url)) || ((this._url.length == 0)))){
-                this._url = (this._key as String);
-            };
-            this._priority = Priority.PERIORITY_NORMAL;
-            this._expireTime = defaultExpireTime;
-            this._saveSO = false;
-            this._retryTimes = 3;
-            this._hash = "";
-            this._checkHash = FileLenUtil.checkBytes;
-            this._content = this._manager.getContent(this);
+            _key = loadKey;
+            _manager = manager;
+            if (!_url || _url.length == 0) {
+                _url = _key as String;
+            }
+            _priority = Priority.PERIORITY_NORMAL;
+            _expireTime = defaultExpireTime;
+            _saveSO = false;
+            _retryTimes = 3;
+            _hash = "";
+            _checkHash = FileLenUtil.checkBytes;
+            _content = _manager.getContent(this);
         }
 
         public function get loadInfo():Object
         {
-            return (this._loadInfo);
+            return _loadInfo;
         }
 
         public function load():void
         {
-            this._manager.request(this);
+            _manager.request(this);
         }
 
         public function unload():void
         {
-            this._manager.release(this);
-            this._loadInfo = null;
-            this._key = null;
-            this._content = null;
+            _manager.release(this);
+            _loadInfo = null;
+            _key = null;
+            _content = null;
         }
 
-        public function reset(_arg_1:String):void
+        public function reset(newKey:String):void
         {
             this.unload();
-            this._key = _arg_1;
-            this._content = this._manager.getContent(this);
+            _key = newKey;
+            _content = _manager.getContent(this);
         }
 
-        public function set key(_arg_1:Object):void
+        public function set key(value:Object):void
         {
-            this._key = _arg_1;
+            _key = value;
         }
-
         public function get key():Object
         {
-            return (this._key);
+            return _key;
         }
 
         public function get content():IContent
         {
-            return (this._content);
+            return _content;
         }
 
-        public function set priority(_arg_1:int):void
+        public function set priority(value:int):void
         {
-            this._priority = _arg_1;
+            _priority = value;
         }
-
         public function get priority():int
         {
-            return (this._priority);
+            return _priority;
         }
 
-        public function set hash(_arg_1:String):void
+        public function set hash(value:String):void
         {
-            this._hash = _arg_1;
+            _hash = value;
         }
-
         public function get hash():String
         {
-            return (this._hash);
+            return _hash;
         }
 
-        public function set checkHash(_arg_1:Function):void
+        public function set checkHash(func:Function):void
         {
-            this._checkHash = _arg_1;
+            _checkHash = func;
         }
-
         public function get checkHash():Function
         {
-            return (this._checkHash);
+            return _checkHash;
         }
 
         public function get url():String
         {
-            return (this._url);
+            return _url;
         }
-
-        public function set url(_arg_1:String):void
+        public function set url(value:String):void
         {
-            this._url = _arg_1;
+            _url = value;
         }
 
         public function get expireTime():int
         {
-            return (this._expireTime);
+            return _expireTime;
         }
-
-        public function set expireTime(_arg_1:int):void
+        public function set expireTime(value:int):void
         {
-            this._expireTime = _arg_1;
+            _expireTime = value;
         }
 
         public function get saveSO():Boolean
         {
-            return (this._saveSO);
+            return _saveSO;
         }
-
-        public function set saveSO(_arg_1:Boolean):void
+        public function set saveSO(value:Boolean):void
         {
-            this._saveSO = _arg_1;
+            _saveSO = value;
         }
 
         public function get retryTimes():int
         {
-            return (this._retryTimes);
+            return _retryTimes;
         }
-
-        public function set retryTimes(_arg_1:int):void
+        public function set retryTimes(value:int):void
         {
-            this._retryTimes = this.retryTimes;
+            _retryTimes = value;
         }
-
-        public /*  ©init. */ function _SafeStr_22()
-        {
-        }
-
 
     }
-}//package com.tencent.free.core.manager.loader
-
-// _SafeStr_22 = " BaseLoader" (String#1349)
-
-
+}

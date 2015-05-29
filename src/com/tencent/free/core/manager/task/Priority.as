@@ -1,11 +1,5 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.core.manager.task.Priority
-
-package com.tencent.free.core.manager.task
+﻿package com.tencent.free.core.manager.task
 {
-    import  ©init._SafeStr_24;
 
     public class Priority 
     {
@@ -22,15 +16,5 @@ package com.tencent.free.core.manager.task
         public static const PERIORITY_NORMAL_SOUND:int = 1001;
         public static const PERIORITY_LOW:int = 9999;
 
-
-        public /*  ©init. */ function _SafeStr_24()
-        {
-        }
-
-
     }
-}//package com.tencent.free.core.manager.task
-
-// _SafeStr_24 = " Priority" (String#1562)
-
-
+}

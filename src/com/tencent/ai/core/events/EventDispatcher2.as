@@ -16,7 +16,7 @@
             this.clear();
         }
 
-        public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
+		override public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
         {
             var events:Vector.<Function> = this.m_EventHandlers[type];
             if (events == null) {
@@ -34,7 +34,7 @@
             }
         }
 
-        public function removeEventListener(type:String, listener:Function, useCapture:Boolean=false):void
+		override public function removeEventListener(type:String, listener:Function, useCapture:Boolean=false):void
         {
             var events:Vector.<Function> = this.m_EventHandlers[type];
             if (events != null) {
@@ -49,7 +49,7 @@
             }
         }
 
-        public function dispatchEvent(event:Event):Boolean
+		override public function dispatchEvent(event:Event):Boolean
         {
             var events:Vector.<Function> = this.m_EventHandlers[event.type];
             if (events != null) {
@@ -63,13 +63,13 @@
             return false;
         }
 
-        public function hasEventListener(type:String):Boolean
+        override public function hasEventListener(type:String):Boolean
         {
             var events:Vector.<Function> = this.m_EventHandlers[type];
             return events && events.length;
         }
 
-        public function willTrigger(type:String):Boolean
+        override public function willTrigger(type:String):Boolean
         {
             return false;
         }
