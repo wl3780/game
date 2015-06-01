@@ -21,18 +21,18 @@
             _bStart = false;
         }
 
-        override public function addCache(_arg_1:*, _arg_2:ICache):Boolean
+        override public function addCache(key:*, res:ICache):Boolean
         {
-            var _local_3:Boolean = super.addCache(_arg_1, _arg_2);
+            var b:Boolean = super.addCache(key, res);
             if (!_bStart) {
                 this.startBurnCache();
             }
-            return (_local_3);
+            return b;
         }
 
-        override public function removeCache(_arg_1:*):void
+        override public function removeCache(key:*):void
         {
-            super.removeCache(_arg_1);
+            super.removeCache(key);
             if (_length == 0) {
                 this.stopBurnCache();
             }
@@ -40,13 +40,11 @@
 
         override public function removeAllCache():void
         {
-            var _local_1:*;
-            var _local_2:*;
-            for (_local_1 in _dicCache) {
-                _local_2 = _dicCache[_local_1];
-                _local_2.remainingTime = -1;
-                if (_local_2.remainingTime < 0) {
-                    _local_2.release();
+            for (var key:* in _dicCache) {
+	            var res:* = _dicCache[key];
+                res.remainingTime = -1;
+                if (res.remainingTime < 0) {
+                    res.release();
                 }
             }
             super.removeAllCache();
@@ -68,29 +66,27 @@
             _timer.stop();
         }
 
-        protected function burnCache(_arg_1:TimerEvent):void
+        protected function burnCache(evt:TimerEvent):void
         {
-            var _local_2:int = getTimer();
-            this.burn((_local_2 - _lastTime));
-            _lastTime = _local_2;
+            var nowTime:int = getTimer();
+            this.burn(nowTime - _lastTime);
+            _lastTime = nowTime;
         }
 
-        public function burn(_arg_1:int):void
+        public function burn(passTime:int):void
         {
-            var _local_3:*;
-            var _local_4:*;
-            var _local_2:Boolean;
-            for (_local_3 in _dicCache) {
-                _local_4 = _dicCache[_local_3];
-                _local_4.remainingTime = (_local_4.remainingTime - _arg_1);
-                if (_local_4.remainingTime < 0) {
+            var flag:Boolean;
+            for (var key:* in _dicCache) {
+	            var res:* = _dicCache[key];
+                res.remainingTime = res.remainingTime - passTime;
+                if (res.remainingTime < 0) {
                     _length--;
-                    delete _dicCache[_local_3];
-                    _local_4.release();
-                    _local_2 = true;
+                    delete _dicCache[key];
+                    res.release();
+                    flag = true;
                 }
             }
-            if (_local_2) {
+            if (flag) {
             }
             if (_length == 0) {
                 this.stopBurnCache();

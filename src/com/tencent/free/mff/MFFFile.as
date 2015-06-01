@@ -1,16 +1,11 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.mff.MFFFile
-
-package com.tencent.free.mff
+﻿package com.tencent.free.mff
 {
-    import flash.utils.IExternalizable;
-    import flash.utils.ByteArray;
     import com.tencent.free.utils.XString;
+    
+    import flash.utils.ByteArray;
     import flash.utils.IDataInput;
     import flash.utils.IDataOutput;
-    import  ©init._SafeStr_49;
+    import flash.utils.IExternalizable;
 
     public class MFFFile implements IExternalizable 
     {
@@ -20,27 +15,26 @@ package com.tencent.free.mff
         public var mffLength:int;
         public var mffBytes:ByteArray;
 
-
-        public function readExternal(_arg_1:IDataInput):void
+        public function readExternal(data:IDataInput):void
         {
-            this.mffName = XString.ReadString(_arg_1);
-            this.mffType = XString.ReadString(_arg_1);
-            this.mffLength = _arg_1.readUnsignedInt();
+            this.mffName = XString.ReadString(data);
+            this.mffType = XString.ReadString(data);
+            this.mffLength = data.readUnsignedInt();
             this.mffBytes = new ByteArray();
-            if (this.mffLength > 0){
-                _arg_1.readBytes(this.mffBytes, 0, this.mffLength);
-            };
+            if (this.mffLength > 0) {
+                data.readBytes(this.mffBytes, 0, this.mffLength);
+            }
         }
 
-        public function writeExternal(_arg_1:IDataOutput):void
+        public function writeExternal(data:IDataOutput):void
         {
-            XString.WriteString(_arg_1, this.mffName);
-            XString.WriteString(_arg_1, this.mffType);
+            XString.WriteString(data, this.mffName);
+            XString.WriteString(data, this.mffType);
             this.mffLength = this.mffBytes.length;
-            _arg_1.writeUnsignedInt(this.mffLength);
-            if (this.mffLength > 0){
-                _arg_1.writeBytes(this.mffBytes, 0, this.mffLength);
-            };
+            data.writeUnsignedInt(this.mffLength);
+            if (this.mffLength > 0) {
+                data.writeBytes(this.mffBytes, 0, this.mffLength);
+            }
         }
 
         public function dispose():void
@@ -48,20 +42,11 @@ package com.tencent.free.mff
             this.mffName = null;
             this.mffType = null;
             this.mffLength = 0;
-            if (this.mffBytes != null){
+            if (this.mffBytes != null) {
                 this.mffBytes.clear();
                 this.mffBytes = null;
-            };
+            }
         }
-
-        public /*  ©init. */ function _SafeStr_49()
-        {
-        }
-
 
     }
-}//package com.tencent.free.mff
-
-// _SafeStr_49 = " MFFFile" (String#1430)
-
-
+}

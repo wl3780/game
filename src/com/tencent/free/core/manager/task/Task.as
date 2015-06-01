@@ -7,103 +7,92 @@
 
     public class Task extends Content implements ITask 
     {
-
-        private var _logHeader:String;
         protected var _res;
         protected var _referenceList:DictionaryEx;
 
-        public function Task(_arg_1:*)
+        private var _logHeader:String;
+
+        public function Task(taskKey:*)
         {
-            this._key = _arg_1;
-            this._referenceList = new DictionaryEx(true);
+			super();
+            _key = taskKey;
+            _referenceList = new DictionaryEx(true);
         }
 
-        public function start(_arg_1:*):void
+        public function start(res:*):void
         {
-            this._res = _arg_1;
+            _res = res;
             this.updateTaskInfo();
         }
 
         public function end()
         {
-            var _local_1:* = this._res;
-            this._res = null;
-            return (_local_1);
+            var tmp:* = _res;
+            _res = null;
+            return tmp;
         }
 
-        public function addLoader(_arg_1:ILoader):void
+        public function addLoader(loader:ILoader):void
         {
-            this._referenceList[_arg_1] = this;
+            _referenceList[loader] = this;
             this.updateTaskInfo();
         }
 
-        public function removeLoader(_arg_1:ILoader):void
+        public function removeLoader(loader:ILoader):void
         {
-            delete this._referenceList[_arg_1];
+            delete _referenceList[loader];
             this.updateTaskInfo();
         }
 
         public function referenceLength():int
         {
-            return (this._referenceList.length);
+            return (_referenceList.length);
         }
 
         protected function updateTaskInfo():void
         {
-            var _local_1:Object;
-            var _local_2:ILoader;
-            for (_local_1 in this._referenceList) {
-                _local_2 = (_local_1 as ILoader);
-                this.updateInfo(_local_2);
-            };
+            for (var loader:Object in _referenceList) {
+                this.updateInfo(loader as ILoader);
+            }
         }
 
-        protected function updateInfo(_arg_1:ILoader):void
+        protected function updateInfo(loader:ILoader):void
         {
-            if (this._priority > _arg_1.priority){
-                this._priority = _arg_1.priority;
-            };
-            this._url = _arg_1.url;
-            this._hash = _arg_1.hash;
-            this._checkHash = _arg_1.checkHash;
-            if (this._expireTime < _arg_1.expireTime){
-                this._expireTime = _arg_1.expireTime;
-            };
-            if (!this._saveSO){
-                this._saveSO = _arg_1.saveSO;
-            };
-            if (this._retryTimes < _arg_1.retryTimes){
-                this._retryTimes = _arg_1.retryTimes;
-            };
-            this._remainingTime = this._expireTime;
+            if (_priority > loader.priority) {
+                _priority = loader.priority;
+            }
+            _url = loader.url;
+            _hash = loader.hash;
+            _checkHash = loader.checkHash;
+            if (_expireTime < loader.expireTime) {
+                _expireTime = loader.expireTime;
+            }
+            if (!_saveSO) {
+                _saveSO = loader.saveSO;
+            }
+            if (_retryTimes < loader.retryTimes) {
+                _retryTimes = loader.retryTimes;
+            }
+            _remainingTime = _expireTime;
         }
 
         protected function onTaskEnd():void
         {
-            var _local_1:TaskEvent = new TaskEvent(TaskEvent.TASK_END);
-            _local_1.key = this._key;
-            this.dispatchEvent(_local_1);
+            var event:TaskEvent = new TaskEvent(TaskEvent.TASK_END);
+            event.key = _key;
+            this.dispatchEvent(event);
         }
 
         protected function retry():Boolean
         {
-            if (_retryTimes > 0){
-                var _local_1 = this;
-                var _local_2 = (_local_1._retryTimes - 1);
-                _local_1._retryTimes = _local_2;
-                return (true);
-            };
-            return (false);
+            if (_retryTimes > 0) {
+                var tmpThis = this;
+                var times:int = tmpThis._retryTimes - 1;
+                tmpThis._retryTimes = times;
+                return true;
+            }
+            return false;
         }
-
-        public /*  ©init. */ function _SafeStr_25()
-        {
-        }
-
 
     }
-}//package com.tencent.free.core.manager.task
-
-// _SafeStr_25 = " Task" (String#1361)
-
-
+}
