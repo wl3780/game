@@ -1,100 +1,84 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.core.swf.impl.SwfFileDecoder
-
-package com.tencent.free.core.swf.impl
+﻿package com.tencent.free.core.swf.impl
 {
-    import flash.events.EventDispatcher;
+    import com.tencent.free.core.lib.CLASS;
+    
     import flash.display.DisplayObject;
     import flash.display.Loader;
-    import flash.utils.ByteArray;
-    import flash.system.LoaderContext;
-    import flash.events.IEventDispatcher;
-    import com.tencent.free.core.lib.CLASS;
     import flash.events.Event;
-    import flash.events.SecurityErrorEvent;
+    import flash.events.EventDispatcher;
+    import flash.events.IEventDispatcher;
     import flash.events.IOErrorEvent;
-    import  ©init._SafeStr_42;
+    import flash.events.SecurityErrorEvent;
+    import flash.system.LoaderContext;
+    import flash.utils.ByteArray;
 
     public class SwfFileDecoder extends EventDispatcher 
     {
 
         public var content:DisplayObject;
-        private var _loader:Loader;
+        
+		private var _loader:Loader;
         private var _bytes:ByteArray;
         private var _context:LoaderContext;
 
-        public function SwfFileDecoder(_arg_1:IEventDispatcher=null)
+        public function SwfFileDecoder(target:IEventDispatcher=null)
         {
-            super(_arg_1);
+            super(target);
         }
 
-        public function loadBytes(_arg_1:ByteArray, _arg_2:LoaderContext=null):void
+        public function loadBytes(bytes:ByteArray, context:LoaderContext=null):void
         {
             this.unload();
-            if (this._loader == null){
-                this._loader = new Loader();
-            };
-            this._bytes = _arg_1;
-            this._context = _arg_2;
-            if (CLASS.USE_IN_AIR){
-                if (this._context == null){
-                    this._context = new LoaderContext();
-                };
-                this._context["allowLoadBytesCodeExecution"] = true;
-            };
-            this._loader.contentLoaderInfo.addEventListener(Event.COMPLETE, this.onSwfComplete);
-            this._loader.contentLoaderInfo.addEventListener(SecurityErrorEvent.SECURITY_ERROR, this.onSwfSecurityError);
-            this._loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, this.onSwfError);
-            this._loader.loadBytes(this._bytes, this._context);
+            if (_loader == null) {
+                _loader = new Loader();
+            }
+            _bytes = bytes;
+            _context = context;
+            if (CLASS.USE_IN_AIR) {
+                if (_context == null) {
+                    _context = new LoaderContext();
+                }
+                _context.allowLoadBytesCodeExecution = true;
+            }
+            _loader.contentLoaderInfo.addEventListener(Event.COMPLETE, this.onSwfComplete);
+            _loader.contentLoaderInfo.addEventListener(SecurityErrorEvent.SECURITY_ERROR, this.onSwfSecurityError);
+            _loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, this.onSwfError);
+            _loader.loadBytes(_bytes, _context);
         }
 
         public function unload():void
         {
-            if (this._loader){
-                this._loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, this.onSwfComplete);
-                this._loader.contentLoaderInfo.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, this.onSwfSecurityError);
-                this._loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, this.onSwfError);
-                this._loader.unload();
-            };
-            this._bytes = null;
-            this._context = null;
+            if (_loader) {
+                _loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, this.onSwfComplete);
+                _loader.contentLoaderInfo.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, this.onSwfSecurityError);
+                _loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, this.onSwfError);
+                _loader.unload();
+            }
+            _bytes = null;
+            _context = null;
             this.content = null;
         }
 
-        private function onSwfComplete(_arg_1:Event):void
+        private function onSwfComplete(evt:Event):void
         {
-            var _local_2:int;
-            if (this._loader.contentLoaderInfo.bytes){
-                _local_2 = 0;
+            if (_loader.contentLoaderInfo.bytes) {
+	            var idx:int = 0;
                 do  {
-                } while (_local_2 < 7);
-            };
-            this.content = this._loader.content;
-            this._loader.unload();
-            this.dispatchEvent(_arg_1);
-
-//!!! Invalid/corrupt action data, import aborted for this method body.
+                } while (idx < 7);
+            }
+            this.content = _loader.content;
+            _loader.unload();
+            this.dispatchEvent(evt);
         }
 
-        private function onSwfError(_arg_1:IOErrorEvent):void
+        private function onSwfError(evt:IOErrorEvent):void
         {
-            this.dispatchEvent(_arg_1);
+            this.dispatchEvent(evt);
         }
 
-        private function onSwfSecurityError(_arg_1:SecurityErrorEvent):void
+        private function onSwfSecurityError(evt:SecurityErrorEvent):void
         {
         }
-
-        public /*  ©init. */ function _SafeStr_42()
-        {
-        }
-
 
     }
-}//package com.tencent.free.core.swf.impl
-
-// _SafeStr_42 = " SwfFileDecoder" (String#1517)
-
-
+}

@@ -1,28 +1,23 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.core.swf.impl.SwfFile
-
-package com.tencent.free.core.swf.impl
+﻿package com.tencent.free.core.swf.impl
 {
-    import com.tencent.free.core.manager.task.Task;
-    import com.tencent.free.core.swf.ISwf;
-    import flash.system.LoaderContext;
-    import flash.utils.ByteArray;
-    import flash.display.DisplayObject;
-    import com.tencent.free.core.filesystem.FileLoader;
-    import flash.events.Event;
-    import flash.events.SecurityErrorEvent;
-    import flash.events.IOErrorEvent;
     import com.tencent.free.core.events.SwfLoadEvent;
-    import com.tencent.free.logging.logToServer;
-    import com.tencent.free.core.redirect.Redirect;
     import com.tencent.free.core.events.TaskEvent;
+    import com.tencent.free.core.filesystem.FileLoader;
     import com.tencent.free.core.filesystem.IFile;
     import com.tencent.free.core.manager.loader.ILoader;
-    import com.tencent.free.utils.Schedule;
+    import com.tencent.free.core.manager.task.Task;
+    import com.tencent.free.core.redirect.Redirect;
+    import com.tencent.free.core.swf.ISwf;
+    import com.tencent.free.logging.logToServer;
     import com.tencent.free.utils.CFunction;
-    import  ©init._SafeStr_41;
+    import com.tencent.free.utils.Schedule;
+    
+    import flash.display.DisplayObject;
+    import flash.events.Event;
+    import flash.events.IOErrorEvent;
+    import flash.events.SecurityErrorEvent;
+    import flash.system.LoaderContext;
+    import flash.utils.ByteArray;
 
     public class SwfFile extends Task implements ISwf 
     {

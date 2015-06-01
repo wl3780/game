@@ -1,14 +1,9 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.core.manager.content.Content
-
-package com.tencent.free.core.manager.content
+﻿package com.tencent.free.core.manager.content
 {
-    import flash.events.EventDispatcher;
     import com.tencent.free.core.manager.cache.ICache;
+    
+    import flash.events.EventDispatcher;
     import flash.events.IEventDispatcher;
-    import  ©init._SafeStr_21;
 
     public class Content extends EventDispatcher implements IContent, ICache 
     {
@@ -24,43 +19,42 @@ package com.tencent.free.core.manager.content
         protected var _saveSO:Boolean = false;
         protected var _retryTimes:int;
 
-        public function Content(_arg_1:IEventDispatcher=null)
+        public function Content(target:IEventDispatcher=null)
         {
-            super(_arg_1);
-            this._isLoaded = false;
+            super(target);
+            _isLoaded = false;
         }
 
         public function get key():Object
         {
-            return (this._key);
+            return _key;
         }
 
         public function get url():String
         {
-            return (this._url);
+            return _url;
         }
 
         public function get hash()
         {
-            return (this._hash);
+            return _hash;
         }
 
-        public function set priority(_arg_1:int):void
+        public function set priority(value:int):void
         {
-            this._priority = _arg_1;
+            _priority = value;
         }
-
         public function get priority():int
         {
-            return (this._priority);
+            return _priority;
         }
 
-        public function check(_arg_1:Function, _arg_2:*):Boolean
+        public function check(func:Function, params:*):Boolean
         {
-            if (null != _arg_1){
-                return (_arg_1(this, _arg_2));
-            };
-            return (true);
+            if (null != func) {
+                return func(this, params);
+            }
+            return true;
         }
 
         public function release():void
@@ -69,27 +63,17 @@ package com.tencent.free.core.manager.content
 
         public function get remainingTime():int
         {
-            return (this._remainingTime);
+            return _remainingTime;
         }
-
-        public function set remainingTime(_arg_1:int):void
+        public function set remainingTime(value:int):void
         {
-            this._remainingTime = _arg_1;
+            _remainingTime = value;
         }
 
         public function isLoaded():Boolean
         {
-            return (this._isLoaded);
+            return _isLoaded;
         }
-
-        public /*  ©init. */ function _SafeStr_21()
-        {
-        }
-
 
     }
-}//package com.tencent.free.core.manager.content
-
-// _SafeStr_21 = " Content" (String#1358)
-
-
+}

@@ -1,15 +1,9 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.core.manager.task.Task
-
-package com.tencent.free.core.manager.task
+﻿package com.tencent.free.core.manager.task
 {
-    import com.tencent.free.core.manager.content.Content;
-    import com.tencent.free.utils.DictionaryEx;
-    import com.tencent.free.core.manager.loader.ILoader;
     import com.tencent.free.core.events.TaskEvent;
-    import  ©init._SafeStr_25;
+    import com.tencent.free.core.manager.content.Content;
+    import com.tencent.free.core.manager.loader.ILoader;
+    import com.tencent.free.utils.DictionaryEx;
 
     public class Task extends Content implements ITask 
     {
