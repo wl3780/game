@@ -1,16 +1,9 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.utils.ErrorMap
-
-package com.tencent.free.utils
+﻿package com.tencent.free.utils
 {
-    import  ©init._SafeStr_71;
 
     public class ErrorMap 
     {
 
-        private static var errors:Array = [];
         public static const NO_ERROR:int = 0;
         public static const ERR_PARTIAL_MSG:int = -1;
         public static const ERR_INVALIED_CUTOFF_VERSION:int = -2;
@@ -23,6 +16,8 @@ package com.tencent.free.utils
         public static const ERR_ARRAY_ELEMENT_UNDEFIND:int = -9;
         public static const ERR_MINUS_REFER_VALUE:int = -10;
 
+        private static var errors:Array = [];
+		
         {
             errors[NO_ERROR] = "no error";
             errors[ERR_PARTIAL_MSG] = "data in buffer do not cover a complete package";
@@ -38,24 +33,14 @@ package com.tencent.free.utils
         }
 
 
-        public static function getErrorString(_arg_1:int):String
+        public static function getErrorString(errorID:int):String
         {
-            var _local_2:* = ErrorMap.errors[_arg_1];
-            if (_local_2 == undefined){
-                return (ErrorMap.errors[NO_ERROR]);
-            };
-            return (_local_2);
+            var msg:* = ErrorMap.errors[errorID];
+            if (msg == undefined) {
+                return ErrorMap.errors[NO_ERROR];
+            }
+            return msg;
         }
-
-
-        public /*  ©init. */ function _SafeStr_71()
-        {
-        }
-
 
     }
-}//package com.tencent.free.utils
-
-// _SafeStr_71 = " ErrorMap" (String#1487)
-
-
+}

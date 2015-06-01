@@ -74,7 +74,8 @@
             _strValue = (h * INT32 + l).toString();
             var len:uint = _strValue.length;
             if (len > 16) {
-	            var str:String = (Math.abs( (h % PARAM)*INT32_REMAINDER + (l%PARAM) ) % PARAM).toString();
+				var tmp:Number = (h % PARAM) * INT32_REMAINDER + (l%PARAM);
+	            var str:String = (Math.abs(tmp) % PARAM).toString();
                 while (str.length < 4) {
                     str = "0" + str;
                 }
