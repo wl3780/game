@@ -57,7 +57,7 @@
 
         public function getType():String
         {
-            return (this.m_type);
+            return this.m_type;
         }
 
         public function render(_arg_1:int):void
@@ -66,17 +66,20 @@
 
         public function getDisplay():IDisplay
         {
-            return (this.m_display);
+            return this.m_display;
         }
 
         public function getPosX():int
         {
-            return (this.m_display.x);
+			if (this.m_display) {
+            	return this.m_display.x;
+			} else {
+				return this.m_posX;
+			}
         }
-
-        public function setPosX(_arg_1:int):void
+        public function setPosX(value:int):void
         {
-            this.m_posX = _arg_1;
+            this.m_posX = value;
             if (this.m_display != null) {
                 this.m_display.x = this.m_posX;
             }
@@ -84,96 +87,96 @@
 
         public function getPosY():int
         {
-            return (this.m_display.y);
+			if (this.m_display) {
+            	return this.m_display.y;
+			} else {
+				return this.m_posY;
+			}
         }
-
-        public function setPosY(_arg_1:int):void
+        public function setPosY(value:int):void
         {
-            this.m_posY = _arg_1;
+            this.m_posY = value;
             if (this.m_display != null) {
                 this.m_display.y = this.m_posY;
             }
         }
 
-        public function setPosXY(_arg_1:int, _arg_2:int):void
+        public function setPosXY(px:int, py:int):void
         {
-            this.m_posX = _arg_1;
-            this.m_posY = _arg_2;
+            this.m_posX = px;
+            this.m_posY = py;
             if (this.m_display != null) {
                 this.m_display.x = this.m_posX;
                 this.m_display.y = this.m_posY;
             }
         }
 
-        public function setMapX(_arg_1:int):void
+        public function setMapX(value:int):void
         {
-            this.mapX = _arg_1;
+            this.mapX = value;
             this.setPosX(this.mapX);
         }
 
-        public function setMapZ(_arg_1:int):void
+        public function setMapZ(value:int):void
         {
-            this.mapZ = _arg_1;
-            this.mapDeep = (_arg_1 + this.m_deepOffset);
-            this.setPosY((this.mapZ - this.mapY));
+            this.mapZ = value;
+            this.mapDeep = value + this.m_deepOffset;
+            this.setPosY(this.mapZ - this.mapY);
         }
 
-        public function setMapY(_arg_1:int):void
+        public function setMapY(value:int):void
         {
-            this.mapY = _arg_1;
-            this.setPosY((this.mapZ - this.mapY));
+            this.mapY = value;
+            this.setPosY(this.mapZ - this.mapY);
         }
 
-        public function setMapXZY(_arg_1:int, _arg_2:int, _arg_3:int):void
+        public function setMapXZY(mx:int, mz:int, my:int):void
         {
-            this.mapX = _arg_1;
-            this.mapZ = _arg_2;
-            this.mapY = _arg_3;
-            this.mapDeep = (_arg_2 + this.m_deepOffset);
+            this.mapX = mx;
+            this.mapZ = mz;
+            this.mapY = my;
+            this.mapDeep = mz + this.m_deepOffset;
             this.setPosX(this.mapX);
-            this.setPosY((this.mapZ - this.mapY));
+            this.setPosY(this.mapZ - this.mapY);
         }
 
-        public function setDeepOffset(_arg_1:int):void
+        public function setDeepOffset(value:int):void
         {
-            this.m_deepOffset = _arg_1;
-            this.mapDeep = (this.m_deepOffset + this.mapZ);
+            this.m_deepOffset = value;
+            this.mapDeep = this.m_deepOffset + this.mapZ;
         }
-
         public function getDeepOffset():int
         {
-            return (this.m_deepOffset);
+            return this.m_deepOffset;
         }
 
-        public function setMapPosition(_arg_1:MapPosition):void
+        public function setMapPosition(map:MapPosition):void
         {
-            this.m_deepOffset = _arg_1.deepOffset;
-            this.setMapXZY(_arg_1.x, _arg_1.z, _arg_1.y);
+            this.m_deepOffset = map.deepOffset;
+            this.setMapXZY(map.x, map.z, map.y);
         }
 
         public function getMapPosition():MapPosition
         {
-            return (new MapPosition(this.mapX, this.mapZ, this.mapY, this.m_deepOffset));
+            return new MapPosition(this.mapX, this.mapZ, this.mapY, this.m_deepOffset);
         }
 
-        public function setParentContainer(_arg_1:IElementContainer):void
+        public function setParentContainer(p:IElementContainer):void
         {
-            this.m_parent = _arg_1;
+            this.m_parent = p;
         }
-
         public function getParentContainer():IElementContainer
         {
-            return (this.m_parent);
+            return this.m_parent;
         }
 
         public function getDirection():int
         {
-            return (this.m_direction);
+            return this.m_direction;
         }
-
-        public function setDirection(_arg_1:int):void
+        public function setDirection(value:int):void
         {
-            this.m_direction = _arg_1;
+            this.m_direction = value;
         }
 
         public function reset():void
@@ -198,17 +201,16 @@
 
         public function get alpha():Number
         {
-            return (this.m_display.alpha);
+            return this.m_display.alpha;
         }
-
-        public function set alpha(_arg_1:Number):void
+        public function set alpha(value:Number):void
         {
-            this.m_display.alpha = _arg_1;
+            this.m_display.alpha = value;
         }
 
         public function getBoundsInMap():Rectangle
         {
-            return (null);
+            return null;
         }
 
     }

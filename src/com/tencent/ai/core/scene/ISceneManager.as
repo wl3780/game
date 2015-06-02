@@ -1,9 +1,4 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.scene.ISceneManager
-
-package com.tencent.ai.core.scene
+﻿package com.tencent.ai.core.scene
 {
     public interface ISceneManager 
     {
@@ -17,5 +12,4 @@ package com.tencent.ai.core.scene
         function getCurrentScene():Scene;
 
     }
-}//package com.tencent.ai.core.scene
-
+}

@@ -1,14 +1,9 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.scene.SceneManager
-
-package com.tencent.ai.core.scene
+﻿package com.tencent.ai.core.scene
 {
+    import com.tencent.ai.core.data.SceneInfo;
+    
     import flash.events.EventDispatcher;
     import flash.utils.Dictionary;
-    import com.tencent.ai.core.data.SceneInfo;
-    import  ©init._SafeStr_1144;
 
     public class SceneManager extends EventDispatcher implements ISceneManager 
     {
@@ -16,15 +11,16 @@ package com.tencent.ai.core.scene
         protected var DefaultSceneClass:Class;
         protected var scenePrepareHash:Dictionary;
         protected var scene:Scene;
-        private var _scenePrepare:ScenePrepare;
+        
+		private var _scenePrepare:ScenePrepare;
         private var _infosArr:Array;
         private var _totalLoaderSize:int;
         private var _totalNum:int;
         private var _curIndex:int;
 
-        public function SceneManager(_arg_1:Class)
+        public function SceneManager(sceneClass:Class)
         {
-            this.DefaultSceneClass = _arg_1;
+            this.DefaultSceneClass = sceneClass;
             this.scenePrepareHash = new Dictionary();
         }
 
@@ -147,14 +143,5 @@ package com.tencent.ai.core.scene
             return (_local_3.config);
         }
 
-        public /*  ©init. */ function _SafeStr_1144()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.scene
-
-// _SafeStr_1144 = " SceneManager" (String#15794)
-
-
+}

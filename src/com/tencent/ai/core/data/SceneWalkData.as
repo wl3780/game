@@ -1,23 +1,18 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.data.SceneWalkData
-
-package com.tencent.ai.core.data
+﻿package com.tencent.ai.core.data
 {
-    import flash.events.EventDispatcher;
-    import __AS3__.vec.Vector;
-    import flash.geom.Rectangle;
-    import com.tencent.ai.core.scene.IScene;
     import com.tencent.ai.core.enum.Constants;
+    import com.tencent.ai.core.scene.IScene;
+    
+    import flash.events.EventDispatcher;
     import flash.geom.Point;
-    import  ©init._SafeStr_323;
-    import __AS3__.vec.*;
+    import flash.geom.Rectangle;
 
     public class SceneWalkData extends EventDispatcher 
     {
 
         public static var isDrawWalk:Boolean;
+
+        public var scene:IScene;
 
         private var _width:int;
         private var _height:int;
@@ -25,153 +20,133 @@ package com.tencent.ai.core.data
         private var _initWalkData:String;
         private var _walkDataMatrix:Vector.<Vector.<int>>;
         private var _rectRef:Vector.<Rectangle>;
-        public var scene:IScene;
-
 
         public function get walkDataMatrix():Vector.<Vector.<int>>
         {
-            return (this._walkDataMatrix);
+            return _walkDataMatrix;
         }
 
         public function get unwalkableRects():Vector.<Rectangle>
         {
-            return (this._rectRef);
+            return _rectRef;
         }
 
-        public function setInitWalkData(_arg_1:int, _arg_2:int, _arg_3:String):void
+        public function setInitWalkData(width:int, height:int, walkData:String):void
         {
-            var _local_6:String;
-            var _local_7:Vector.<int>;
-            var _local_8:int;
-            this._width = _arg_1;
-            this._height = _arg_2;
-            this._numBlockPerOneWidth = Math.ceil((_arg_1 / Constants.WALK_SIZE));
-            this._initWalkData = _arg_3;
-            var _local_4:int = Math.ceil((_arg_2 / Constants.WALK_SIZE));
-            this._walkDataMatrix = new Vector.<Vector.<int>>(_local_4, true);
-            var _local_5:int;
-            while (_local_5 < _local_4) {
-                _local_6 = _arg_3.substr((_local_5 * this._numBlockPerOneWidth), this._numBlockPerOneWidth);
-                _local_7 = new Vector.<int>(this._numBlockPerOneWidth, true);
-                _local_8 = 0;
-                while (_local_8 < this._numBlockPerOneWidth) {
-                    _local_7[_local_8] = int(_local_6.charAt(_local_8));
-                    _local_8++;
-                };
-                this._walkDataMatrix[_local_5] = _local_7;
-                _local_5++;
-            };
-            this._rectRef = new Vector.<Rectangle>();
+            _width = width;
+            _height = height;
+            _numBlockPerOneWidth = Math.ceil(width / Constants.WALK_SIZE);
+            _initWalkData = walkData;
+            var rows:int = Math.ceil(height / Constants.WALK_SIZE);
+            _walkDataMatrix = new Vector.<Vector.<int>>(rows, true);
+            var row:int;
+            while (row < rows) {
+	            var rowData:String = walkData.substr(row * _numBlockPerOneWidth, _numBlockPerOneWidth);
+	            var rowMatrix:Vector.<int> = new Vector.<int>(_numBlockPerOneWidth, true);
+	            var col:int = 0;
+                while (col < _numBlockPerOneWidth) {
+                    rowMatrix[col] = int(rowData.charAt(col));
+                    col++;
+                }
+                _walkDataMatrix[row] = rowMatrix;
+                row++;
+            }
+            _rectRef = new Vector.<Rectangle>();
         }
 
         public function getInitWalkData():String
         {
-            return (this._initWalkData);
+            return _initWalkData;
         }
 
-        public function isWalkable(_arg_1:int, _arg_2:int):Boolean
+        public function isWalkable(x:int, y:int):Boolean
         {
-            var _local_3:Point = this.translate(_arg_1, _arg_2);
-            if (!_local_3){
-                return (false);
-            };
-            return ((this._walkDataMatrix[_local_3.y][_local_3.x] > 0));
+            var p:Point = this.translate(x, y);
+            if (!p) {
+                return false;
+            }
+            return _walkDataMatrix[p.y][p.x] > 0;
         }
 
-        public function isWalkable2(_arg_1:int, _arg_2:int):Boolean
+        public function isWalkable2(col:int, row:int):Boolean
         {
-            return ((this._walkDataMatrix[_arg_2][_arg_1] > 0));
+            return _walkDataMatrix[row][col] > 0;
         }
 
-        private function translate(_arg_1:int, _arg_2:int):Point
+        private function translate(x:int, y:int):Point
         {
-            if ((((((((_arg_1 < 0)) || ((_arg_1 >= this._width)))) || ((_arg_2 < 0)))) || ((_arg_2 >= this._height)))){
-                return (null);
-            };
-            var _local_3:int = int((_arg_1 / Constants.WALK_SIZE));
-            var _local_4:int = int((_arg_2 / Constants.WALK_SIZE));
-            return (new Point(_local_3, _local_4));
+            if (x < 0 || x >= _width || y < 0 || y >= _height) {
+                return null;
+            }
+            var col:int = int(x / Constants.WALK_SIZE);
+            var row:int = int(y / Constants.WALK_SIZE);
+            return new Point(col, row);
         }
 
-        public function addUnwalkable(_arg_1:Rectangle):void
+        public function addUnwalkable(rect:Rectangle):void
         {
-            var _local_4:Point;
-            var _local_6:int;
-            var _local_2:int = _arg_1.right;
-            var _local_3:int = _arg_1.bottom;
-            this._rectRef.push(_arg_1);
-            var _local_5:int = _arg_1.y;
-            while (_local_5 <= _local_3) {
-                _local_6 = _arg_1.x;
-                while (_local_6 <= _local_2) {
-                    _local_4 = this.translate(_local_6, _local_5);
-                    if (_local_4){
-                        this.setWalkable(_local_4.x, _local_4.y);
-                    };
-                    _local_6 = (_local_6 + 5);
-                };
-                _local_5 = (_local_5 + 5);
-            };
+            _rectRef.push(rect);
+            var right:int = rect.right;
+            var bottom:int = rect.bottom;
+            var startY:int = rect.y;
+            while (startY <= bottom) {
+	            var startX:int = rect.x;
+                while (startX <= right) {
+		            var p:Point = this.translate(startX, startY);
+                    if (p) {
+                        this.setWalkable(p.x, p.y, false);
+                    }
+                    startX = startX + 5;	//5是什么MagicNumber
+                }
+                startY = startY + 5;	//5是什么MagicNumber
+            }
         }
 
-        public function removeUnwalkable(_arg_1:Rectangle):void
+        public function removeUnwalkable(rect:Rectangle):void
         {
-            var _local_3:int;
-            var _local_4:int;
-            var _local_5:Point;
-            var _local_6:int;
-            var _local_7:int;
-            var _local_2:int = this._rectRef.indexOf(_arg_1);
-            if (_local_2 != -1){
-                this._rectRef.splice(_local_2, 1);
-                _local_3 = _arg_1.right;
-                _local_4 = _arg_1.bottom;
-                _local_6 = _arg_1.y;
-                while (_local_6 <= _local_4) {
-                    _local_7 = _arg_1.x;
-                    while (_local_7 <= _local_3) {
-                        _local_5 = this.translate(_local_7, _local_6);
-                        if (_local_5){
-                            this.setWalkable(_local_5.x, _local_5.y, true);
-                        };
-                        _local_7 = (_local_7 + 5);
-                    };
-                    _local_6 = (_local_6 + 5);
-                };
-            };
+            var index:int = _rectRef.indexOf(rect);
+            if (index != -1) {
+                _rectRef.splice(index, 1);
+            	var right:int = rect.right;
+	            var bottom:int = rect.bottom;
+	            var startY:int = rect.y;
+                while (startY <= bottom) {
+		            var startX:int = rect.x;
+                    while (startX <= right) {
+			            var p:Point = this.translate(startX, startY);
+                        if (p) {
+                            this.setWalkable(p.x, p.y, true);
+                        }
+                        startX = startX + 5;
+                    }
+                    startY = startY + 5;
+                }
+            }
         }
 
-        public function minMax(_arg_1:int, _arg_2:int):Point
+        public function minMax(x:int, y:int):Point
         {
-            var _local_3:Point = new Point(_arg_1, _arg_1);
-            _local_3.x = (_local_3.x - 20);
-            while (this.isWalkable(_local_3.x, _arg_2)) {
-                _local_3.x = (_local_3.x - 20);
-            };
-            _local_3.x = (_local_3.x + 20);
-            _local_3.y = (_local_3.y + 20);
-            while (this.isWalkable(_local_3.y, _arg_2)) {
-                _local_3.y = (_local_3.y + 20);
-            };
-            _local_3.y = (_local_3.y - 20);
-            return (_local_3);
+            var p:Point = new Point(x, x);
+            p.x = p.x - 20;
+            while (this.isWalkable(p.x, y)) {
+                p.x = p.x - 20;
+            }
+            p.x = p.x + 20;
+			
+            p.y = p.y + 20;
+            while (this.isWalkable(p.y, y)) {
+                p.y = p.y + 20;
+            }
+            p.y = p.y - 20;
+            return p;
         }
 
-        private function setWalkable(_arg_1:int, _arg_2:int, _arg_3:Boolean=false):void
+        private function setWalkable(col:int, row:int, flag:Boolean=false):void
         {
-            if ((((((((_arg_1 > 0)) && ((_arg_2 > 0)))) && ((_arg_2 < this._walkDataMatrix.length)))) && ((_arg_1 < this._walkDataMatrix[_arg_2].length)))){
-                this._walkDataMatrix[_arg_2][_arg_1] = (this._walkDataMatrix[_arg_2][_arg_1] + ((_arg_3) ? 1 : -1));
-            };
+            if (col > 0 && row > 0 && row < _walkDataMatrix.length && col < _walkDataMatrix[row].length) {
+                _walkDataMatrix[row][col] = _walkDataMatrix[row][col] + (flag ? 1 : -1);
+            }
         }
-
-        public /*  ©init. */ function _SafeStr_323()
-        {
-        }
-
 
     }
-}//package com.tencent.ai.core.data
-
-// _SafeStr_323 = " SceneWalkData" (String#15659)
-
-
+}
