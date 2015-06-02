@@ -1,69 +1,54 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.utils.BitArray
-
-package com.tencent.ai.core.utils
+﻿package com.tencent.ai.core.utils
 {
     import flash.utils.ByteArray;
-    import  ©init._SafeStr_1368;
 
     public class BitArray extends ByteArray 
     {
 
-        public function BitArray(_arg_1:ByteArray=null)
+        public function BitArray(bytes:ByteArray=null)
         {
-            if (_arg_1 != null){
-                this.writeBytes(_arg_1, 0, _arg_1.length);
-            };
+            if (bytes != null) {
+                this.writeBytes(bytes, 0, bytes.length);
+            }
         }
 
         public function get bitLength():uint
         {
-            return ((this.length * 8));
+            return this.length * 8;
         }
 
-        public function getBitAt(_arg_1:uint=0):Boolean
+        public function getBitAt(bitIndex:uint=0):Boolean
         {
-            _arg_1++;
-            if (_arg_1 > (this.length * 8)){
-                return (false);
-            };
-            var _local_2:uint = (Math.ceil((_arg_1 / 8)) - 1);
-            var _local_3:uint = (1 << (((this.length * 8) - _arg_1) % 8));
-            return (Boolean((this[_local_2] & _local_3)));
+            bitIndex++;
+            if (bitIndex > (this.length * 8)) {
+                return false;
+            }
+            var pos:uint = Math.ceil(bitIndex / 8) - 1;
+            var bitValue:uint = 1 << ((this.length * 8 - bitIndex) % 8);
+            return Boolean(this[pos] & bitValue);
         }
 
-        public function setBitAt(_arg_1:uint, _arg_2:Boolean):void
+        public function setBitAt(bitIndex:uint, value:Boolean):void
         {
-            _arg_1++;
-            var _local_3:uint = Math.ceil((_arg_1 / 8));
-            if (_local_3 > this.length){
-                this.length = _local_3;
-            };
-            var _local_4:uint = (Math.ceil((_arg_1 / 8)) - 1);
-            var _local_5:uint = (1 << (((this.length * 8) - _arg_1) % 8));
-            if (_arg_2){
-                this[_local_4] = (this[_local_4] | _local_5);
+            bitIndex++;
+            var maxLen:uint = Math.ceil(bitIndex / 8);
+            if (maxLen > this.length) {
+                this.length = maxLen;
+            }
+            var pos:uint = Math.ceil(bitIndex / 8) - 1;
+            var bitValue:uint = 1 << ((this.length * 8 - bitIndex) % 8);
+            if (value) {
+                this[pos] = this[pos] | bitValue;
             } else {
-                this[_local_4] = (this[_local_4] & ~(_local_5));
-            };
+                this[pos] = this[pos] & ~(bitValue);
+            }
         }
 
-        public function getBitAtCoord(_arg_1:uint, _arg_2:uint, _arg_3:uint):Boolean
+        public function getBitAtCoord(row:uint, col:uint, margin:uint=8):Boolean
         {
-            var _local_4:uint = ((_arg_3 * _arg_1) + _arg_2);
-            return (this.getBitAt(_local_4));
+            var bitIndex:uint = margin * row + col;
+            return this.getBitAt(bitIndex);
         }
-
-        public /*  ©init. */ function _SafeStr_1368()
-        {
-        }
-
 
     }
-}//package com.tencent.ai.core.utils
-
-// _SafeStr_1368 = " BitArray" (String#14501)
-
-
+}

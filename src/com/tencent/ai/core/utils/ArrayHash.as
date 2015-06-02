@@ -1,12 +1,6 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.utils.ArrayHash
-
-package com.tencent.ai.core.utils
+﻿package com.tencent.ai.core.utils
 {
     import flash.utils.Dictionary;
-    import  ©init._SafeStr_1367;
 
     public class ArrayHash 
     {
@@ -18,9 +12,9 @@ package com.tencent.ai.core.utils
         protected var m_key2Index:Dictionary;
         protected var m_allowSameKey:Boolean;
 
-        public function ArrayHash(_arg_1:Boolean=false)
+        public function ArrayHash(weakKeys:Boolean=false)
         {
-            this.m_allowSameKey = _arg_1;
+            this.m_allowSameKey = weakKeys;
             this.m_array = [];
             this.m_hash = new Dictionary();
             this.m_index2Key = [];
@@ -29,152 +23,150 @@ package com.tencent.ai.core.utils
 
         public function get length():uint
         {
-            return (this.m_array.length);
+            return this.m_array.length;
         }
 
         public function get hash():Dictionary
         {
-            return (this.m_hash);
+            return this.m_hash;
         }
 
         public function get array():Array
         {
-            return (this.m_array);
+            return this.m_array;
         }
 
-        public function exist(_arg_1:Object):Boolean
+        public function exist(key:Object):Boolean
         {
-            return (Boolean(this.m_hash[_arg_1]));
+            return Boolean(this.m_hash[key]);
         }
 
-        public function push(_arg_1:Object, _arg_2:Object=null):uint
+        public function push(value:Object, key:Object=null):uint
         {
-            if (_arg_2 == null){
-                _arg_2 = ("#key" + this.m_sum);
-            };
-            if (this.exist(_arg_2)){
-                if (!this.m_allowSameKey){
-                    throw (new Error("key 已存在。"));
-                };
-            };
-            var _local_4 = this;
-            var _local_5 = (_local_4.m_sum + 1);
-            _local_4.m_sum = _local_5;
-            var _local_3:uint = this.m_array.push(_arg_1);
-            this.m_index2Key.push(_arg_2);
-            this.m_hash[_arg_2] = _arg_1;
-            return (_local_3);
+            if (key == null) {
+                key = "#key" + this.m_sum;
+            }
+            if (this.exist(key)) {
+                if (!this.m_allowSameKey) {
+                    throw new Error("key 已存在。");
+                }
+            }
+            var tmpThis:* = this;
+            var tmpSum:int = tmpThis.m_sum + 1;
+            tmpThis.m_sum = tmpSum;
+            var len:uint = this.m_array.push(value);
+            this.m_index2Key.push(key);
+            this.m_hash[key] = value;
+            return len;
         }
 
         public function pop():Object
         {
-            var _local_1:Object = this.m_array.pop();
-            var _local_2:Object = this.m_index2Key.pop();
-            delete this.m_hash[_local_2];
-            delete this.m_key2Index[_local_2];
-            return (_local_1);
+            var value:Object = this.m_array.pop();
+            var key:Object = this.m_index2Key.pop();
+            delete this.m_hash[key];
+            delete this.m_key2Index[key];
+            return value;
         }
 
-        public function unshift(_arg_1:Object, _arg_2:Object=null):uint
+        public function unshift(value:Object, key:Object=null):uint
         {
-            if (_arg_2 == null){
-                _arg_2 = ("#key" + this.m_sum);
-            };
-            if (this.exist(_arg_2)){
-                if (!this.m_allowSameKey){
-                    throw (new Error("key 已存在。"));
-                };
-            };
-            var _local_3 = this;
-            var _local_4 = (_local_3.m_sum + 1);
-            _local_3.m_sum = _local_4;
-            this.m_array.unshift(_arg_1);
-            this.m_index2Key.unshift(_arg_2);
-            this.m_hash[_arg_2] = _arg_1;
-            return (this.m_array.length);
+            if (key == null) {
+                key = "#key" + this.m_sum;
+            }
+            if (this.exist(key)) {
+                if (!this.m_allowSameKey) {
+                    throw new Error("key 已存在。");
+                }
+            }
+            var tmpThis:* = this;
+            var tmpSum:int = tmpThis.m_sum + 1;
+            tmpThis.m_sum = tmpSum;
+            this.m_array.unshift(value);
+            this.m_index2Key.unshift(key);
+            this.m_hash[key] = value;
+            return this.m_array.length;
         }
 
         public function shift():Object
         {
-            var _local_1:Object = this.m_array.shift();
-            var _local_2:Object = this.m_index2Key.shift();
-            delete this.m_hash[_local_2];
-            delete this.m_key2Index[_local_2];
-            return (_local_1);
+            var value:Object = this.m_array.shift();
+            var key:Object = this.m_index2Key.shift();
+            delete this.m_hash[key];
+            delete this.m_key2Index[key];
+            return value;
         }
 
         private function refreshKey2Index():void
         {
-            var _local_3:Object;
-            var _local_1:int = this.m_index2Key.length;
-            var _local_2:int;
-            while (_local_2 < _local_1) {
-                _local_3 = this.m_index2Key[_local_2];
-                this.m_key2Index[_local_3] = _local_2;
-                _local_2++;
-            };
+            var len:int = this.m_index2Key.length;
+            var idx:int;
+            while (idx < len) {
+	            var key:Object = this.m_index2Key[idx];
+                this.m_key2Index[key] = idx;
+                idx++;
+            }
         }
 
-        public function splice(_arg_1:int, _arg_2:uint):Array
+        public function splice(startIndex:int, deleteCount:uint):Array
         {
-            var _local_7:Object;
-            var _local_3:Array = this.m_array.splice(_arg_1, _arg_2);
-            var _local_4:Array = this.m_index2Key.splice(_arg_1, _arg_2);
-            var _local_5:int = _local_4.length;
-            var _local_6:int;
-            while (_local_6 < _local_5) {
-                _local_7 = _local_4[_local_6];
-                delete this.m_hash[_local_7];
-                delete this.m_key2Index[_local_7];
-                _local_6++;
-            };
-            return (_local_3);
+            var values:Array = this.m_array.splice(startIndex, deleteCount);
+            var keys:Array = this.m_index2Key.splice(startIndex, deleteCount);
+            var len:int = keys.length;
+            var idx:int;
+            while (idx < len) {
+	            var key:Object = keys[idx];
+                delete this.m_hash[key];
+                delete this.m_key2Index[key];
+                idx++;
+            }
+            return values;
         }
 
-        public function addItemAt(_arg_1:Object, _arg_2:int, _arg_3:Object=null):void
+        public function addItemAt(value:Object, startIndex:int, key:Object=null):void
         {
-            if (_arg_3 == null){
-                _arg_3 = ("#key" + this.m_sum);
-            };
-            if (this.exist(_arg_3)){
-                if (!this.m_allowSameKey){
-                    throw (new Error("key 已存在。"));
-                };
-            };
-            var _local_4 = this;
-            var _local_5 = (_local_4.m_sum + 1);
-            _local_4.m_sum = _local_5;
-            this.m_array.splice(_arg_2, 0, _arg_1);
-            this.m_index2Key.splice(_arg_2, 0, _arg_3);
-            this.m_hash[_arg_3] = _arg_1;
+            if (key == null) {
+                key = "#key" + this.m_sum;
+            }
+            if (this.exist(key)) {
+                if (!this.m_allowSameKey) {
+                    throw new Error("key 已存在。");
+                }
+            }
+            var tmpThis:* = this;
+            var tmpSum:int = tmpThis.m_sum + 1;
+            tmpThis.m_sum = tmpSum;
+            this.m_array.splice(startIndex, 0, value);
+            this.m_index2Key.splice(startIndex, 0, key);
+            this.m_hash[key] = value;
         }
 
-        public function deleteItemBy(_arg_1:Object):void
+        public function deleteItemBy(key:Object):void
         {
-            if (!this.m_hash[_arg_1]){
+            if (!this.m_hash[key]) {
                 return;
-            };
+            }
             this.refreshKey2Index();
-            var _local_2:int = this.m_key2Index[_arg_1];
-            delete this.m_hash[_arg_1];
-            delete this.m_key2Index[_arg_1];
-            this.m_array.splice(_local_2, 1);
-            this.m_index2Key.splice(_local_2, 1);
+            var idx:int = this.m_key2Index[key];
+            delete this.m_hash[key];
+            delete this.m_key2Index[key];
+            this.m_array.splice(idx, 1);
+            this.m_index2Key.splice(idx, 1);
         }
 
         public function toString():String
         {
-            return (this.m_array.toString());
+            return this.m_array.toString();
         }
 
-        public function getItemAt(_arg_1:int):Object
+        public function getItemAt(idx:int):Object
         {
-            return (this.m_array[_arg_1]);
+            return this.m_array[idx];
         }
 
-        public function getItemBy(_arg_1:Object):Object
+        public function getItemBy(key:Object):Object
         {
-            return (this.m_hash[_arg_1]);
+            return this.m_hash[key];
         }
 
         public function removeAll():void
@@ -185,14 +177,5 @@ package com.tencent.ai.core.utils
             this.m_key2Index = new Dictionary();
         }
 
-        public /*  ©init. */ function _SafeStr_1367()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.utils
-
-// _SafeStr_1367 = " ArrayHash" (String#14582)
-
-
+}

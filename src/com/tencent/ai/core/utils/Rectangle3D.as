@@ -1,11 +1,5 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.utils.Rectangle3D
-
-package com.tencent.ai.core.utils
+﻿package com.tencent.ai.core.utils
 {
-    import  ©init._SafeStr_1376;
 
     public class Rectangle3D 
     {
@@ -17,37 +11,32 @@ package com.tencent.ai.core.utils
         public var height:int;
         public var deepZ:int;
 
-        public function Rectangle3D(_arg_1:int=0, _arg_2:int=0, _arg_3:int=0, _arg_4:int=0, _arg_5:int=0, _arg_6:int=0)
+        public function Rectangle3D(x:int=0, y:int=0, z:int=0, w:int=0, h:int=0, deepZ:int=0)
         {
-            this.x = _arg_1;
-            this.y = _arg_2;
-            this.z = _arg_3;
-            this.wigth = _arg_4;
-            this.height = _arg_5;
-            this.deepZ = _arg_6;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.wigth = w;
+            this.height = h;
+            this.deepZ = deepZ;
         }
 
-        public function contains(_arg_1:int, _arg_2:int, _arg_3:int):Boolean
+        public function contains(px:int, py:int, pz:int):Boolean
         {
-            if ((((((((((((_arg_1 < this.x)) || ((_arg_1 > (this.x + this.wigth))))) || ((_arg_2 < this.y)))) || ((_arg_2 > (this.y + this.height))))) || ((_arg_3 < this.z)))) || ((_arg_3 > (this.z + this.deepZ))))){
-                return (false);
-            };
-            return (true);
+            if ((px < this.x) || (px > (this.x + this.wigth) 
+				|| (py < this.y) || (py > (this.y + this.height) 
+				|| (pz < this.z) || (pz > (this.z + this.deepZ)) {
+                return false;
+            }
+            return true;
         }
 
-        public function distance(_arg_1:int, _arg_2:int, _arg_3:int):int
+        public function distance(dx:int, dy:int, dz:int):int
         {
-            return (Math.sqrt(((((_arg_1 - this.x) * (_arg_1 - this.x)) + ((_arg_2 - this.y) * (_arg_2 - this.y))) + ((_arg_3 - this.z) * (_arg_3 - this.z)))));
+            return Math.sqrt((dx - this.x) * (dx - this.x) 
+				+ (dy - this.y) * (dy - this.y)
+				+ (dz - this.z) * (dz - this.z));
         }
-
-        public /*  ©init. */ function _SafeStr_1376()
-        {
-        }
-
 
     }
-}//package com.tencent.ai.core.utils
-
-// _SafeStr_1376 = " Rectangle3D" (String#16283)
-
-
+}

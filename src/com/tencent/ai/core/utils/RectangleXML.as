@@ -1,84 +1,68 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.utils.RectangleXML
-
-package com.tencent.ai.core.utils
+﻿package com.tencent.ai.core.utils
 {
     import flash.geom.Rectangle;
     import flash.utils.IDataInput;
     import flash.utils.IDataOutput;
-    import  ©init._SafeStr_1377;
 
     public class RectangleXML extends Rectangle implements IXMLSerialize, ISerialize 
     {
 
         public var name:String;
 
-        public function RectangleXML(_arg_1:String="Rectangle", _arg_2:Number=0, _arg_3:Number=0, _arg_4:Number=0, _arg_5:Number=0)
+        public function RectangleXML(name:String="Rectangle", x:Number=0, y:Number=0, w:Number=0, h:Number=0)
         {
-            this.name = _arg_1;
-            super(_arg_2, _arg_3, _arg_4, _arg_5);
+            this.name = name;
+            super(x, y, w, h);
         }
 
-        public function decode(_arg_1:XML):void
+        public function decode(xml:XML):void
         {
-            if (_arg_1){
-                this.name = _arg_1.name();
-                this.x = _arg_1.@x;
-                this.y = _arg_1.@y;
-                this.width = _arg_1.@w;
-                this.height = _arg_1.@h;
-            };
+            if (xml) {
+                this.name = xml.name();
+                this.x = xml.@x;
+                this.y = xml.@y;
+                this.width = xml.@w;
+                this.height = xml.@h;
+            }
         }
 
         public function encode()
         {
-            var _local_1:XML = <Rectangle/>
-            ;
-            _local_1.setName(this.name);
-            _local_1.@x = this.x;
-            _local_1.@y = this.y;
-            _local_1.@w = this.width;
-            _local_1.@h = this.height;
-            return (_local_1);
+            var xml:XML = <Rectangle/>;
+            xml.setName(this.name);
+            xml.@x = this.x;
+            xml.@y = this.y;
+            xml.@w = this.width;
+            xml.@h = this.height;
+            return xml;
         }
 
         override public function clone():Rectangle
         {
-            var _local_1:RectangleXML = new RectangleXML();
-            _local_1.x = this.x;
-            _local_1.y = this.y;
-            _local_1.width = this.width;
-            _local_1.height = this.height;
-            _local_1.name = this.name;
-            return (_local_1);
+            var rect:RectangleXML = new RectangleXML();
+            rect.x = this.x;
+            rect.y = this.y;
+            rect.width = this.width;
+            rect.height = this.height;
+            rect.name = this.name;
+            return rect;
         }
 
-        public function read(_arg_1:IDataInput):void
+        public function read(data:IDataInput):void
         {
-            this.x = _arg_1.readInt();
-            this.y = _arg_1.readInt();
-            this.width = _arg_1.readInt();
-            this.height = _arg_1.readInt();
+            this.x = data.readInt();
+            this.y = data.readInt();
+            this.width = data.readInt();
+            this.height = data.readInt();
         }
 
-        public function write(_arg_1:IDataOutput):void
+        public function write(data:IDataOutput):void
         {
-            _arg_1.writeInt(x);
-            _arg_1.writeInt(y);
-            _arg_1.writeInt(width);
-            _arg_1.writeInt(height);
+            data.writeInt(x);
+            data.writeInt(y);
+            data.writeInt(width);
+            data.writeInt(height);
         }
-
-        public /*  ©init. */ function _SafeStr_1377()
-        {
-        }
-
 
     }
-}//package com.tencent.ai.core.utils
-
-// _SafeStr_1377 = " RectangleXML" (String#13859)
-
-
+}
