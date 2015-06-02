@@ -27,12 +27,12 @@
         public var CLASS_LaserViewRender:String;
 
 
-        public function create(_arg_1:String, _arg_2:Array=null):Object
+        public function create(name:String, params:Array=null):Object
         {
-            if ((((_arg_1 == null)) || ((_arg_1 == "")))){
-                return (null);
-            };
-            return (CLASS.current.tryNewInstance(_arg_1, _arg_2));
+            if (name == null || name == "") {
+                return null;
+            }
+            return CLASS.current.tryNewInstance(name, params);
         }
 
     }

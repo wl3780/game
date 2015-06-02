@@ -1,30 +1,17 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.element.BaseElement
-
-package com.tencent.ai.core.element
+﻿package com.tencent.ai.core.element
 {
+    import com.tencent.ai.core.data.MapPosition;
+    import com.tencent.ai.core.display.IDisplay;
+    import com.tencent.ai.core.enum.Direction;
+    import com.tencent.ai.core.enum.ElementType;
     import com.tencent.ai.core.events.EventDispatcher2;
     import com.tencent.ai.core.render.IRenderObject;
-    import com.tencent.ai.core.display.IDisplay;
-    import com.tencent.ai.core.enum.ElementType;
+    
     import flash.display.BlendMode;
-    import com.tencent.ai.core.data.MapPosition;
-    import com.tencent.ai.core.enum.Direction;
     import flash.geom.Rectangle;
-    import  ©init._SafeStr_394;
 
     public class BaseElement extends EventDispatcher2 implements IRenderObject 
     {
-
-        protected var m_posX:int;
-        protected var m_posY:int;
-        protected var m_direction:int;
-        protected var m_type:String;
-        protected var m_display:IDisplay;
-        protected var m_parent:IElementContainer;
-        protected var m_deepOffset:int;
         public var renderLevel:int = -1;
         public var mapX:int;
         public var mapZ:int;
@@ -38,9 +25,17 @@ package com.tencent.ai.core.element
         public var sPrev:Object;
         public var sNext:BaseElement;
 
-        public function BaseElement(_arg_1:String)
+        protected var m_posX:int;
+        protected var m_posY:int;
+        protected var m_direction:int;
+        protected var m_type:String;
+        protected var m_display:IDisplay;
+        protected var m_parent:IElementContainer;
+        protected var m_deepOffset:int;
+
+        public function BaseElement(type:String)
         {
-            this.m_type = _arg_1;
+            this.m_type = type;
             this.initThis();
         }
 
@@ -52,12 +47,12 @@ package com.tencent.ai.core.element
 
         public function setBlendMode(_arg_1:String):void
         {
-            if (_arg_1 == ""){
+            if (_arg_1 == "") {
                 _arg_1 = BlendMode.NORMAL;
-            };
-            if (this.m_display != null){
+            }
+            if (this.m_display != null) {
                 this.m_display.blendMode = _arg_1;
-            };
+            }
         }
 
         public function getType():String
@@ -82,9 +77,9 @@ package com.tencent.ai.core.element
         public function setPosX(_arg_1:int):void
         {
             this.m_posX = _arg_1;
-            if (this.m_display != null){
+            if (this.m_display != null) {
                 this.m_display.x = this.m_posX;
-            };
+            }
         }
 
         public function getPosY():int
@@ -95,19 +90,19 @@ package com.tencent.ai.core.element
         public function setPosY(_arg_1:int):void
         {
             this.m_posY = _arg_1;
-            if (this.m_display != null){
+            if (this.m_display != null) {
                 this.m_display.y = this.m_posY;
-            };
+            }
         }
 
         public function setPosXY(_arg_1:int, _arg_2:int):void
         {
             this.m_posX = _arg_1;
             this.m_posY = _arg_2;
-            if (this.m_display != null){
+            if (this.m_display != null) {
                 this.m_display.x = this.m_posX;
                 this.m_display.y = this.m_posY;
-            };
+            }
         }
 
         public function setMapX(_arg_1:int):void
@@ -216,14 +211,5 @@ package com.tencent.ai.core.element
             return (null);
         }
 
-        public /*  ©init. */ function _SafeStr_394()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.element
-
-// _SafeStr_394 = " BaseElement" (String#13781)
-
-
+}

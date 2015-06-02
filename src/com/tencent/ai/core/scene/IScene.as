@@ -1,18 +1,14 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.scene.IScene
-
-package com.tencent.ai.core.scene
+﻿package com.tencent.ai.core.scene
 {
+    import com.tencent.ai.core.data.SceneConfigInfo;
+    import com.tencent.ai.core.data.SceneInfo;
+    import com.tencent.ai.core.data.SceneWalkData;
+    import com.tencent.ai.core.debug.IProfileObject;
+    import com.tencent.ai.core.element.BaseElement;
     import com.tencent.ai.core.element.IElementContainer;
     import com.tencent.ai.core.render.IRenderObject;
-    import com.tencent.ai.core.debug.IProfileObject;
-    import com.tencent.ai.core.data.SceneInfo;
-    import com.tencent.ai.core.data.SceneConfigInfo;
+    
     import flash.utils.Dictionary;
-    import com.tencent.ai.core.element.BaseElement;
-    import com.tencent.ai.core.data.SceneWalkData;
 
     public interface IScene extends IElementContainer, IRenderObject, IProfileObject 
     {
@@ -41,5 +37,4 @@ package com.tencent.ai.core.scene
         function get walkData():SceneWalkData;
 
     }
-}//package com.tencent.ai.core.scene
-
+}

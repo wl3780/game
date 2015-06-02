@@ -1,26 +1,20 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.display.ISprite
-
-package com.tencent.ai.core.display
+﻿package com.tencent.ai.core.display
 {
     public interface ISprite extends IDisplay 
     {
 
-        function addDisplay(_arg_1:IDisplay):IDisplay;
-        function removeDisplay(_arg_1:IDisplay):IDisplay;
-        function containsDisplay(_arg_1:IDisplay):Boolean;
-        function addDisplayAt(_arg_1:IDisplay, _arg_2:int):IDisplay;
-        function removeDisplayAt(_arg_1:int):IDisplay;
-        function setDisplayIndex(_arg_1:IDisplay, _arg_2:int):void;
-        function getDisplayIndex(_arg_1:IDisplay):int;
-        function getDisplayAt(_arg_1:int):IDisplay;
-        function set mouseChildren(_arg_1:Boolean):void;
+        function addDisplay(target:IDisplay):IDisplay;
+        function removeDisplay(target:IDisplay):IDisplay;
+        function containsDisplay(target:IDisplay):Boolean;
+        function addDisplayAt(target:IDisplay, index:int):IDisplay;
+        function removeDisplayAt(index:int):IDisplay;
+        function setDisplayIndex(target:IDisplay, index:int):void;
+        function getDisplayIndex(target:IDisplay):int;
+        function getDisplayAt(index:int):IDisplay;
+        function set mouseChildren(enabled:Boolean):void;
         function get mouseChildren():Boolean;
-        function set mouseEnabled(_arg_1:Boolean):void;
+        function set mouseEnabled(enabled:Boolean):void;
         function get mouseEnabled():Boolean;
 
     }
-}//package com.tencent.ai.core.display
-
+}

@@ -1,11 +1,5 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.enum.Constants
-
-package com.tencent.ai.core.enum
+﻿package com.tencent.ai.core.enum
 {
-    import  ©init._SafeStr_421;
 
     public class Constants 
     {
@@ -14,6 +8,7 @@ package com.tencent.ai.core.enum
         public static const PROTOCAL_64:int = 64;
         public static const PROTOCAL_128:int = 128;
         public static const PROTOCAL_256:int = 0x0100;
+		
         public static const LEN_MAIL_CONTENT:int = 0x0200;
         public static const LEN_MAIL_TITLE:int = 128;
         public static const LEN_NICKNAME:int = 32;
@@ -46,15 +41,5 @@ package com.tencent.ai.core.enum
         public static const MAX_HUNGRY:int = 200;
         public static const MAX_SKILL_LEVEL:int = 20;
 
-
-        public /*  ©init. */ function _SafeStr_421()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.enum
-
-// _SafeStr_421 = " Constants" (String#15062)
-
-
+}

@@ -1,11 +1,5 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.enum.ElementType
-
-package com.tencent.ai.core.enum
+﻿package com.tencent.ai.core.enum
 {
-    import  ©init._SafeStr_435;
 
     public class ElementType 
     {
@@ -20,23 +14,15 @@ package com.tencent.ai.core.enum
         public static const ET_SHADOW:String = "shadow";
         public static const ET_ARROW:String = "sceneArrow";
         public static const ET_PET:String = "pet";
-        public static const MT_UNKNOW:int = 0;
+        
+		public static const MT_UNKNOW:int = 0;
         public static const MT_INTERACT:int = 1;
         public static const MT_PLAYER:int = 2;
         public static const MT_MONSTER:int = 3;
         public static const MT_PET:int = 4;
-        public static const CLASS_ID_BASE:int = 0;
+        
+		public static const CLASS_ID_BASE:int = 0;
         public static const CLASS_ID_INTERACT:int = 100;
 
-
-        public /*  ©init. */ function _SafeStr_435()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.enum
-
-// _SafeStr_435 = " ElementType" (String#16061)
-
-
+}

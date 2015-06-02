@@ -1,11 +1,7 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.render.BodyViewLayer
-
-package com.tencent.ai.core.render
+﻿package com.tencent.ai.core.render
 {
     import com.tencent.ai.core.utils.RectArea;
+    
     import flash.utils.Dictionary;
 
     public interface BodyViewLayer extends IMotionView 
@@ -22,5 +18,4 @@ package com.tencent.ai.core.render
         function clear():void;
 
     }
-}//package com.tencent.ai.core.render
-
+}
