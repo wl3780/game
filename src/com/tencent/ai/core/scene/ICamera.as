@@ -1,21 +1,17 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.scene.ICamera
-
-package com.tencent.ai.core.scene
+﻿package com.tencent.ai.core.scene
 {
+    import com.tencent.ai.core.data.MapPosition;
     import com.tencent.ai.core.element.BaseElement;
+    
     import flash.geom.Point;
     import flash.geom.Rectangle;
-    import com.tencent.ai.core.data.MapPosition;
 
     public interface ICamera 
     {
 
-        function attachScene(_arg_1:IScene):void;
+        function attachScene(scene:IScene):void;
         function shake(_arg_1:int, _arg_2:int=25, _arg_3:int=10):void;
-        function setFocus(_arg_1:BaseElement):void;
+        function setFocus(element:BaseElement):void;
         function getFocus():BaseElement;
         function update():void;
         function getOffset():Point;
@@ -42,5 +38,4 @@ package com.tencent.ai.core.scene
         function globalToLocal(_arg_1:int, _arg_2:int, _arg_3:MapPosition=null):MapPosition;
 
     }
-}//package com.tencent.ai.core.scene
-
+}
