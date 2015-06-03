@@ -18,7 +18,6 @@
         protected var _checkHash:Function;
         protected var _url:String;
         protected var _expireTime:int;
-        protected var _saveSO:Boolean = false;
         protected var _retryTimes:int;
         protected var _loadInfo:Object;
 
@@ -33,7 +32,6 @@
             }
             _priority = Priority.PERIORITY_NORMAL;
             _expireTime = defaultExpireTime;
-            _saveSO = false;
             _retryTimes = 3;
             _hash = "";
             _checkHash = FileLenUtil.checkBytes;
@@ -122,15 +120,6 @@
         public function set expireTime(value:int):void
         {
             _expireTime = value;
-        }
-
-        public function get saveSO():Boolean
-        {
-            return _saveSO;
-        }
-        public function set saveSO(value:Boolean):void
-        {
-            _saveSO = value;
         }
 
         public function get retryTimes():int

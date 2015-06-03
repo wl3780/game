@@ -19,7 +19,6 @@
         function get checkHash():Function;
         function get url():String;
         function get expireTime():int;
-        function get saveSO():Boolean;
         function get retryTimes():int;
 
     }

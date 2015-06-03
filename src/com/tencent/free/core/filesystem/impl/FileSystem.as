@@ -8,7 +8,8 @@
     {
 
         public static var g_Max_Simultaneous_Task_Number:int = 2;
-        private static var g_Instance:FileSystem;
+        
+		private static var g_Instance:FileSystem;
 
         private var _totalBytes:int;
 

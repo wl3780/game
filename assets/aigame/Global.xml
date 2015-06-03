@@ -1,0 +1,148 @@
+<Global version="95640" appClass="com.tencent.ai.AIApplication" redirect="109830" date="2014.7.16" so="false">
+  <Libs>
+    <Lib name="外部库" src="{GAME_ROOT}/libs/comm/CommonLib.swf"/>
+    <Lib name="通用库 框架 应用程序库" src="{GAME_ROOT}/libs/ai/CommonFree.swf"/>
+    <Lib name="核心库" src="{GAME_ROOT}/libs/ai/AIApplication.swf"/>
+    <Lib name="UI库" src="{GAME_ROOT}/libs/ai/AI_UI.swf"/>
+    <Lib name="核心扩展库" src="{GAME_ROOT}/libs/ai/Ext.AICore.swf"/>
+    <Lib name="扩展库集合" src="{GAME_ROOT}/libs/ai/Ext.Libs.swf"/>
+    <Lib name="通用性资源库" src="{GAME_ROOT}/libs/ai/Asset.AICommonEffect.swf"/>
+    <Lib name="主城环境库" src="{GAME_ROOT}/libs/ai/Context.AICity.swf"/>
+    <Lib name="战场环境库" src="{GAME_ROOT}/libs/ai/Context.AIDuplicate.swf"/>
+    <Lib name="副本基础库" src="{GAME_ROOT}/libs/ai/Context.BasicContext.swf"/>
+    <Lib name="PVP环境库" src="{GAME_ROOT}/libs/ai/Context.AIPvp.swf"/>
+    <Lib name="家园环境库" src="{GAME_ROOT}/libs/ai/Context.AIHomestead.swf"/>
+    <Lib name="宠物堡垒环境库" src="{AILIBS_SRC}/Context.AIPetFortress.swf"/>
+    <Lib name="可扩展副本环境库" src="{AILIBS_SRC}/Context.BasicDup.swf"/>
+    <Lib name="战斗UI特效插件库" src="{GAME_ROOT}/libs/ai/Plugin.AICombatUIEffect.swf"/>
+    <Lib name="控制条插件库" src="{GAME_ROOT}/libs/ai/Plugin.ControlBar.swf"/>
+    <Lib name="登录插件库" src="{GAME_ROOT}/libs/ai/Plugin.AILogin.swf"/>
+    <Lib name="支付插件库" src="{GAME_ROOT}/libs/ai/Plugin.Payment.swf"/>
+    <Lib name="消息插件库" src="{GAME_ROOT}/libs/ai/Plugin.MessageSystem.swf"/>
+    <Lib name="聊天插件库" src="{GAME_ROOT}/libs/ai/Plugin.ChatEntry.swf"/>
+    <Lib name="宠物服务技能" src="{AILIBS_SRC}/Plugin.Aid.swf"/>
+    <Lib name="任务追踪" src="{AILIBS_SRC}/Plugin.MissionTrack.swf"/>
+    <Lib name="一秒换装" src="{AILIBS_SRC}/Plugin.QuickChangeAvatar.swf"/>
+  </Libs>
+  <DEFINE>
+    <ATTR name="GAME_MODE" type="num" value="0"/>
+    <ATTR name="IS_DEBUG" type="num" value="1"/>
+    <ATTR name="CGI_ROOT" value="www.qq.com"/>
+    <ATTR name="POLICYPORT" type="num" value="843"/>
+    <ATTR name="GAME_ROOT_SRC" value="{GAME_ROOT}/"/>
+    <ATTR name="ASSET_EQUIP_SRC" value="{GAME_ROOT}/res/assets/equip/"/>
+    <ATTR name="ASSET_EFFECT_SRC" value="{GAME_ROOT}/res/assets/effects/"/>
+    <ATTR name="MONSTER_RES_SRC" value="{GAME_ROOT}/res/assets/monster/"/>
+    <ATTR name="PLAYER_RES_SRC" value="{GAME_ROOT}/res/assets/player/"/>
+    <ATTR name="CITY_RES_SRC" value="{GAME_ROOT}/res/city/"/>
+    <ATTR name="DUP_RES_SRC" value="{GAME_ROOT}/res/dup/"/>
+    <ATTR name="G_SCENE_RES_SRC" value="{GAME_ROOT}/res/assets/scene/"/>
+    <ATTR name="NPC_RES_SRC" value="{GAME_ROOT}/res/assets/npc/"/>
+    <ATTR name="INTERACT_RES_SRC" value="{GAME_ROOT}/res/assets/interact/"/>
+    <ATTR name="SOUND_RES_SRC" value="{GAME_ROOT}/res/assets/sound/"/>
+    <ATTR name="ICON_RES_SRC" value="{GAME_ROOT}/res/assets/icon/"/>
+    <ATTR name="MOVIE_RES_SRC" value="{GAME_ROOT}/res/assets/movie/"/>
+    <ATTR name="LOGIN_SRC" value="{GAME_ROOT}/res/assets/login/"/>
+    <ATTR name="CG_RES_SRC" value="{GAME_ROOT}/res/assets/game/"/>
+    <ATTR name="MILITARY_SRC" value="{GAME_ROOT}/res/assets/badge/military/"/>
+    <ATTR name="AVATAR_RES_SRC" value="{GAME_ROOT}/res/assets/avatarShow/"/>
+  </DEFINE>
+  <ServerInfo>
+    <DefaultServer1 host="101.226.62.63" port="443"/>
+    <DefaultServer2 host="112.65.195.175" port="443"/>
+    <DefaultServer3 host="120.204.201.199" port="443"/>
+    <DirServer host="dir.17xf.qq.com" port="443"/>
+    <RoleListServer host="rolelist.17xf.qq.com" port="443"/>
+    <RegServer host="register.17xf.qq.com" port="443"/>
+    <CrossDomain host="17xf.qq.com" port="843"/>
+  </ServerInfo>
+  <AddContexts>
+    <Context name="city" className="com.tencent.ai.context.city.CityContext" label="default"/>
+    <Context name="duplicate" className="com.tencent.ai.context.duplicate.DuplicateContext"/>
+    <Context name="homestead" className="com.tencent.ai.context.homestead.HomesteadContext"/>
+    <Context name="pvp" className="com.tencent.ai.context.pvp.PvpContext"/>
+    <Context name="extdup" className="com.tencent.ai.context.basic.dup.BasicDupContext"/>
+    <Context name="petFortress" className="com.tencent.ai.context.petFortress.PetFortressContext"/>
+  </AddContexts>
+  <AIInitClasses>
+    <ImportClass key="CLASS_DialogManager" classPath="com.tencent.ai.core.ext.dialog.DialogManager"/>
+    <ImportClass key="CLASS_MovieManager" classPath="com.tencent.ai.core.ext.movie.MovieManager"/>
+    <ImportClass key="CLASS_PlayerModelManager" classPath="com.tencent.ai.core.ext.player.PlayerModelManager"/>
+    <ImportClass key="CLASS_SpawnMonsterManager" classPath="com.tencent.ai.core.ext.monster.SpawnMonsterManager"/>
+    <ImportClass key="CLASS_BubbleManager" classPath="com.tencent.ai.core.ext.bubble.BubbleManager"/>
+    <ImportClass key="CLASS_MissionManager" classPath="com.tencent.ai.core.mission.MissionManager"/>
+    <ImportClass key="CLASS_PlotSystem" classPath="com.tencent.ai.core.ext.plot.PlotSystem"/>
+    <ImportClass key="CLASS_GuideSystem" classPath="com.tencent.ai.core.ext.guideSystem.GuideSystemManager"/>
+    <ImportClass key="CLASS_CryptoManager" classPath="com.tencent.ai.core.ext.crypto.CryptoManager"/>
+    <ImportClass key="CLASS_Bitmap" classPath="com.tencent.ai.render.stage2d.Stage2DBitmap"/>
+    <ImportClass key="CLASS_BitmapDisplay" classPath="com.tencent.ai.render.stage2d.Stage2DBitmapDisplay"/>
+    <ImportClass key="CLASS_BitmapRender" classPath="com.tencent.ai.render.stage2d.Stage2DBitmapRender"/>
+    <ImportClass key="CLASS_BitmapRenderDisplay" classPath="com.tencent.ai.render.stage2d.Stage2DBitmapRenderDisplay"/>
+    <ImportClass key="CLASS_Sprite" classPath="com.tencent.ai.render.stage2d.Stage2DSprite"/>
+    <ImportClass key="CLASS_TextFiled" classPath="com.tencent.ai.render.stage2d.Stage2DTextField"/>
+    <ImportClass key="CLASS_Shape" classPath="com.tencent.ai.render.stage2d.Stage2DShape"/>
+    <ImportClass key="CLASS_LayerRender" classPath="com.tencent.ai.render.stage2d.Stage2DLayerRender"/>
+    <ImportClass key="CLASS_BodyViewLayer" classPath="com.tencent.ai.render.stage2d.Stage2DBodyViewLayer"/>
+    <ImportClass key="CLASS_LaserViewRender" classPath="com.tencent.ai.render.stage2d.Stage2DLaserRender"/>
+  </AIInitClasses>
+  <Confs>
+    <Conf name="装备信息" key="equip_info" src="{GAME_ROOT}/conf/EquipStaticInfos.xml"/>
+    <Conf name="宝石合成信息" key="gem_combin_info" src="{GAME_ROOT}/conf/GemCombinConf.xml"/>
+    <Conf name="战斗物品信息" key="item_info" src="{GAME_ROOT}/conf/CommonPropertyStaticInfos.xml"/>
+    <Conf name="普通物品信息" key="item_info" src="{GAME_ROOT}/conf/CombatPropertyStaticInfos.xml"/>
+    <Conf name="套装信息" key="suit_info" src="{GAME_ROOT}/conf/SuitStaticInfos.xml"/>
+    <Conf name="效果信息" key="effect_info" src="{GAME_ROOT}/conf/EffectInfos.xml"/>
+    <Conf name="异常状态类别信息" key="ss_type_info" src="{GAME_ROOT}/conf/SSTypeInfos.xml"/>
+    <Conf name="异常状态信息" key="ss_info" src="{GAME_ROOT}/conf/SpecialStatusInfos.xml"/>
+    <Conf name="特殊功能信息" key="sf_info" src="{GAME_ROOT}/conf/SpecialFuncInfos.xml"/>
+    <Conf name="人物技能信息" key="p_skill_info" src="{GAME_ROOT}/conf/PlayerSkillInfos.xml"/>
+    <Conf name="怪物技能信息" key="m_skill_info" src="{GAME_ROOT}/conf/MonsterSkillInfos.xml"/>
+    <Conf name="城市场景配置" key="city_info" src="{GAME_ROOT}/conf/CitySceneInfos.xml"/>
+    <Conf name="副本的信息" key="dup_info" src="{GAME_ROOT}/conf/DupStaticInfos.xml"/>
+    <Conf name="副本加载Tips信息" key="dup_tips_info" src="{GAME_ROOT}/conf/DupLoadingTips.xml"/>
+    <Conf name="种族信息" key="ethnic_Info" src="{GAME_ROOT}/conf/EthnicInfos.xml"/>
+    <Conf name="NPC的信息" key="npc_info" src="{GAME_ROOT}/conf/NpcStaticInfos.xml"/>
+    <Conf name="怪物的AI信息" key="monster_ai_info" src="{GAME_ROOT}/conf/MonsterAIInfos.xml"/>
+    <Conf name="怪物的信息" key="monster_static_info" src="{GAME_ROOT}/conf/MonsterStaticInfos.xml"/>
+    <Conf name="宠物的信息" key="pet_static_info" src="{GAME_ROOT}/conf/PetStaticInfos.xml"/>
+    <Conf name="宠物战斗技能信息" key="pet_skill_info" src="{GAME_ROOT}/conf/PetSkillInfos.xml"/>
+    <Conf name="宠物服务技能信息" key="pet_s_skill_info" src="{GAME_ROOT}/conf/PetServiceSkillInfos.xml"/>
+    <Conf name="宠物的AI信息" key="pet_ai_info" src="{GAME_ROOT}/conf/PetAIInfos.xml"/>
+    <Conf name="交互物件的信息" key="interact_static_info" src="{GAME_ROOT}/conf/InteractItemStaticInfos.xml"/>
+    <Conf name="公共元素工厂" key="factory_info" src="{GAME_ROOT}/conf/FactoryInfos.xml"/>
+    <Conf name="插件配置" key="plugin_info" src="{GAME_ROOT}/conf/PluginInfos_release.xml"/>
+    <Conf name="声音配置" key="sound_info" src="{GAME_ROOT}/conf/SoundStaticInfos.xml"/>
+    <Conf name="任务信息" key="mission_info" src="{GAME_ROOT}/conf/MissionInfos.xml"/>
+    <Conf name="剧情信息" key="plot_info" src="{GAME_ROOT}/conf/Plots.xml"/>
+    <Conf name="动画信息" key="movie_info" src="{GAME_ROOT}/conf/MovieStaticInfos.xml"/>
+    <Conf name="角色等级经验" key="max_xp_info" src="{GAME_ROOT}/conf/Numeric_exp.xml"/>
+    <Conf name="小游戏" key="cg_info" src="{GAME_ROOT}/conf/CasualGameStaticInfo.xml"/>
+    <Conf name="对白信息" key="dialog_info" src="{GAME_ROOT}/conf/DialogInfos.xml"/>
+    <Conf name="公共cd信息" key="common_cd_Info" src="{GAME_ROOT}/conf/PublicCdInfos.xml"/>
+    <Conf name="冒泡对白信息" key="bubble_dialog_Info" src="{GAME_ROOT}/conf/BubbleDialogInfos.xml"/>
+    <Conf name="地图信息" key="map_data_Info" src="{GAME_ROOT}/conf/MapDataInfos.xml"/>
+    <Conf name="职业装信息" key="careerWear_info" src="{GAME_ROOT}/conf/CareerWearStaticInfos.xml"/>
+    <Conf name="超影信息" key="supershadow_info" src="{GAME_ROOT}/conf/SuperShadowInfos.xml"/>
+    <Conf name="通用配置定义" key="define_info" src="{GAME_ROOT}/conf/DefineInfo.xml"/>
+    <Conf name="mail处理器" key="mail_handler_info" src="{GAME_ROOT}/conf/MailHandlerStaticInfos.xml"/>
+    <Conf name="徽章配置信息" key="badge_info" src="{GAME_ROOT}/conf/BadgeStaticInfos.xml"/>
+    <Conf name="军衔配置信息" key="military_rank_info" src="{GAME_ROOT}/conf/MilitaryRankStaticInfos.xml"/>
+    <Conf name="服务器错误码信息" key="server_error_code_info" src="{GAME_ROOT}/conf/ServerErrorCodeStaticInfos.xml"/>
+    <Conf name="资源依赖关系" key="res_depand_info" src="{GAME_ROOT}/conf/FindRes.xml"/>
+    <Conf name="技能树数据" key="skill_tree_info" src="{GAME_ROOT}/conf/SkillTreeStaticInfos.xml"/>
+    <Conf name="mp3信息" key="mp3_info" src="{GAME_ROOT}/conf/Mp3StaticInfos.xml"/>
+    <Conf name="创建角色时用到的名称数据" key="name_info" src="{GAME_ROOT}/conf/NameStaticInfos.xml"/>
+    <Conf name="根据等级给于任务经验奖励" key="missino_award_xp" src="{GAME_ROOT}/conf/Numeric_level_exp.xml"/>
+    <Conf name="Autorun数据" key="autorun" src="{GAME_ROOT}/conf/AutorunStaticInfos.xml"/>
+    <Conf name="装备合成配置" key="equip_combin_info" src="{GAME_ROOT}/conf/EquipCombin.xml"/>
+    <Conf name="装备强化稀有度配置" key="equip_enhance_lack_info" src="{GAME_ROOT}/conf/EquipEnhanceTypeLackAttr.xml"/>
+    <Conf name="装备强化类型配置" key="equip_enhance_type_info" src="{GAME_ROOT}/conf/EquipEnhanceTypeAttr.xml"/>
+    <Conf name="装备强化等级配置" key="equip_enhance_level_info" src="{GAME_ROOT}/conf/EquipEnhanceLevelAttr.xml"/>
+    <Conf name="SO缓存配置" key="so_info" src="{GAME_ROOT}/conf/SO.xml"/>
+    <Conf name="装备兑换表" key="cube_formula" src="{GAME_ROOT}/conf/CubeFormula.xml"/>
+    <Conf name="装备兑换材料表" key="cube_item" src="{GAME_ROOT}/conf/CubeItem.xml"/>
+    <Conf name="怪物血条数量表" key="monster_blood" src="{GAME_ROOT}/conf/MonsterBloodStaticInfos.xml"/>
+    <Conf name="武器发光特效表" key="equip_effect" src="{GAME_ROOT}/conf/EquipEffect.xml"/>
+    <Conf name="战魂配置表" key="war_soul" src="{GAME_ROOT}/conf/WarSoulStaticInfos.xml"/>
+  </Confs>
+</Global>

@@ -1,17 +1,12 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.context.AIContext
-
-package com.tencent.ai.core.context
+﻿package com.tencent.ai.core.context
 {
-    import com.tencent.ai.core.scene.IScene;
     import com.tencent.ai.core.data.SceneInfo;
-    import com.tencent.ai.core.player.IPlayerManager;
-    import com.tencent.ai.core.npc.INpcManager;
-    import com.tencent.ai.core.monster.IMonsterManager;
-    import com.tencent.ai.core.pet.IPetManager;
     import com.tencent.ai.core.interact.IInteractItemManager;
+    import com.tencent.ai.core.monster.IMonsterManager;
+    import com.tencent.ai.core.npc.INpcManager;
+    import com.tencent.ai.core.pet.IPetManager;
+    import com.tencent.ai.core.player.IPlayerManager;
+    import com.tencent.ai.core.scene.IScene;
 
     public interface AIContext 
     {
@@ -31,5 +26,4 @@ package com.tencent.ai.core.context
         function getLevel():int;
 
     }
-}//package com.tencent.ai.core.context
-
+}

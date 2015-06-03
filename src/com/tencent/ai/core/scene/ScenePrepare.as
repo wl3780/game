@@ -58,108 +58,86 @@
             this.prepareComplete = false;
         }
 
-        private function collectConfig(_arg_1:String, _arg_2:ByteArray):void
+        private function collectConfig(fileName:String, data:ByteArray):void
         {
-            var _local_5:XML;
-            var _local_6:SceneConfigInfo;
-            var _local_7:Vector.<SceneNpcInfo>;
-            var _local_8:XMLList;
-            var _local_9:XML;
-            var _local_10:SceneNpcInfo;
-            var _local_11:Vector.<InteractItemInfo>;
-            var _local_12:XMLList;
-            var _local_13:XML;
-            var _local_14:InteractItemInfo;
-            var _local_15:int;
-            var _local_16:InteractItemStaticInfo;
-            var _local_17:String;
-            var _local_18:XML;
-            var _local_19:TingeInfo;
-            var _local_20:XML;
-            var _local_21:AdjustColorInfo;
-            var _local_22:Vector.<PropertyArg>;
-            var _local_23:XMLList;
-            var _local_24:XML;
-            var _local_25:PropertyArg;
-            var _local_26:XML;
-            var _local_3:Array = _arg_1.split(".");
-            _arg_1 = _local_3[0];
-            var _local_4:String = _local_3[1];
-            if (_local_4 == "xml") {
-                _local_5 = new XML(_arg_2.readUTFBytes(_arg_2.bytesAvailable));
-                switch (_arg_1) {
+            var fileList:Array = fileName.split(".");
+            fileName = fileList[0];
+            var fileType:String = fileList[1];
+            if (fileType == "xml") {
+	            var xml:XML = new XML(data.readUTFBytes(data.bytesAvailable));
+                switch (fileName) {
                     case "scene":
-                        _local_6 = new SceneConfigInfo();
-                        _local_6.decode(_local_5);
-                        this.config[_arg_1] = _local_6;
+			            var sceneConfig:SceneConfigInfo = new SceneConfigInfo();
+                        sceneConfig.decode(xml);
+                        this.config[fileName] = sceneConfig;
                         return;
                     case "npc":
-                        _local_7 = new Vector.<SceneNpcInfo>();
-                        _local_8 = _local_5.Npc;
-                        for each (_local_9 in _local_8) {
-                            _local_10 = new SceneNpcInfo();
-                            _local_10.decode(_local_9);
-                            _local_7.push(_local_10);
+			            var npcList:Vector.<SceneNpcInfo> = new Vector.<SceneNpcInfo>();
+						var npcXMLList:XMLList = xml.Npc;
+                        for each (var npcXML:XML in npcXMLList) {
+							var npcInfo:SceneNpcInfo = new SceneNpcInfo();
+                            npcInfo.decode(npcXML);
+                            npcList.push(npcInfo);
                         }
-                        _local_7.fixed = true;
-                        this.config[_arg_1] = _local_7;
+                        npcList.fixed = true;
+                        this.config[fileName] = npcList;
                         return;
                     case "interact":
-                        _local_11 = new Vector.<InteractItemInfo>();
-                        _local_12 = _local_5.Item;
-                        for each (_local_13 in _local_12) {
-                            _local_14 = new InteractItemInfo();
-                            _local_14.renderLevel = ((_local_13.hasOwnProperty("@renderLevel")) ? Number(_local_13.@renderLevel) : -1);
-                            _local_14.id = int(_local_13.@id);
-                            _local_15 = int(_local_13.@interactID);
-                            _local_16 = AICore.data.getInteractItemStaticInfo(_local_15);
-                            if (!_local_16) {
-                                _local_17 = (("ID 为 " + _local_15) + " 的交互物件不存在！");
-                                error((("ID 为 " + _local_15) + " 的交互物件不存在！"));
+						var itemList:Vector.<InteractItemInfo> = new Vector.<InteractItemInfo>();
+						var itemXMLList:XMLList = xml.Item;
+                        for each (var itemXML:XML in itemXMLList) {
+							var itemInfo:InteractItemInfo = new InteractItemInfo();
+                            itemInfo.renderLevel = itemXML.hasOwnProperty("@renderLevel") ? Number(itemXML.@renderLevel) : -1;
+                            itemInfo.id = int(itemXML.@id);
+							var interactID:int = int(itemXML.@interactID);
+							var interactInfo:InteractItemStaticInfo = AICore.data.getInteractItemStaticInfo(interactID);
+                            if (!interactInfo) {
+								var msg:String = "ID 为 " + interactID + " 的交互物件不存在！";
+                                error(msg);
                             }
-                            _local_14.setStaticInfo(_local_16);
-                            _local_14.groupID = _local_16.groupID;
-                            _local_14.amityGroupID = _local_16.groupID;
-                            _local_14.direction = Direction.RIGHT;
-                            _local_14.location = MapPosition.DecodeXML(_local_13);
-                            _local_14.dropPackageID = int(_local_13.@dropID);
-                            if (_local_13.hasOwnProperty("@direction")) {
-                                _local_14.direction = int(_local_13.@direction);
+                            itemInfo.setStaticInfo(interactInfo);
+                            itemInfo.groupID = interactInfo.groupID;
+                            itemInfo.amityGroupID = interactInfo.groupID;
+                            itemInfo.direction = Direction.RIGHT;
+                            itemInfo.location = MapPosition.DecodeXML(itemXML);
+                            itemInfo.dropPackageID = int(itemXML.@dropID);
+                            if (itemXML.hasOwnProperty("@direction")) {
+                                itemInfo.direction = int(itemXML.@direction);
                             }
-                            if (_local_13.hasOwnProperty("Tinge")) {
-                                _local_18 = _local_13.Tinge[0];
-                                _local_19 = new TingeInfo();
-                                _local_19.decode(_local_18);
-                                _local_14.tingeInfo = _local_19;
+                            if (itemXML.hasOwnProperty("Tinge")) {
+								var tingeXML:XML = itemXML.Tinge[0];
+								var tingeInfo:TingeInfo = new TingeInfo();
+                                tingeInfo.decode(tingeXML);
+                                itemInfo.tingeInfo = tingeInfo;
                             }
-                            if (_local_13.hasOwnProperty("AdjustColor")) {
-                                _local_20 = _local_13.AdjustColor[0];
-                                _local_21 = new AdjustColorInfo();
-                                _local_21.decode(_local_20);
-                                _local_14.adjustColorInfo = _local_21;
+                            if (itemXML.hasOwnProperty("AdjustColor")) {
+								var colorXML:XML = itemXML.AdjustColor[0];
+								var colorInfo:AdjustColorInfo = new AdjustColorInfo();
+                                colorInfo.decode(colorXML);
+                                itemInfo.adjustColorInfo = colorInfo;
                             }
-                            if (_local_13.hasOwnProperty("property")) {
-                                _local_22 = new Vector.<PropertyArg>();
-                                _local_23 = _local_13.property;
-                                for each (_local_24 in _local_23) {
-                                    _local_25 = PropertyArg.newArg(_local_24.@type);
-                                    _local_25.decode(_local_24);
-                                    _local_22.push(_local_25);
+                            if (itemXML.hasOwnProperty("property")) {
+								var argList:Vector.<PropertyArg> = new Vector.<PropertyArg>();
+								var argXMLList:XMLList = itemXML.property;
+                                for each (var argXML:XML in argXMLList) {
+									var propArg:PropertyArg = PropertyArg.newArg(argXML.@type);
+                                    propArg.decode(argXML);
+                                    argList.push(propArg);
                                 }
-                                _local_14.propertyArgList = _local_22;
+                                itemInfo.propertyArgList = argList;
                             }
-                            if (_local_13.hasOwnProperty("ProcedureInfo")) {
-                                _local_26 = _local_13.ProcedureInfo[0];
-                                _local_14.procedureInfo = new ProcedureInfo();
-                                _local_14.procedureInfo.decode(_local_26);
+                            if (itemXML.hasOwnProperty("ProcedureInfo")) {
+								var proXML:XML = itemXML.ProcedureInfo[0];
+                                itemInfo.procedureInfo = new ProcedureInfo();
+                                itemInfo.procedureInfo.decode(proXML);
                             }
-                            _local_11.push(_local_14);
+                            itemList.push(itemInfo);
                         }
-                        _local_11.fixed = true;
-                        this.config[_arg_1] = _local_11;
+                        itemList.fixed = true;
+                        this.config[fileName] = itemList;
                         return;
                     default:
-                        this.config[_arg_1] = _local_5;
+                        this.config[fileName] = xml;
                 }
             }
         }
@@ -218,30 +196,27 @@
 
         private function loadSceneConfig(sceneConfig:SceneConfigInfo):void
         {
-            var _local_3:SceneLayerInfo;
-            var _local_4:Vector.<SceneItemInfo>;
-            var _local_5:SceneItemInfo;
-            var _local_6:String;
-            var _local_7:FileLoader;
             this.totalItem = 0;
             this.loadedItem = 0;
-            var _local_2:Vector.<SceneLayerInfo> = sceneConfig.layerList;
-            for each (_local_3 in _local_2) {
-                _local_4 = _local_3.itemList;
-                for each (_local_5 in _local_4) {
-                    if (!_local_5.resPath) break;
-                    _local_6 = (DEFINE.G_SCENE_RES_SRC + _local_5.resPath);
-                    if (!this.lockFileList[_local_6]) {
-                        _local_7 = new FileLoader(_local_6);
-                        _local_7.priority = Priority.PERIORITY_HIGH;
-                        _local_7.content.addEventListener(TaskEvent.COMPLETE, this.onResourceLoaded);
-                        _local_7.content.addEventListener(TaskEvent.PROGRESS, this.onResourceLoaded);
-                        _local_7.content.addEventListener(TaskEvent.IO_ERROR, this.onResourceLoaded);
-                        _local_7.content.addEventListener(TaskEvent.CHECK_ERROR, this.onResourceLoaded);
-                        _local_7.content.addEventListener(TaskEvent.SECURITY_ERROR, this.onResourceLoaded);
-                        this.lockFileList[_local_6] = _local_7;
+            var list:Vector.<SceneLayerInfo> = sceneConfig.layerList;
+            for each (var info:SceneLayerInfo in list) {
+	            var items:Vector.<SceneItemInfo> = info.itemList;
+                for each (var itm:SceneItemInfo in items) {
+                    if (!itm.resPath) {
+						break;
+					}
+		            var path:String = DEFINE.G_SCENE_RES_SRC + itm.resPath;
+                    if (!this.lockFileList[path]) {
+			            var loader:FileLoader = new FileLoader(path);
+                        loader.priority = Priority.PERIORITY_HIGH;
+                        loader.content.addEventListener(TaskEvent.COMPLETE, this.onResourceLoaded);
+                        loader.content.addEventListener(TaskEvent.PROGRESS, this.onResourceLoaded);
+                        loader.content.addEventListener(TaskEvent.IO_ERROR, this.onResourceLoaded);
+                        loader.content.addEventListener(TaskEvent.CHECK_ERROR, this.onResourceLoaded);
+                        loader.content.addEventListener(TaskEvent.SECURITY_ERROR, this.onResourceLoaded);
+                        this.lockFileList[path] = loader;
                         this.totalItem++;
-                        _local_7.load();
+                        loader.load();
                     }
                 }
             }
@@ -252,50 +227,48 @@
 
         private function sendLoaderOK():void
         {
-            var _local_1:ScenePrepareEvent;
             this.prepareComplete = true;
-            _local_1 = new ScenePrepareEvent(ScenePrepareEvent.COMPLETE);
-            _local_1.sceneID = -1;
-            _local_1.totalItem = this.totalItem;
-            _local_1.loadedItem = this.loadedItem;
-            this.dispatchEvent(_local_1);
+            var event:ScenePrepareEvent = new ScenePrepareEvent(ScenePrepareEvent.COMPLETE);
+            event.sceneID = -1;
+            event.totalItem = this.totalItem;
+            event.loadedItem = this.loadedItem;
+            this.dispatchEvent(event);
         }
 
-        private function onResourceLoaded(_arg_1:TaskEvent):void
+        private function onResourceLoaded(evt:TaskEvent):void
         {
-            var _local_2:FileLoader;
-            var _local_3:ScenePrepareEvent;
-            if (_arg_1.type == TaskEvent.COMPLETE) {
-                _local_2 = this.lockFileList[_arg_1.key];
-                if (((_local_2) && (_local_2.content.isLoaded()))) {
+            var event:ScenePrepareEvent;
+            if (evt.type == TaskEvent.COMPLETE) {
+	            var loader:FileLoader = this.lockFileList[evt.key];
+                if (loader && loader.content.isLoaded()) {
                     this.loadedItem++;
-                    _local_3 = new ScenePrepareEvent(ScenePrepareEvent.LOAD_PROESS);
-                    _local_3.sceneID = _sceneInfo.sceneID;
-                    _local_3.totalItem = this.totalItem;
-                    _local_3.loadedItem = this.loadedItem;
-                    _local_3.bytesTotal = _sceneBytes;
-                    _local_3.key = String(_arg_1.key);
-                    this.dispatchEvent(_local_3);
-                    if (((!((this.totalItem == 0))) && ((this.totalItem == this.loadedItem)))) {
+                    event = new ScenePrepareEvent(ScenePrepareEvent.LOAD_PROESS);
+                    event.sceneID = _sceneInfo.sceneID;
+                    event.totalItem = this.totalItem;
+                    event.loadedItem = this.loadedItem;
+                    event.bytesTotal = _sceneBytes;
+                    event.key = String(evt.key);
+                    this.dispatchEvent(event);
+                    if (this.totalItem != 0 && this.totalItem == this.loadedItem) {
                         this.sendLoaderOK();
                     }
                 }
             } else {
-                if (_arg_1.type == TaskEvent.PROGRESS) {
-                    _sceneBytes = _arg_1.bytesTotal;
+                if (evt.type == TaskEvent.PROGRESS) {
+                    _sceneBytes = evt.bytesTotal;
                 } else {
-                    _local_3 = new ScenePrepareEvent(ScenePrepareEvent.ERROR);
-                    _local_3.sceneID = _sceneInfo.sceneID;
-                    _local_3.totalItem = this.totalItem;
-                    _local_3.loadedItem = this.loadedItem;
-                    this.dispatchEvent(_local_3);
+                    event = new ScenePrepareEvent(ScenePrepareEvent.ERROR);
+                    event.sceneID = _sceneInfo.sceneID;
+                    event.totalItem = this.totalItem;
+                    event.loadedItem = this.loadedItem;
+                    this.dispatchEvent(event);
                 }
             }
         }
 
         public function get sceneInfo():SceneInfo
         {
-            return (_sceneInfo);
+            return _sceneInfo;
         }
 
         public function load():void

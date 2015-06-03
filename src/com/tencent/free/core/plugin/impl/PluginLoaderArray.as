@@ -1,21 +1,14 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.core.plugin.impl.PluginLoaderArray
-
-package com.tencent.free.core.plugin.impl
+﻿package com.tencent.free.core.plugin.impl
 {
     import com.tencent.free.core.plugin.IPluginManager;
-    import __AS3__.vec.Vector;
-    import com.tencent.free.core.plugin.PluginRequest;
-    import flash.events.Event;
-    import flash.events.ErrorEvent;
-    import flash.events.IEventDispatcher;
-    import com.tencent.free.logging.warning;
     import com.tencent.free.core.plugin.PluginConfig;
-    import  ©init._SafeStr_28;
-    import __AS3__.vec.*;
+    import com.tencent.free.core.plugin.PluginRequest;
     import com.tencent.free.core.plugin.impl.*;
+    import com.tencent.free.logging.warning;
+    
+    import flash.events.ErrorEvent;
+    import flash.events.Event;
+    import flash.events.IEventDispatcher;
 
     class PluginLoaderArray 
     {
@@ -107,27 +100,26 @@ package com.tencent.free.core.plugin.impl
     }
 }//package com.tencent.free.core.plugin.impl
 
-import flash.events.EventDispatcher;
-import com.tencent.free.core.plugin.PluginRequest;
-import com.tencent.free.core.plugin.RequireInfo;
-import com.tencent.free.core.plugin.IPluginManager;
-import flash.events.IEventDispatcher;
-import com.tencent.free.core.swf.SwfFileLoader;
+import com.tencent.free.core.events.FreeEvent;
+import com.tencent.free.core.events.SwfLoadEvent;
 import com.tencent.free.core.filesystem.XMLLoader;
 import com.tencent.free.core.lib.CLASS;
-import com.tencent.free.core.manager.content.IContent;
-import __AS3__.vec.Vector;
-import com.tencent.free.core.plugin.RequireType;
 import com.tencent.free.core.lib.DomainType;
+import com.tencent.free.core.manager.content.IContent;
 import com.tencent.free.core.manager.task.Priority;
-import com.tencent.free.core.events.SwfLoadEvent;
+import com.tencent.free.core.plugin.IPluginManager;
+import com.tencent.free.core.plugin.PluginConfig;
+import com.tencent.free.core.plugin.PluginLoadType;
+import com.tencent.free.core.plugin.PluginRequest;
+import com.tencent.free.core.plugin.RequireInfo;
+import com.tencent.free.core.plugin.RequireType;
+import com.tencent.free.core.swf.SwfFileLoader;
+import com.tencent.free.setup.GLOBAL_DEF;
+
 import flash.events.ErrorEvent;
 import flash.events.Event;
-import com.tencent.free.setup.GLOBAL_DEF;
-import com.tencent.free.core.plugin.PluginConfig;
-import com.tencent.free.core.events.FreeEvent;
-import com.tencent.free.core.plugin.PluginLoadType;
-import  ©init._SafeStr_29;
+import flash.events.EventDispatcher;
+import flash.events.IEventDispatcher;
 
 class PluginLoader extends EventDispatcher 
 {

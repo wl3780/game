@@ -23,13 +23,11 @@
         
 		protected var file:FileLoader;
         protected var m_priority:int;
-        protected var m_saveSO:Boolean;
         protected var m_expireTime:int;
 
-        public function XMLLoader(_arg_1:int=100, _arg_2:Boolean=false, expireTime:int=-1)
+        public function XMLLoader(priority:int=100, expireTime:int=-1)
         {
-            this.m_priority = _arg_1;
-            this.m_saveSO = _arg_2;
+            this.m_priority = priority;
             this.m_expireTime = expireTime==-1 ? BaseLoader.defaultExpireTime : expireTime;
         }
 
@@ -70,7 +68,6 @@
             this.listen(true);
             this.file.expireTime = this.m_expireTime;
             this.file.priority = this.m_priority;
-            this.file.saveSO = this.m_saveSO;
             this.file.load();
         }
 

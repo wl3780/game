@@ -26,10 +26,10 @@
 
         public function prepareScene(_arg_1:Array):void
         {
-            this._infosArr = _arg_1;
-            this._totalNum = _arg_1.length;
-            this._curIndex = 0;
-            this._totalLoaderSize = 0;
+            _infosArr = _arg_1;
+            _totalNum = _arg_1.length;
+            _curIndex = 0;
+            _totalLoaderSize = 0;
             this.loadScene();
         }
 
@@ -37,46 +37,46 @@
         {
             var _local_1:ScenePrepareEvent;
             this.removePrepareEvent();
-            if (this._curIndex >= this._totalNum){
+            if (_curIndex >= _totalNum) {
                 _local_1 = new ScenePrepareEvent(ScenePrepareEvent.COMPLETE);
-                _local_1.bytesTotal = this._totalLoaderSize;
+                _local_1.bytesTotal = _totalLoaderSize;
                 dispatchEvent(_local_1);
                 return;
-            };
-            this._scenePrepare = new ScenePrepare(this._infosArr[this._curIndex]);
-            this._scenePrepare.addEventListener(ScenePrepareEvent.COMPLETE, this.onPrepareComplete);
-            this._scenePrepare.addEventListener(ScenePrepareEvent.LOAD_PROESS, this.onPrepareProgress);
-            this._scenePrepare.addEventListener(ScenePrepareEvent.ERROR, this.onPrepareError);
-            this._scenePrepare.load();
+            }
+            _scenePrepare = new ScenePrepare(_infosArr[_curIndex]);
+            _scenePrepare.addEventListener(ScenePrepareEvent.COMPLETE, this.onPrepareComplete);
+            _scenePrepare.addEventListener(ScenePrepareEvent.LOAD_PROESS, this.onPrepareProgress);
+            _scenePrepare.addEventListener(ScenePrepareEvent.ERROR, this.onPrepareError);
+            _scenePrepare.load();
         }
 
         private function removePrepareEvent():void
         {
-            if (this._scenePrepare){
-                this._scenePrepare.removeEventListener(ScenePrepareEvent.COMPLETE, this.onPrepareComplete);
-                this._scenePrepare.removeEventListener(ScenePrepareEvent.LOAD_PROESS, this.onPrepareProgress);
-                this._scenePrepare.removeEventListener(ScenePrepareEvent.ERROR, this.onPrepareError);
-            };
+            if (_scenePrepare) {
+                _scenePrepare.removeEventListener(ScenePrepareEvent.COMPLETE, this.onPrepareComplete);
+                _scenePrepare.removeEventListener(ScenePrepareEvent.LOAD_PROESS, this.onPrepareProgress);
+                _scenePrepare.removeEventListener(ScenePrepareEvent.ERROR, this.onPrepareError);
+            }
         }
 
         protected function onPrepareComplete(_arg_1:ScenePrepareEvent):void
         {
-            var _local_2:SceneInfo = this._infosArr[this._curIndex];
-            this.scenePrepareHash[_local_2.sceneID] = this._scenePrepare;
-            this._curIndex++;
+            var _local_2:SceneInfo = _infosArr[_curIndex];
+            this.scenePrepareHash[_local_2.sceneID] = _scenePrepare;
+            _curIndex++;
             this.loadScene();
         }
 
         protected function onPrepareProgress(_arg_1:ScenePrepareEvent):void
         {
             var _local_2:ScenePrepareEvent = new ScenePrepareEvent(ScenePrepareEvent.LOAD_PROESS);
-            var _local_3:Number = (this._scenePrepare.loadedItem / this._scenePrepare.totalItem);
-            _local_3 = ((this._curIndex / this._totalNum) + (_local_3 / this._totalNum));
+            var _local_3:Number = (_scenePrepare.loadedItem / _scenePrepare.totalItem);
+            _local_3 = ((_curIndex / _totalNum) + (_local_3 / _totalNum));
             _local_2.bytesTotal = int((_local_3 * 100));
             _local_2.key = _arg_1.key;
-            _local_2.totalItem = this._scenePrepare.totalItem;
-            _local_2.loadedItem = this._scenePrepare.loadedItem;
-            this._totalLoaderSize = (this._totalLoaderSize + _arg_1.bytesTotal);
+            _local_2.totalItem = _scenePrepare.totalItem;
+            _local_2.loadedItem = _scenePrepare.loadedItem;
+            _totalLoaderSize = (_totalLoaderSize + _arg_1.bytesTotal);
             dispatchEvent(_local_2);
         }
 
@@ -84,8 +84,8 @@
         {
             var _local_2:ScenePrepareEvent = new ScenePrepareEvent(ScenePrepareEvent.ERROR);
             _local_2.key = _arg_1.key;
-            _local_2.totalItem = this._scenePrepare.totalItem;
-            _local_2.loadedItem = this._scenePrepare.loadedItem;
+            _local_2.totalItem = _scenePrepare.totalItem;
+            _local_2.loadedItem = _scenePrepare.loadedItem;
             dispatchEvent(_local_2);
         }
 
@@ -95,22 +95,22 @@
             var _local_3:SceneInfo;
             for each (_local_3 in _arg_1) {
                 _local_2 = this.scenePrepareHash[_local_3.sceneID];
-                if (_local_2){
+                if (_local_2) {
                     _local_2.removeEventListener(ScenePrepareEvent.COMPLETE, this.onPrepareComplete);
                     _local_2.removeEventListener(ScenePrepareEvent.LOAD_PROESS, this.onPrepareProgress);
                     _local_2.removeEventListener(ScenePrepareEvent.ERROR, this.onPrepareError);
                     _local_2.unload();
                     _local_2 = null;
                     delete this.scenePrepareHash[_local_3.sceneID];
-                };
-            };
+                }
+            }
         }
 
         public function newCurrentScene(_arg_1:int):Scene
         {
-            if (null == this.scene){
+            if (null == this.scene) {
                 this.scene = new this.DefaultSceneClass();
-            };
+            }
             this.scene.setSceneID(_arg_1);
             return (this.scene);
         }
@@ -124,9 +124,9 @@
 
         public function destroyCurrentScene():void
         {
-            if (this.scene){
+            if (this.scene) {
                 this.scene.unload();
-            };
+            }
         }
 
         public function getCurrentScene():Scene
@@ -136,11 +136,11 @@
 
         public function getConfig(_arg_1:int, _arg_2:String=""):Object
         {
-            var _local_3:ScenePrepare = this.scenePrepareHash[_arg_1];
-            if (_arg_2){
-                return (_local_3.config[_arg_2]);
-            };
-            return (_local_3.config);
+            var prepare:ScenePrepare = this.scenePrepareHash[_arg_1];
+            if (_arg_2) {
+                return prepare.config[_arg_2];
+            }
+            return (prepare.config);
         }
 
     }

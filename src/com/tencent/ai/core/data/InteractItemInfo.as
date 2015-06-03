@@ -1,15 +1,8 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.data.InteractItemInfo
-
-package com.tencent.ai.core.data
+﻿package com.tencent.ai.core.data
 {
     import com.tencent.ai.core.actor.model.ActorModel;
-    import com.tencent.ai.core.element.BaseElement;
-    import __AS3__.vec.Vector;
     import com.tencent.ai.core.data.arg.sceneProperty.PropertyArg;
-    import  ©init._SafeStr_261;
+    import com.tencent.ai.core.element.BaseElement;
 
     public class InteractItemInfo extends MultiArgsInfo 
     {
@@ -43,25 +36,16 @@ package com.tencent.ai.core.data
         public var procedureInfo:ProcedureInfo;
 
 
-        public function setStaticInfo(_arg_1:InteractItemStaticInfo):void
+        public function setStaticInfo(info:InteractItemStaticInfo):void
         {
-            this.staticInfo = _arg_1;
-            if (this.groupID == -1){
-                this.groupID = _arg_1.groupID;
-            };
-            this.interactItemID = _arg_1.id;
-            this.interactItemType = _arg_1.type;
-            this.state = _arg_1.defaultState;
+            this.staticInfo = info;
+            if (this.groupID == -1) {
+                this.groupID = info.groupID;
+            }
+            this.interactItemID = info.id;
+            this.interactItemType = info.type;
+            this.state = info.defaultState;
         }
-
-        public /*  ©init. */ function _SafeStr_261()
-        {
-        }
-
 
     }
-}//package com.tencent.ai.core.data
-
-// _SafeStr_261 = " InteractItemInfo" (String#17702)
-
-
+}

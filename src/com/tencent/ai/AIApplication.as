@@ -68,13 +68,12 @@
 
         protected var m_contexts:Dictionary;
         protected var m_AssetLoader:AIAssetsLoader;
-        protected var m_assetLoadingView:AssetLoadingView;
         protected var m_globalXML:Dictionary;
         protected var m_classes:AIInitClasses;
 
         public function AIApplication()
         {
-            this._initThis();
+            _initThis();
         }
 
         private function _initThis():void
@@ -93,7 +92,6 @@
             m_free.addEventListener(FreeEvent.PLUGIN_INSTALL_COMPLETE, this.onPluginInstallFinished);
             m_free.addEventListener(FreeEvent.ON_BEFORE_PLUGIN_LOAD, this.onPluginInstallStart);
             m_free.addEventListener(FreeEvent.PLUGIN_INSTALL_PROGRESS, this.onPluginInstallProgress);
-            new ReleaseDebugExt().addListen();
         }
 
         private function _checkChannel():void
@@ -106,10 +104,6 @@
 
         protected function onPluginInstallFinished(_arg_1:FreeEvent):void
         {
-            if (this.m_assetLoadingView != null){
-                this.m_assetLoadingView.hide();
-                this.m_assetLoadingView = null;
-            };
             if (_arg_1.type == FreeEvent.PLUGIN_INSTALL_ERROR){
                 UIManager.getInstance().alert(_arg_1.message, "插件加载错误");
             };
@@ -119,21 +113,11 @@
         {
             var _local_3:PluginConfig;
             var _local_2:PluginRequest = (_arg_1.data as PluginRequest);
-            if ((((((this.m_assetLoadingView == null)) && (!((_local_2 == null))))) && (!((_local_2.loadType == PluginLoadType.ASYN_LOAD))))){
-                this.m_assetLoadingView = UIManager.getInstance().getSmallLoadingView();
-                _local_3 = _arg_1.data.config;
-                this.m_assetLoadingView.setInfo((("正在加载[" + _local_3.label) + "]......"));
-                this.m_assetLoadingView.show();
-                this.m_assetLoadingView.setProgress(0);
-            };
         }
 
         protected function onPluginInstallProgress(_arg_1:FreeEvent):void
         {
             var _local_2:Object = _arg_1.data;
-            if (((!((_local_2 == null))) && (!((this.m_assetLoadingView == null))))){
-                this.m_assetLoadingView.setProgress((_local_2.bytesLoaded / _local_2.bytesTotal));
-            };
         }
 
         protected function onSystemMsg(_arg_1:AIEvent):void

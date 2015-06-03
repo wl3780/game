@@ -38,7 +38,8 @@
     {
 
         public static var controlBar:IControlBar;
-        private static var _RUNTIME:AICore;
+        
+		private static var _RUNTIME:AICore;
 
         protected var m_free:Free;
         protected var m_net:INetwork;
@@ -67,140 +68,140 @@
 
         public function AICore()
         {
-            this.m_actorDispatcher = new EventDispatcher2();
             super();
+            this.m_actorDispatcher = new EventDispatcher2();
         }
 
-        protected static function setRuntime(_arg_1:AICore):void
+        protected static function setRuntime(runtime:AICore):void
         {
-            if (_RUNTIME == null){
-                _RUNTIME = _arg_1;
-            };
+            if (_RUNTIME == null) {
+                _RUNTIME = runtime;
+            }
         }
 
         public static function get net():INetwork
         {
-            return (_RUNTIME.m_net);
+            return _RUNTIME.m_net;
         }
 
         public static function get data():IDataManager
         {
-            return (_RUNTIME.m_data);
+            return _RUNTIME.m_data;
         }
 
         public static function get effect():IEffectManager
         {
-            return (_RUNTIME.m_effect);
+            return _RUNTIME.m_effect;
         }
 
         public static function get bubble():IBubbleManager
         {
-            return (_RUNTIME.m_bubble);
+            return _RUNTIME.m_bubble;
         }
 
         public static function get movie():IMovieManager
         {
-            return (_RUNTIME.m_movie);
+            return _RUNTIME.m_movie;
         }
 
         public static function get dialog():IDialogManager
         {
-            return (_RUNTIME.m_dialog);
+            return _RUNTIME.m_dialog;
         }
 
         public static function get sound():ISoundManager
         {
-            return (_RUNTIME.m_sound);
+            return _RUNTIME.m_sound;
         }
 
         public static function get script():IScriptManager
         {
-            return (_RUNTIME.m_script);
+            return _RUNTIME.m_script;
         }
 
         public static function get mission():IMissionManager
         {
-            return (_RUNTIME.m_mission);
+            return _RUNTIME.m_mission;
         }
 
         public static function get playerSystem():IPlayerSystem
         {
-            return (_RUNTIME.m_player_sys);
+            return _RUNTIME.m_player_sys;
         }
 
         public static function get npcSystem():INpcSystem
         {
-            return (_RUNTIME.m_npc_sys);
+            return _RUNTIME.m_npc_sys;
         }
 
         public static function get monsterSystem():IMonsterSystem
         {
-            return (_RUNTIME.m_monster_sys);
+            return _RUNTIME.m_monster_sys;
         }
 
         public static function get petSystem():IPetSystem
         {
-            return (_RUNTIME.m_pet_sys);
+            return _RUNTIME.m_pet_sys;
         }
 
         public static function get actorDispatcher():IEventDispatcher
         {
-            return (_RUNTIME.m_actorDispatcher);
+            return _RUNTIME.m_actorDispatcher;
         }
 
         public static function get interactItemSystem():IInteractItemSystem
         {
-            return (_RUNTIME.m_interactItem_sys);
+            return _RUNTIME.m_interactItem_sys;
         }
 
         public static function get plotSystem():IPlotSystem
         {
-            return (_RUNTIME.m_plot);
+            return _RUNTIME.m_plot;
         }
 
         public static function get combatSystem():ICombatSystem
         {
-            return (_RUNTIME.m_combat_sys);
+            return _RUNTIME.m_combat_sys;
         }
 
         public static function get guideSystem():IGuideSystemManager
         {
-            return (_RUNTIME.m_guideSystem);
+            return _RUNTIME.m_guideSystem;
         }
 
         public static function get cryptoManager():ICryptoManager
         {
-            return (_RUNTIME.m_cryptoManager);
+            return _RUNTIME.m_cryptoManager;
         }
 
         public static function get protectModule():IProtectModule
         {
-            return (_RUNTIME.m_protectModule);
+            return _RUNTIME.m_protectModule;
         }
 
         public static function get Runtime():AICore
         {
-            return (_RUNTIME);
+            return _RUNTIME;
         }
 
         public static function get free():Free
         {
-            return (_RUNTIME.m_free);
+            return _RUNTIME.m_free;
         }
 
-        public static function dispatchAIEvent(_arg_1:Event):void
+        public static function dispatchAIEvent(evt:Event):void
         {
-            _RUNTIME.dispatchEvent(_arg_1);
+            _RUNTIME.dispatchEvent(evt);
         }
 
-        public static function addAIEventListener(_arg_1:String, _arg_2:Function, _arg_3:Boolean=false, _arg_4:int=0, _arg_5:Boolean=false):void
+        public static function addAIEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
         {
-            _RUNTIME.addEventListener(_arg_1, _arg_2, _arg_3, _arg_4, _arg_5);
+            _RUNTIME.addEventListener(type, listener, useCapture, priority, useWeakReference);
         }
 
-        public static function removeAIEventListener(_arg_1:String, _arg_2:Function, _arg_3:Boolean=false):void
+        public static function removeAIEventListener(type:String, listener:Function, useCapture:Boolean=false):void
         {
-            _RUNTIME.removeEventListener(_arg_1, _arg_2, _arg_3);
+            _RUNTIME.removeEventListener(type, listener, useCapture);
         }
 
         public static function isCombatContext():Boolean
@@ -209,98 +210,98 @@
             return ((((((_local_1 == AIContextType.CT_DUPLICATE)) || ((_local_1 == AIContextType.CT_PVP)))) || ((_local_1 == AIContextType.CT_EXTDUP))));
         }
 
-        public static function registerCmd(_arg_1:String, _arg_2:ICmdListener):void
+        public static function registerCmd(cmd:String, handler:ICmdListener):void
         {
-            free.registerCmd(_arg_1, _arg_2);
+            free.registerCmd(cmd, handler);
         }
 
-        public static function hasCmd(_arg_1:String):Boolean
+        public static function hasCmd(cmd:String):Boolean
         {
-            return (free.hasCmd(_arg_1));
+            return free.hasCmd(cmd);
         }
 
-        public static function unregisterCmd(_arg_1:String):void
+        public static function unregisterCmd(cmd:String):void
         {
-            free.unregisterCmd(_arg_1);
+            free.unregisterCmd(cmd);
         }
 
-        public static function cmdCall(_arg_1:String, _arg_2:Object=null):void
+        public static function cmdCall(cmd:String, args:Object=null):void
         {
-            free.call(_arg_1, _arg_2);
+            free.call(cmd, args);
         }
 
-        public static function callCommand(_arg_1:BaseCommand):void
+        public static function callCommand(command:BaseCommand):void
         {
-            free.callCommand(_arg_1);
+            free.callCommand(command);
         }
 
-        public static function callHtmlFunction(_arg_1:String, ... _args)
+        public static function callHtmlFunction(_arg_1:String, ... args)
         {
-            var _local_3:*;
-            _args.unshift(("swfCall." + _arg_1));
-            if (ExternalInterface.available){
-                _local_3 = ExternalInterface.call.apply(null, _args);
-            };
-            return (_local_3);
+            var ret:*;
+            args.unshift("swfCall." + _arg_1);
+            if (ExternalInterface.available) {
+                ret = ExternalInterface.call.apply(null, args);
+            }
+            return ret;
         }
 
 
-        public function bindScene(_arg_1:IScene):void
+        public function bindScene(scene:IScene):void
         {
-            this.m_current_scene = _arg_1;
-            if (this.m_effect != null){
-                this.m_effect.bindScene(_arg_1);
-            };
-            if (this.m_bubble != null){
-                this.m_bubble.bindScene(_arg_1);
-            };
+            this.m_current_scene = scene;
+            if (this.m_effect != null) {
+                this.m_effect.bindScene(scene);
+            }
+            if (this.m_bubble != null) {
+                this.m_bubble.bindScene(scene);
+            }
         }
 
         public function unbind():void
         {
-            if (this.m_effect != null){
+            if (this.m_effect != null) {
                 this.m_effect.unbind();
-            };
-            if (this.m_bubble != null){
+            }
+            if (this.m_bubble != null) {
                 this.m_bubble.unbind();
-            };
+            }
             this.m_current_scene = null;
         }
 
-        public function setDefaultContext(_arg_1:AIContext):void
+        public function setDefaultContext(context:AIContext):void
         {
         }
 
         public function get root():Sprite
         {
-            return (this.m_root);
+            return this.m_root;
         }
 
         public function get currentContext():AIContext
         {
-            return (this.m_context);
+            return this.m_context;
         }
 
         public function get currentScene():IScene
         {
-            return (this.m_current_scene);
+            return this.m_current_scene;
         }
 
-        public function isAtContext(_arg_1:String):Boolean
+        public function isAtContext(type:String):Boolean
         {
-            if (this.m_context == null){
-                return (false);
-            };
-            return ((this.m_context.getType() == _arg_1));
+            if (this.m_context == null) {
+                return false;
+            }
+            return this.m_context.getType() == type;
         }
 
-        public function activeContext(_arg_1:String):void
+        public function activeContext(type:String):void
         {
         }
 
-        public function getContextByName(_arg_1:String):AIContext
+        public function getContextByName(pName:String):AIContext
         {
-            return (null);
+            return null;
         }
 
         public function refreshWeb():void

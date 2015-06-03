@@ -34,7 +34,6 @@
         
 		private var _setupApp:SetupApplication;
         private var _aiApp:Object;
-        private var _startTime:int;
         private var _startBytes:int;
         private var _debug:Boolean = false;
 
@@ -87,7 +86,6 @@
 
         private function onInit(e:Event):void
         {
-            _startTime = getTimer();
             _startBytes = FileSystem.getInstance().totalBytes;
             CLASS.DEFAULT_DECODE_FUNC = Release_AIMain.DEFAULT_DECODE_FUNC;
             
