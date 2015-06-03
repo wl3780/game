@@ -1,15 +1,8 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.setup.GLOBAL_DEF
-
-package com.tencent.free.setup
+﻿package com.tencent.free.setup
 {
-    import __AS3__.vec.Vector;
     import com.tencent.free.setup.data.VarDef;
+    
     import flash.utils.Dictionary;
-    import  ©init._SafeStr_62;
-    import __AS3__.vec.*;
 
     public class GLOBAL_DEF 
     {
@@ -32,7 +25,7 @@ package com.tencent.free.setup
             if (_VAR_DEFS_MAP[_arg_1] == undefined){
                 _VAR_DEFS_MAP[_arg_1] = _arg_2;
                 _VAR_DEFs.push(new VarDef(_arg_1, _arg_2));
-            };
+            }
         }
 
         public static function UNDEFINE(_arg_1:String):String
@@ -44,9 +37,9 @@ package com.tencent.free.setup
                 if (_VAR_DEFs[_local_3].key == _arg_1){
                     _VAR_DEFs.splice(_local_3, 1);
                     break;
-                };
+                }
                 _local_3++;
-            };
+            }
             return (_local_2);
         }
 
@@ -64,19 +57,9 @@ package com.tencent.free.setup
                 _local_4 = _VAR_DEFs[_local_3];
                 _arg_1 = _local_4.replace(_arg_1);
                 _local_3++;
-            };
+            }
             return (_arg_1);
         }
 
-
-        public /*  ©init. */ function _SafeStr_62()
-        {
-        }
-
-
     }
-}//package com.tencent.free.setup
-
-// _SafeStr_62 = " GLOBAL_DEF" (String#1439)
-
-
+}

@@ -1,26 +1,21 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.setup.SetupApplication
-
-package com.tencent.free.setup
+﻿package com.tencent.free.setup
 {
-    import flash.events.EventDispatcher;
-    import com.tencent.free.setup.data.SetupInfo;
-    import flash.display.Sprite;
+    import com.tencent.free.logging.LoggingDefine;
+    import com.tencent.free.logging.TraceAppender;
     import com.tencent.free.phase.PhaseContainer;
+    import com.tencent.free.setup.data.SetupInfo;
+    import com.tencent.free.setup.events.SetupEvent;
     import com.tencent.free.setup.ui.SetupDefaultUI;
+    
+    import flash.display.Sprite;
+    import flash.display.Stage;
+    import flash.events.ContextMenuEvent;
+    import flash.events.EventDispatcher;
+    import flash.external.ExternalInterface;
     import flash.net.URLVariables;
     import flash.ui.ContextMenu;
-    import com.tencent.free.logging.TraceAppender;
-    import com.tencent.free.logging.LoggingDefine;
-    import flash.external.ExternalInterface;
-    import flash.display.Stage;
-    import com.tencent.free.setup.events.SetupEvent;
-    import flash.utils.Dictionary;
     import flash.ui.ContextMenuItem;
-    import flash.events.ContextMenuEvent;
-    import  ©init._SafeStr_66;
+    import flash.utils.Dictionary;
 
     public class SetupApplication extends EventDispatcher 
     {
@@ -276,14 +271,5 @@ package com.tencent.free.setup
             this.m_phasesContainer.start();
         }
 
-        public /*  ©init. */ function _SafeStr_66()
-        {
-        }
-
-
     }
-}//package com.tencent.free.setup
-
-// _SafeStr_66 = " SetupApplication" (String#1379)
-
-
+}

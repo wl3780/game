@@ -1,12 +1,8 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.free.setup.data.SetupInfo
-
-package com.tencent.free.setup.data
+﻿package com.tencent.free.setup.data
 {
     import flash.display.Sprite;
-    import  ©init._SafeStr_57;
+    import flash.display.StageAlign;
+    import flash.display.StageScaleMode;
 
     public class SetupInfo 
     {
@@ -16,8 +12,8 @@ package com.tencent.free.setup.data
         public var configValueType:String = "default";
         public var globalDefs:Array;
         public var contextMenuItems:Array;
-        public var stageScaleMode:String = "noScale";
-        public var stageAlign:String = "TL";
+        public var stageScaleMode:String = StageScaleMode.NO_SCALE;
+        public var stageAlign:String = StageAlign.TOP_LEFT;
         public var stageWidth:int = 0;
         public var stageHeight:int = 0;
         public var classGlobalLoader:Class;
@@ -25,20 +21,11 @@ package com.tencent.free.setup.data
         public var classLibLoader:Class;
         public var defFlashVars:Array;
 
-        public function SetupInfo(_arg_1:String, _arg_2:Sprite=null)
+        public function SetupInfo(url:String, root:Sprite=null)
         {
-            this.configURL = _arg_1;
-            this.root = _arg_2;
+            this.configURL = url;
+            this.root = root;
         }
-
-        public /*  ©init. */ function _SafeStr_57()
-        {
-        }
-
 
     }
-}//package com.tencent.free.setup.data
-
-// _SafeStr_57 = " SetupInfo" (String#1544)
-
-
+}
