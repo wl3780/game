@@ -1,20 +1,14 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.BeHurtAction
-
-package com.tencent.ai.core.action
+﻿package com.tencent.ai.core.action
 {
     import com.tencent.ai.core.action.hurt.BaseHurtAction;
-    import com.tencent.ai.core.enum.BaseActionIDDef;
+    import com.tencent.ai.core.action.hurt.FloatState;
+    import com.tencent.ai.core.action.hurt.GetUpState;
     import com.tencent.ai.core.action.hurt.HurtState;
+    import com.tencent.ai.core.action.hurt.LieState;
     import com.tencent.ai.core.action.hurt.NormalState;
     import com.tencent.ai.core.action.hurt.StiffState;
-    import com.tencent.ai.core.action.hurt.FloatState;
-    import com.tencent.ai.core.action.hurt.LieState;
-    import com.tencent.ai.core.action.hurt.GetUpState;
     import com.tencent.ai.core.data.AttackInfo;
-    import  ©init._SafeStr_16;
+    import com.tencent.ai.core.enum.BaseActionIDDef;
 
     public class BeHurtAction extends BaseHurtAction 
     {
@@ -58,14 +52,5 @@ package com.tencent.ai.core.action
             };
         }
 
-        public /*  ©init. */ function _SafeStr_16()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.action
-
-// _SafeStr_16 = " BeHurtAction" (String#14741)
-
-
+}

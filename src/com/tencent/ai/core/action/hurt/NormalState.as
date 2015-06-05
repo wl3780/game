@@ -1,15 +1,9 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.hurt.NormalState
-
-package com.tencent.ai.core.action.hurt
+﻿package com.tencent.ai.core.action.hurt
 {
-    import com.tencent.ai.core.data.SkillInfo;
     import com.tencent.ai.core.actor.HasActionElement;
-    import com.tencent.ai.core.enum.MotionDef;
     import com.tencent.ai.core.data.AttackInfo;
-    import  ©init._SafeStr_14;
+    import com.tencent.ai.core.data.SkillInfo;
+    import com.tencent.ai.core.enum.MotionDef;
 
     public class NormalState extends HurtState 
     {
@@ -55,14 +49,5 @@ package com.tencent.ai.core.action.hurt
             return (_local_2);
         }
 
-        public /*  ©init. */ function _SafeStr_14()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.action.hurt
-
-// _SafeStr_14 = " NormalState" (String#17696)
-
-
+}

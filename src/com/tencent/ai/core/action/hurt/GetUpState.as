@@ -1,15 +1,9 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.hurt.GetUpState
-
-package com.tencent.ai.core.action.hurt
+﻿package com.tencent.ai.core.action.hurt
 {
-    import com.tencent.ai.core.render.IFrameListener;
-    import com.tencent.ai.core.events.ActorModelEvent;
-    import com.tencent.ai.core.enum.MotionDef;
     import com.tencent.ai.core.data.AttackInfo;
-    import  ©init._SafeStr_11;
+    import com.tencent.ai.core.enum.MotionDef;
+    import com.tencent.ai.core.events.ActorModelEvent;
+    import com.tencent.ai.core.render.IFrameListener;
 
     public class GetUpState extends HurtState implements IFrameListener 
     {

@@ -1,17 +1,11 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.hurt.HurtState
-
-package com.tencent.ai.core.action.hurt
+﻿package com.tencent.ai.core.action.hurt
 {
-    import com.tencent.ai.core.actor.IActorView;
-    import com.tencent.ai.core.data.EnvironmentInfo;
     import com.tencent.ai.core.actor.BaseActor;
+    import com.tencent.ai.core.actor.IActorView;
     import com.tencent.ai.core.actor.model.ActorModel;
-    import com.tencent.ai.core.data.SkillInfo;
     import com.tencent.ai.core.data.AttackInfo;
-    import  ©init._SafeStr_12;
+    import com.tencent.ai.core.data.EnvironmentInfo;
+    import com.tencent.ai.core.data.SkillInfo;
 
     public class HurtState 
     {
@@ -67,14 +61,5 @@ package com.tencent.ai.core.action.hurt
             this.m_environmentInfo = null;
         }
 
-        public /*  ©init. */ function _SafeStr_12()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.action.hurt
-
-// _SafeStr_12 = " HurtState" (String#13676)
-
-
+}

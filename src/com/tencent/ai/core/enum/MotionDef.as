@@ -1,11 +1,5 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.enum.MotionDef
-
-package com.tencent.ai.core.enum
+﻿package com.tencent.ai.core.enum
 {
-    import  ©init._SafeStr_459;
 
     public class MotionDef 
     {
@@ -13,7 +7,8 @@ package com.tencent.ai.core.enum
         public static const L_FRAME_END:String = "onFrameEnd";
         public static const L_ENTER_FRAME:String = "onEnterFrame";
         public static const L_HIT:String = "hit";
-        public static const MT_STAND:int = 0;
+        
+		public static const MT_STAND:int = 0;
         public static const MT_WALK:int = 1;
         public static const MT_RUN:int = 2;
         public static const MT_IDLE:int = 3;
@@ -30,15 +25,5 @@ package com.tencent.ai.core.enum
         public static const MT_JUMP_FIGHT:int = 17;
         public static const MT_PICK_UP:int = 18;
 
-
-        public /*  ©init. */ function _SafeStr_459()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.enum
-
-// _SafeStr_459 = " MotionDef" (String#17744)
-
-
+}

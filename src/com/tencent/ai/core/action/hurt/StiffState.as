@@ -1,19 +1,13 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.hurt.StiffState
-
-package com.tencent.ai.core.action.hurt
+﻿package com.tencent.ai.core.action.hurt
 {
-    import com.tencent.ai.core.render.IFrameListener;
-    import com.tencent.ai.core.data.arg.script.ShakeScriptArg;
-    import com.tencent.ai.core.manager.data.DEFINE;
     import com.tencent.ai.core.components.arg.PosArg;
-    import com.tencent.ai.core.enum.MotionDef;
-    import com.tencent.ai.core.enum.HurtType;
     import com.tencent.ai.core.data.AttackInfo;
     import com.tencent.ai.core.data.SkillInfo;
-    import  ©init._SafeStr_15;
+    import com.tencent.ai.core.data.arg.script.ShakeScriptArg;
+    import com.tencent.ai.core.enum.HurtType;
+    import com.tencent.ai.core.enum.MotionDef;
+    import com.tencent.ai.core.manager.data.DEFINE;
+    import com.tencent.ai.core.render.IFrameListener;
 
     public class StiffState extends HurtState implements IFrameListener 
     {

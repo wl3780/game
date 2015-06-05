@@ -1,11 +1,5 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.enum.ActionType
-
-package com.tencent.ai.core.enum
+﻿package com.tencent.ai.core.enum
 {
-    import  ©init._SafeStr_399;
 
     public class ActionType 
     {
@@ -17,15 +11,5 @@ package com.tencent.ai.core.enum
         public static const DEFEND:int = 4;
         public static const RESTORE:int = 5;
 
-
-        public /*  ©init. */ function _SafeStr_399()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.enum
-
-// _SafeStr_399 = " ActionType" (String#16625)
-
-
+}

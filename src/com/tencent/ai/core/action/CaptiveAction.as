@@ -1,26 +1,20 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.CaptiveAction
-
-package com.tencent.ai.core.action
+﻿package com.tencent.ai.core.action
 {
     import com.tencent.ai.core.action.hurt.BaseHurtAction;
-    import com.tencent.ai.core.actor.model.OpSetValue;
     import com.tencent.ai.core.action.hurt.CaptiveNormalState;
-    import com.tencent.ai.core.enum.BaseActionIDDef;
-    import com.tencent.ai.core.actor.model.AN;
-    import com.tencent.ai.core.actor.model.OpAttribItem;
-    import com.tencent.ai.core.action.hurt.HurtState;
-    import com.tencent.ai.core.action.hurt.LieState;
     import com.tencent.ai.core.action.hurt.FloatState;
     import com.tencent.ai.core.action.hurt.GetUpState;
+    import com.tencent.ai.core.action.hurt.HurtState;
+    import com.tencent.ai.core.action.hurt.LieState;
+    import com.tencent.ai.core.actor.IElementController;
+    import com.tencent.ai.core.actor.model.AN;
+    import com.tencent.ai.core.actor.model.OpAttribItem;
+    import com.tencent.ai.core.actor.model.OpSetValue;
     import com.tencent.ai.core.data.AttackInfo;
     import com.tencent.ai.core.enum.AttackType;
+    import com.tencent.ai.core.enum.BaseActionIDDef;
     import com.tencent.ai.core.enum.CaptiveAttackIDDef;
     import com.tencent.ai.core.enum.VKeyDef;
-    import com.tencent.ai.core.actor.IElementController;
-    import  ©init._SafeStr_18;
 
     public class CaptiveAction extends BaseHurtAction 
     {

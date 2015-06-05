@@ -1,9 +1,4 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.IElementAction
-
-package com.tencent.ai.core.action
+﻿package com.tencent.ai.core.action
 {
     import com.tencent.ai.core.data.AttackInfo;
     import com.tencent.ai.core.scene.IScene;
@@ -22,5 +17,4 @@ package com.tencent.ai.core.action
         function getActionType():int;
 
     }
-}//package com.tencent.ai.core.action
-
+}

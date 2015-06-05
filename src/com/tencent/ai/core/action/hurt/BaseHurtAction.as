@@ -1,29 +1,23 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.hurt.BaseHurtAction
-
-package com.tencent.ai.core.action.hurt
+﻿package com.tencent.ai.core.action.hurt
 {
-    import com.tencent.ai.core.script.BaseScriptsContainer;
-    import com.tencent.ai.core.render.IElementView;
     import com.tencent.ai.core.actor.BaseActor;
-    import com.tencent.ai.core.actor.model.ActorModel;
-    import com.tencent.ai.core.scene.IScene;
-    import com.tencent.ai.core.data.EnvironmentInfo;
-    import com.tencent.free.utils.CFunction;
-    import com.tencent.ai.core.script.build_scripts;
-    import com.tencent.ai.core.enum.ScriptCmdDef;
-    import com.tencent.ai.core.enum.ActionType;
-    import com.tencent.ai.core.enum.VKeyDef;
-    import com.tencent.ai.core.data.AttackInfo;
     import com.tencent.ai.core.actor.HasActionElement;
-    import com.tencent.ai.core.data.ActionInfo;
     import com.tencent.ai.core.actor.IElementController;
-    import com.tencent.ai.core.data.arg.script.ScriptArg;
+    import com.tencent.ai.core.actor.model.ActorModel;
     import com.tencent.ai.core.actor.model.Variable;
+    import com.tencent.ai.core.data.ActionInfo;
     import com.tencent.ai.core.data.ActionState;
-    import  ©init._SafeStr_4;
+    import com.tencent.ai.core.data.AttackInfo;
+    import com.tencent.ai.core.data.EnvironmentInfo;
+    import com.tencent.ai.core.data.arg.script.ScriptArg;
+    import com.tencent.ai.core.enum.ActionType;
+    import com.tencent.ai.core.enum.ScriptCmdDef;
+    import com.tencent.ai.core.enum.VKeyDef;
+    import com.tencent.ai.core.render.IElementView;
+    import com.tencent.ai.core.scene.IScene;
+    import com.tencent.ai.core.script.BaseScriptsContainer;
+    import com.tencent.ai.core.script.build_scripts;
+    import com.tencent.free.utils.CFunction;
 
     public class BaseHurtAction extends BaseScriptsContainer implements IAcceptHurtAction 
     {
@@ -40,9 +34,9 @@ package com.tencent.ai.core.action.hurt
         protected var m_acceptVKeyFunction:CFunction;
         protected var m_waitNextAction:Boolean;
 
-        public function BaseHurtAction(_arg_1:int)
+        public function BaseHurtAction(actionID:int)
         {
-            this.m_actionID = _arg_1;
+            this.m_actionID = actionID;
             this.initThis();
         }
 
@@ -256,14 +250,5 @@ package com.tencent.ai.core.action.hurt
         {
         }
 
-        public /*  ©init. */ function _SafeStr_4()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.action.hurt
-
-// _SafeStr_4 = " BaseHurtAction" (String#14024)
-
-
+}

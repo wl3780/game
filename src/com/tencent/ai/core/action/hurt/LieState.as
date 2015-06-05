@@ -1,21 +1,15 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.hurt.LieState
-
-package com.tencent.ai.core.action.hurt
+﻿package com.tencent.ai.core.action.hurt
 {
-    import com.tencent.ai.core.render.IFrameListener;
-    import com.tencent.ai.core.status.ISpecialStatusManager;
-    import com.tencent.ai.core.events.ActorModelEvent;
-    import com.tencent.ai.core.data.SkillInfo;
-    import com.tencent.ai.core.manager.data.DEFINE;
-    import com.tencent.ai.core.enum.CommonValueDef;
     import com.tencent.ai.core.AICore;
-    import com.tencent.ai.core.enum.MotionDef;
     import com.tencent.ai.core.components.arg.PosArg;
     import com.tencent.ai.core.data.AttackInfo;
-    import  ©init._SafeStr_13;
+    import com.tencent.ai.core.data.SkillInfo;
+    import com.tencent.ai.core.enum.CommonValueDef;
+    import com.tencent.ai.core.enum.MotionDef;
+    import com.tencent.ai.core.events.ActorModelEvent;
+    import com.tencent.ai.core.manager.data.DEFINE;
+    import com.tencent.ai.core.render.IFrameListener;
+    import com.tencent.ai.core.status.ISpecialStatusManager;
 
     public class LieState extends HurtState implements IFrameListener 
     {

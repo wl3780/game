@@ -1,11 +1,5 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.enum.BaseActionIDDef
-
-package com.tencent.ai.core.enum
+﻿package com.tencent.ai.core.enum
 {
-    import  ©init._SafeStr_409;
 
     public class BaseActionIDDef 
     {
@@ -28,15 +22,5 @@ package com.tencent.ai.core.enum
         public static const RIDE:int = 36;
         public static const APPEAR:int = 90;
 
-
-        public /*  ©init. */ function _SafeStr_409()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.enum
-
-// _SafeStr_409 = " BaseActionIDDef" (String#15317)
-
-
+}

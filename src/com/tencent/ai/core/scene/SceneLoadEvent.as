@@ -1,13 +1,8 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.scene.SceneLoadEvent
-
-package com.tencent.ai.core.scene
+﻿package com.tencent.ai.core.scene
 {
     import com.tencent.ai.core.events.BaseEvent;
+    
     import flash.events.Event;
-    import  ©init._SafeStr_1143;
 
     public class SceneLoadEvent extends BaseEvent 
     {
@@ -21,9 +16,9 @@ package com.tencent.ai.core.scene
         public var loadedItem:int;
         public var errorMessage:String;
 
-        public function SceneLoadEvent(_arg_1:String, _arg_2:Boolean=false, _arg_3:Boolean=false)
+        public function SceneLoadEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
         {
-            super(_arg_1, _arg_2, _arg_3);
+            super(type, bubbles, cancelable);
         }
 
         override public function clone():Event
@@ -37,14 +32,5 @@ package com.tencent.ai.core.scene
             return (_local_1);
         }
 
-        public /*  ©init. */ function _SafeStr_1143()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.scene
-
-// _SafeStr_1143 = " SceneLoadEvent" (String#17195)
-
-
+}

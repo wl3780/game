@@ -1,22 +1,16 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.DeadAction
-
-package com.tencent.ai.core.action
+﻿package com.tencent.ai.core.action
 {
     import com.tencent.ai.core.action.hurt.BaseHurtAction;
-    import com.tencent.ai.core.data.AttackInfo;
-    import com.tencent.ai.core.enum.BaseActionIDDef;
-    import com.tencent.ai.core.action.hurt.HurtState;
+    import com.tencent.ai.core.action.hurt.DeadLieState;
     import com.tencent.ai.core.action.hurt.DeadNormalState;
     import com.tencent.ai.core.action.hurt.FloatState;
-    import com.tencent.ai.core.action.hurt.DeadLieState;
-    import com.tencent.free.utils.CFunction;
-    import com.tencent.ai.core.enum.VKeyDef;
+    import com.tencent.ai.core.action.hurt.HurtState;
     import com.tencent.ai.core.actor.IElementController;
+    import com.tencent.ai.core.data.AttackInfo;
     import com.tencent.ai.core.data.SkillInfo;
-    import  ©init._SafeStr_20;
+    import com.tencent.ai.core.enum.BaseActionIDDef;
+    import com.tencent.ai.core.enum.VKeyDef;
+    import com.tencent.free.utils.CFunction;
 
     public class DeadAction extends BaseHurtAction 
     {

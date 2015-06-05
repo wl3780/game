@@ -1,24 +1,18 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.hurt.FloatState
-
-package com.tencent.ai.core.action.hurt
+﻿package com.tencent.ai.core.action.hurt
 {
-    import com.tencent.free.utils.CFunction;
-    import com.tencent.ai.core.data.EffectInfo;
-    import com.tencent.ai.core.events.ActorModelEvent;
-    import com.tencent.ai.core.data.MapPosition;
-    import com.tencent.ai.core.scene.IScene;
-    import com.tencent.ai.core.manager.data.DEFINE;
-    import com.tencent.ai.core.enum.ElementType;
-    import com.tencent.ai.core.enum.SoundDef;
     import com.tencent.ai.core.AICore;
-    import com.tencent.ai.core.enum.MotionDef;
     import com.tencent.ai.core.components.arg.PosArg;
-    import com.tencent.ai.core.data.SkillInfo;
     import com.tencent.ai.core.data.AttackInfo;
-    import  ©init._SafeStr_10;
+    import com.tencent.ai.core.data.EffectInfo;
+    import com.tencent.ai.core.data.MapPosition;
+    import com.tencent.ai.core.data.SkillInfo;
+    import com.tencent.ai.core.enum.ElementType;
+    import com.tencent.ai.core.enum.MotionDef;
+    import com.tencent.ai.core.enum.SoundDef;
+    import com.tencent.ai.core.events.ActorModelEvent;
+    import com.tencent.ai.core.manager.data.DEFINE;
+    import com.tencent.ai.core.scene.IScene;
+    import com.tencent.free.utils.CFunction;
 
     public class FloatState extends HurtState 
     {
