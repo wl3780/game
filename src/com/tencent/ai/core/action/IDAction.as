@@ -1,24 +1,18 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.IDAction
-
-package com.tencent.ai.core.action
+﻿package com.tencent.ai.core.action
 {
-    import com.tencent.ai.core.script.BaseScriptsContainer;
-    import com.tencent.free.utils.CFunction;
     import com.tencent.ai.core.actor.BaseActor;
+    import com.tencent.ai.core.actor.HasActionElement;
+    import com.tencent.ai.core.actor.IActorView;
     import com.tencent.ai.core.actor.IElementController;
     import com.tencent.ai.core.actor.model.ActorModel;
-    import com.tencent.ai.core.actor.IActorView;
-    import com.tencent.ai.core.data.ActionState;
     import com.tencent.ai.core.data.ActionInfo;
-    import com.tencent.ai.core.data.EnvironmentInfo;
-    import com.tencent.ai.core.scene.IScene;
-    import com.tencent.ai.core.actor.HasActionElement;
-    import com.tencent.ai.core.render.IElementView;
+    import com.tencent.ai.core.data.ActionState;
     import com.tencent.ai.core.data.AttackInfo;
-    import  ©init._SafeStr_23;
+    import com.tencent.ai.core.data.EnvironmentInfo;
+    import com.tencent.ai.core.render.IElementView;
+    import com.tencent.ai.core.scene.IScene;
+    import com.tencent.ai.core.script.BaseScriptsContainer;
+    import com.tencent.free.utils.CFunction;
 
     public class IDAction extends BaseScriptsContainer implements IElementAction 
     {
@@ -38,74 +32,74 @@ package com.tencent.ai.core.action
         protected var m_actionID:int;
         protected var m_actionType:int = 0;
 
-        public function IDAction(_arg_1:int)
+        public function IDAction(actionID:int)
         {
-            this.m_actionID = _arg_1;
+            this.m_actionID = actionID;
         }
 
         public function get scene():IScene
         {
-            return (this.m_scene);
+            return this.m_scene;
         }
 
         public function get target():HasActionElement
         {
-            return (this.m_target);
+            return this.m_target;
         }
 
         public function get view():IElementView
         {
-            return (this.m_view);
+            return this.m_view;
         }
 
         public function get model():ActorModel
         {
-            return (this.m_model);
+            return this.m_model;
         }
 
         public function get actionInfo():ActionInfo
         {
-            return (this.m_actionInfo);
+            return this.m_actionInfo;
         }
 
         public function get environmentInfo():EnvironmentInfo
         {
-            return (this.m_environmentInfo);
+            return this.m_environmentInfo;
         }
 
         public function get latestVKey():int
         {
-            return (this.m_latestVKey);
+            return this.m_latestVKey;
         }
 
         public function switchToDead():Boolean
         {
-            return (true);
+            return true;
         }
 
         public function beHurt(_arg_1:AttackInfo):Boolean
         {
-            return (true);
+            return true;
         }
 
         public function getActionID():int
         {
-            return (this.m_actionID);
+            return this.m_actionID;
         }
 
         public function getActionType():int
         {
-            return (this.m_actionType);
+            return this.m_actionType;
         }
 
         public function stop():void
         {
-            m_flag = false;
+            this.m_flag = false;
         }
 
         public function isRuning():Boolean
         {
-            return (m_flag);
+            return this.m_flag;
         }
 
         public function exec(_arg_1:int, _arg_2:Object=null):void
@@ -121,18 +115,18 @@ package com.tencent.ai.core.action
 
         public function setScene(_arg_1:IScene):void
         {
-            if (_arg_1 != null){
+            if (_arg_1 != null) {
                 this.m_scene = _arg_1;
                 this.m_environmentInfo = _arg_1.getInfo();
             } else {
                 this.m_scene = null;
                 this.m_environmentInfo = null;
-            };
+            }
         }
 
         public function attach(_arg_1:Object):void
         {
-            this.m_target = (_arg_1 as BaseActor);
+            this.m_target = _arg_1 as BaseActor;
             this.m_model = this.m_target.getModel();
             this.m_view = this.m_target.getActorView();
             this.m_controller = this.m_target.getController();
@@ -140,7 +134,7 @@ package com.tencent.ai.core.action
 
         public function dispose():void
         {
-            m_flag = false;
+            this.m_flag = false;
             this.m_target = null;
             this.m_model = null;
             this.m_view = null;
@@ -149,14 +143,5 @@ package com.tencent.ai.core.action
             this.m_environmentInfo = null;
         }
 
-        public /*  ©init. */ function _SafeStr_23()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.action
-
-// _SafeStr_23 = " IDAction" (String#13724)
-
-
+}

@@ -1,27 +1,22 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.DynamicAction
-
-package com.tencent.ai.core.action
+﻿package com.tencent.ai.core.action
 {
+    import com.tencent.ai.core.actor.model.Variable;
+    import com.tencent.ai.core.components.GravityComponent;
+    import com.tencent.ai.core.components.arg.PosArg;
+    import com.tencent.ai.core.data.ActionState;
+    import com.tencent.ai.core.data.arg.script.ControlScriptArg;
+    import com.tencent.ai.core.data.arg.script.ScriptArg;
+    import com.tencent.ai.core.element.MovementElement;
+    import com.tencent.ai.core.enum.Direction;
+    import com.tencent.ai.core.enum.MotionDef;
+    import com.tencent.ai.core.enum.VKeyDef;
+    import com.tencent.ai.core.events.ActorModelEvent;
     import com.tencent.ai.core.render.IFrameListener;
     import com.tencent.ai.core.script.ITarget;
-    import flash.utils.Dictionary;
-    import com.tencent.free.utils.CFunction;
-    import com.tencent.ai.core.data.arg.script.ControlScriptArg;
     import com.tencent.ai.core.script.build_scripts;
-    import com.tencent.ai.core.enum.MotionDef;
-    import com.tencent.ai.core.components.arg.PosArg;
-    import com.tencent.ai.core.enum.VKeyDef;
-    import com.tencent.ai.core.enum.Direction;
-    import com.tencent.ai.core.events.ActorModelEvent;
-    import com.tencent.ai.core.data.arg.script.ScriptArg;
-    import com.tencent.ai.core.components.GravityComponent;
-    import com.tencent.ai.core.element.MovementElement;
-    import com.tencent.ai.core.actor.model.Variable;
-    import com.tencent.ai.core.data.ActionState;
-    import  ©init._SafeStr_21;
+    import com.tencent.free.utils.CFunction;
+    
+    import flash.utils.Dictionary;
 
     public class DynamicAction extends IDAction implements IFrameListener, ITarget 
     {
@@ -295,14 +290,5 @@ package com.tencent.ai.core.action
             m_acceptVKeyFunction = _arg_1;
         }
 
-        public /*  ©init. */ function _SafeStr_21()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.action
-
-// _SafeStr_21 = " DynamicAction" (String#13727)
-
-
+}

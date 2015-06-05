@@ -1,13 +1,8 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.render.IElementView
-
-package com.tencent.ai.core.render
+﻿package com.tencent.ai.core.render
 {
-    import com.tencent.ai.core.utils.RectArea;
     import com.tencent.ai.core.display.IDisplay;
     import com.tencent.ai.core.element.IElementContainer;
+    import com.tencent.ai.core.utils.RectArea;
 
     public interface IElementView extends IMotionView 
     {
@@ -24,5 +19,4 @@ package com.tencent.ai.core.render
         function renderChildren(_arg_1:int):void;
 
     }
-}//package com.tencent.ai.core.render
-
+}

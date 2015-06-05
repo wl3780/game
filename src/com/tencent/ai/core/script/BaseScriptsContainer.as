@@ -1,15 +1,8 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.script.BaseScriptsContainer
-
-package com.tencent.ai.core.script
+﻿package com.tencent.ai.core.script
 {
-    import flash.utils.Dictionary;
-    import __AS3__.vec.Vector;
     import com.tencent.ai.core.global_script;
-    import  ©init._SafeStr_1252;
-    import __AS3__.vec.*;
+    
+    import flash.utils.Dictionary;
 
     public class BaseScriptsContainer implements IScriptsContainer 
     {
@@ -25,78 +18,67 @@ package com.tencent.ai.core.script
             this.m_flag = false;
         }
 
-        public function addScript(_arg_1:IScript):void
+        public function addScript(script:IScript):void
         {
-            var _local_3:Array;
-            var _local_4:int;
-            var _local_2:Object = _arg_1.getCmds();
-            if ((_local_2 is String)){
-                this.m_scripts[_local_2] = _arg_1;
+            var cmdObj:Object = script.getCmds();
+            if (cmdObj is String) {
+                this.m_scripts[cmdObj] = script;
             } else {
-                if ((_local_2 is Array)){
-                    _local_3 = (_local_2 as Array);
-                    _local_4 = 0;
-                    while (_local_4 < _local_3.length) {
-                        this.m_scripts[_local_3[_local_4]] = _arg_1;
-                        _local_4++;
-                    };
-                };
-            };
+                if (cmdObj is Array) {
+		            var cmdList:Array = cmdObj as Array;
+		            var idx:int = 0;
+                    while (idx < cmdList.length) {
+                        this.m_scripts[cmdList[idx]] = script;
+                        idx++;
+                    }
+                }
+            }
         }
 
-        public function addLastRS(_arg_1:IScript):void
+        public function addLastRS(script:IScript):void
         {
-            if (this.m_flag){
-                if (this.m_lastRSs.indexOf(_arg_1) == -1){
-                    this.m_lastRSs.push(_arg_1);
-                };
+            if (this.m_flag) {
+                if (this.m_lastRSs.indexOf(script) == -1) {
+                    this.m_lastRSs.push(script);
+                }
             } else {
-                _arg_1.stop();
-            };
+                script.stop();
+            }
         }
 
-        public function removeLastRs(_arg_1:IScript):void
+        public function removeLastRs(script:IScript):void
         {
-            var _local_2:int = this.m_lastRSs.indexOf(_arg_1);
-            if (_local_2 != -1){
-                this.m_lastRSs.splice(_local_2, 1);
-            };
+            var idx:int = this.m_lastRSs.indexOf(script);
+            if (idx != -1) {
+                this.m_lastRSs.splice(idx, 1);
+            }
         }
 
-        public function hasScript(_arg_1:String):Boolean
+        public function hasScript(cmd:String):Boolean
         {
-            return (!((this.m_scripts[_arg_1] == null)));
+            return this.m_scripts[cmd] != null;
         }
 
-        public function onScript(_arg_1:String, _arg_2:Object=null):void
+        public function onScript(cmd:String, arg:Object=null):void
         {
-            var _local_3:IScript = this.m_scripts[_arg_1];
-            if (_local_3 != null){
-                _local_3.exec(_arg_1, _arg_2);
+            var script:IScript = this.m_scripts[cmd];
+            if (script != null) {
+                script.exec(cmd, arg);
             } else {
-                global_script(_arg_1, _arg_2, this);
-            };
+                global_script(cmd, arg, this);
+            }
         }
 
         public function clearLastScripts():void
         {
-            var _local_1:int = this.m_lastRSs.length;
-            var _local_2:int;
-            while (_local_2 < _local_1) {
-                this.m_lastRSs[_local_2].stop();
-                _local_2++;
-            };
+            var len:int = this.m_lastRSs.length;
+            var idx:int;
+            while (idx < len) {
+                this.m_lastRSs[idx].stop();
+                idx++;
+            }
             this.m_lastRSs.length = 0;
         }
 
-        public /*  ©init. */ function _SafeStr_1252()
-        {
-        }
-
-
     }
-}//package com.tencent.ai.core.script
-
-// _SafeStr_1252 = " BaseScriptsContainer" (String#13721)
-
-
+}

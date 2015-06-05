@@ -1,24 +1,18 @@
-﻿// Decompiled by AS3 Sorcerer 3.16
-// http://www.as3sorcerer.com/
-
-//com.tencent.ai.core.action.DynamicAttackAction
-
-package com.tencent.ai.core.action
+﻿package com.tencent.ai.core.action
 {
-    import com.tencent.ai.core.script.ITargetHasSkill;
-    import com.tencent.ai.core.combat.impl.AttackDelegate;
     import com.tencent.ai.core.actor.model.SkillModel;
+    import com.tencent.ai.core.actor.model.Variable;
+    import com.tencent.ai.core.combat.IAttackDelegate;
+    import com.tencent.ai.core.combat.impl.AttackDelegate;
+    import com.tencent.ai.core.data.SkillInfo;
+    import com.tencent.ai.core.element.InteractElement;
     import com.tencent.ai.core.enum.ActionType;
     import com.tencent.ai.core.enum.MotionDef;
-    import com.tencent.free.utils.CFunction;
-    import com.tencent.ai.core.script.build_scripts;
-    import com.tencent.ai.core.actor.model.Variable;
     import com.tencent.ai.core.manager.data.DEFINE;
     import com.tencent.ai.core.scene.IScene;
-    import com.tencent.ai.core.element.InteractElement;
-    import com.tencent.ai.core.combat.IAttackDelegate;
-    import com.tencent.ai.core.data.SkillInfo;
-    import  ©init._SafeStr_22;
+    import com.tencent.ai.core.script.ITargetHasSkill;
+    import com.tencent.ai.core.script.build_scripts;
+    import com.tencent.free.utils.CFunction;
 
     public class DynamicAttackAction extends DynamicAction implements ITargetHasSkill 
     {
